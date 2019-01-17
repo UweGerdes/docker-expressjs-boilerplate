@@ -1,0 +1,13 @@
+//- widgets/checkbox.pug
+mixin checkbox(name, value, pretext, label)
+  .field(class='field_' + name)
+    .field-label= pretext
+    .field-value
+      input(
+        id=name,
+        type='checkbox',
+        name=name,
+        value=value,
+        class='input-checkbox'
+      )
+      label.checkbox-label(for=name)= label

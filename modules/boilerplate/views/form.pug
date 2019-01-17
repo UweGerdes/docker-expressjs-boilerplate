@@ -2,6 +2,8 @@
 extends ../../pages/views/page.pug
 
 include ../../page-elements/views/form/input.pug
+include ../../page-elements/views/form/checkbox.pug
+include ../../page-elements/views/form/radio.pug
 include ../../page-elements/views/form/submit.pug
 
 include widgets/defaults.pug
@@ -19,10 +21,12 @@ block content
     include widgets/header.pug
 
     #user-container.user-container.flex-block.flex-center
-      h2 Formular
+      h2.subheadline Formular
       if (error)
         .error #{__(error, post.username)}
       form#loginform.loginform(method='POST', action='/boilerplate/form/')
         + input('text', 'username', post.username, 30, 'Username')
         + input('password', 'password', null, 30, 'Passwort')
+        + checkbox('stayLoggedIn', 'stay', '', 'eingeloggt bleiben')
+        + radio('something', '', { klick: 'mal klicken', klock: 'oder hier' })
         + submit('anmelden')

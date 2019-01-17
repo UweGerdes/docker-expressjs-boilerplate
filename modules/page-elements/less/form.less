@@ -24,4 +24,76 @@
       width: 100%;
     }
   }
+
+  @media all and (min-width: 768px) {
+    align-items: baseline;
+    display: flex;
+
+    .field-label {
+      flex-basis: 20%;
+      flex-grow: 1;
+      padding-right: 1em;
+      text-align: right;
+    }
+
+    .field-value {
+      flex-basis: 80%;
+      flex-grow: 1;
+
+      .input-text,
+      .input-password {
+        width: 50%;
+      }
+
+      .input-checkbox {
+        opacity: 0;
+
+        & + .checkbox-label {
+          display: inline-block;
+          line-height: 1.5em;
+          margin-left: -20px;
+          padding: 3px 0;
+
+          &:before {
+            content: '\2610';
+            float: left;
+            font-size: 1.5em;
+            line-height: 1em;
+            padding: 0 0.3em 0 0;
+          }
+        }
+
+        &:checked + .checkbox-label {
+          &:before {
+            content: '\2611';
+          }
+        }
+      }
+
+      .input-radio {
+        opacity: 0;
+
+        & + .radio-label {
+          display: inline-block;
+          line-height: 1.5em;
+          margin-left: -20px;
+          padding: 3px 1em 0 0;
+
+          &:before {
+            content: '\25CE';
+            float: left;
+            font-size: 1.5em;
+            line-height: .8em;
+            padding: 0 0.3em 0 0;
+          }
+        }
+
+        &:checked + .radio-label {
+          &:before {
+            content: '\25C9';
+          }
+        }
+      }
+    }
+  }
 }
