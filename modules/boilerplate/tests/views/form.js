@@ -48,11 +48,22 @@ describe('/boilerplate/tests/views/form.js', function () {
           assert.equal(form.getAttribute('method'), 'POST');
           assert.equal(form.getAttribute('action'), '/boilerplate/form/');
 
-          const inputTextContainer = document.querySelector('.field_username');
-          assert.equal(inputTextContainer.textContent, 'Username');
+          const inputTextContainer = document.querySelector('.field_textinput');
+          assert.equal(inputTextContainer.textContent, 'Texteingabe');
           const inputText = inputTextContainer.querySelector('.input-text');
-          assert.equal(inputText.name, 'username');
+          assert.equal(inputText.name, 'textinput');
           assert.equal(inputText.getAttribute('type'), 'text');
+
+          const inputHidden = document.querySelector('[name=hiddeninput]');
+          assert.equal(inputHidden.name, 'hiddeninput');
+          assert.equal(inputHidden.value, 'wert');
+          assert.equal(inputHidden.getAttribute('type'), 'hidden');
+
+          const inputButtonContainer = document.querySelector('.field_buttoninput');
+          assert.equal(inputButtonContainer.textContent, 'Button');
+          const inputButton = inputButtonContainer.querySelector('.input-button');
+          assert.equal(inputButton.name, 'buttoninput');
+          assert.equal(inputButton.getAttribute('type'), 'button');
 
           const inputPasswordContainer = document.querySelector('.field_password');
           assert.equal(inputPasswordContainer.textContent, 'Passwort');
@@ -90,6 +101,11 @@ describe('/boilerplate/tests/views/form.js', function () {
           assert.equal(inputSelectOption[1].textContent, 'dies');
           assert.equal(inputSelectOption[2].value, 'opt2');
           assert.equal(inputSelectOption[2].textContent, 'das');
+
+          const inputTextareaContainer = document.querySelector('.field_textareainput');
+          assert.equal(inputTextareaContainer.textContent, 'Langtextfeldsteht schon was');
+          const inputTextarea = inputTextareaContainer.querySelector('.input-textarea');
+          assert.equal(inputTextarea.name, 'textareainput');
 
           const inputSubmitContainer = document.querySelector('.field_submit');
           const inputSubmit = inputSubmitContainer.querySelector('.input-submit');

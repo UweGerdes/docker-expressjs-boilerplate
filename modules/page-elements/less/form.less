@@ -12,6 +12,11 @@
     &-empty {
       margin: 0;
     }
+
+    &-textarea {
+      align-self: flex-start;
+      padding-top: 0.5em;
+    }
   }
 
   &-value {
@@ -22,6 +27,78 @@
       border-radius: 5px;
       padding: 4px 6px;
       width: 100%;
+    }
+
+    .input-checkbox {
+      opacity: 0;
+
+      & + .checkbox-label {
+        display: inline-block;
+        line-height: 1.5em;
+        margin-left: -20px;
+        padding: 3px 0;
+
+        &:before {
+          content: '\2610';
+          float: left;
+          font-size: 1.5em;
+          line-height: 1em;
+          padding: 0 0.3em 0 0;
+        }
+      }
+
+      &:checked + .checkbox-label {
+        &:before {
+          content: '\2611';
+        }
+      }
+    }
+
+    .input-radio {
+      opacity: 0;
+
+      & + .radio-label {
+        display: inline-block;
+        line-height: 1.5em;
+        margin-left: -20px;
+        padding: 3px 1em 0 0;
+
+        &:before {
+          content: '\25CE';
+          float: left;
+          font-size: 1.5em;
+          line-height: .8em;
+          padding: 0 0.3em 0 0;
+        }
+      }
+
+      &:checked + .radio-label {
+        &:before {
+          content: '\25C9';
+        }
+      }
+    }
+
+    .input-select {
+      border: 1px solid #666666;
+      border-radius: 5px;
+      margin-right: 0.5em;
+      padding: 4px 6px;
+    }
+
+    .input-textarea {
+      border: 1px solid #666666;
+      border-radius: 5px;
+      margin-right: 0.5em;
+      padding: 4px 6px;
+    }
+
+    .input-button,
+    .input-submit {
+      border: 1px solid #666666;
+      border-radius: 5px;
+      margin-right: 0.5em;
+      padding: 4px 6px;
     }
   }
 
@@ -43,56 +120,6 @@
       .input-text,
       .input-password {
         width: 50%;
-      }
-
-      .input-checkbox {
-        opacity: 0;
-
-        & + .checkbox-label {
-          display: inline-block;
-          line-height: 1.5em;
-          margin-left: -20px;
-          padding: 3px 0;
-
-          &:before {
-            content: '\2610';
-            float: left;
-            font-size: 1.5em;
-            line-height: 1em;
-            padding: 0 0.3em 0 0;
-          }
-        }
-
-        &:checked + .checkbox-label {
-          &:before {
-            content: '\2611';
-          }
-        }
-      }
-
-      .input-radio {
-        opacity: 0;
-
-        & + .radio-label {
-          display: inline-block;
-          line-height: 1.5em;
-          margin-left: -20px;
-          padding: 3px 1em 0 0;
-
-          &:before {
-            content: '\25CE';
-            float: left;
-            font-size: 1.5em;
-            line-height: .8em;
-            padding: 0 0.3em 0 0;
-          }
-        }
-
-        &:checked + .radio-label {
-          &:before {
-            content: '\25C9';
-          }
-        }
       }
     }
   }

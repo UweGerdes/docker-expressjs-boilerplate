@@ -1,0 +1,11 @@
+//- widgets/textarea.pug
+mixin textarea(name, value, width, height, label)
+  .field(class='field_' + name)
+    label.field-label.field-label-textarea= label
+    .field-value
+      textarea(
+        name=name,
+        class='input-textarea',
+        cols=width * 2,
+        rows=height
+      )= value
