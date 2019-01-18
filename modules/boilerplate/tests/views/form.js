@@ -47,16 +47,50 @@ describe('/boilerplate/tests/views/form.js', function () {
           const form = document.querySelector('form');
           assert.equal(form.getAttribute('method'), 'POST');
           assert.equal(form.getAttribute('action'), '/boilerplate/form/');
+
           const inputTextContainer = document.querySelector('.field_username');
           assert.equal(inputTextContainer.textContent, 'Username');
           const inputText = inputTextContainer.querySelector('.input-text');
           assert.equal(inputText.name, 'username');
           assert.equal(inputText.getAttribute('type'), 'text');
+
           const inputPasswordContainer = document.querySelector('.field_password');
           assert.equal(inputPasswordContainer.textContent, 'Passwort');
           const inputPassword = inputPasswordContainer.querySelector('.input-password');
           assert.equal(inputPassword.name, 'password');
           assert.equal(inputPassword.getAttribute('type'), 'password');
+
+          const inputCheckboxContainer = document.querySelector('.field_checkbox');
+          assert.equal(inputCheckboxContainer.textContent, 'Möglichkeiteingeloggt bleiben');
+          const inputCheckbox = inputCheckboxContainer.querySelector('.input-checkbox');
+          assert.equal(inputCheckbox.name, 'checkbox');
+          assert.equal(inputCheckbox.value, 'stay');
+          assert.equal(inputCheckbox.getAttribute('type'), 'checkbox');
+
+          const inputRadioContainer = document.querySelector('.field_radio');
+          assert.equal(inputRadioContainer.textContent, 'Auswahlmal klickenoder hier');
+          const inputRadio = inputRadioContainer.querySelectorAll('.input-radio');
+          assert.equal(inputRadio.length, 2);
+          assert.equal(inputRadio[0].name, 'radio');
+          assert.equal(inputRadio[0].value, 'klick');
+          assert.equal(inputRadio[0].getAttribute('type'), 'radio');
+          assert.equal(inputRadio[1].name, 'radio');
+          assert.equal(inputRadio[1].value, 'klock');
+          assert.equal(inputRadio[1].getAttribute('type'), 'radio');
+
+          const inputSelectContainer = document.querySelector('.field_select');
+          assert.equal(inputSelectContainer.textContent, 'Auswahllistebitte wählendiesdasvielleicht ein Pflichtfeld');
+          const inputSelect = inputSelectContainer.querySelector('.input-select');
+          assert.equal(inputSelect.name, 'select');
+          const inputSelectOption = inputSelect.querySelectorAll('option');
+          assert.equal(inputSelectOption.length, 3);
+          assert.equal(inputSelectOption[0].value, '');
+          assert.equal(inputSelectOption[0].textContent, 'bitte wählen');
+          assert.equal(inputSelectOption[1].value, 'opt1');
+          assert.equal(inputSelectOption[1].textContent, 'dies');
+          assert.equal(inputSelectOption[2].value, 'opt2');
+          assert.equal(inputSelectOption[2].textContent, 'das');
+
           const inputSubmitContainer = document.querySelector('.field_submit');
           const inputSubmit = inputSubmitContainer.querySelector('.input-submit');
           assert.equal(inputSubmit.getAttribute('type'), 'submit');

@@ -4,6 +4,7 @@ extends ../../pages/views/page.pug
 include ../../page-elements/views/form/input.pug
 include ../../page-elements/views/form/checkbox.pug
 include ../../page-elements/views/form/radio.pug
+include ../../page-elements/views/form/select.pug
 include ../../page-elements/views/form/submit.pug
 
 include widgets/defaults.pug
@@ -27,6 +28,7 @@ block content
       form#loginform.loginform(method='POST', action='/boilerplate/form/')
         + input('text', 'username', post.username, 30, 'Username')
         + input('password', 'password', null, 30, 'Passwort')
-        + checkbox('stayLoggedIn', 'stay', '', 'eingeloggt bleiben')
-        + radio('something', '', { klick: 'mal klicken', klock: 'oder hier' })
+        + checkbox('checkbox', 'stay', 'Möglichkeit', 'eingeloggt bleiben')
+        + radio('radio', 'Auswahl', { klick: 'mal klicken', klock: 'oder hier' })
+        + select('select', 'Auswahlliste', { '': 'bitte wählen', opt1: 'dies', opt2: 'das' }, 'vielleicht ein Pflichtfeld')
         + submit('anmelden')

@@ -3,7 +3,7 @@ mixin radio(name, pretext, entries)
   .field(class='field_' + name)
     .field-label= pretext
     .field-value
-      each value, label in entries
+      each label, value in entries
         input(
           id=name + '_' + value,
           type='radio',
