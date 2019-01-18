@@ -3,7 +3,6 @@ extends ../../pages/views/page.pug
 
 include ../../page-elements/views/form/field.pug
 include ../../page-elements/views/form/hidden.pug
-include ../../page-elements/views/form/radio.pug
 include ../../page-elements/views/form/select.pug
 include ../../page-elements/views/form/textarea.pug
 
@@ -47,7 +46,12 @@ block content
             name: 'checkboxinput',
             value: 'gewählt'
           }, 'kann man wählen')
-        + radio('radio', 'Auswahl', { klick: 'mal klicken', klock: 'oder hier' })
+        + field('Auswahl', {
+            type: 'radio',
+            name: 'radioinput',
+            value: 'gewählt',
+            entries: { klick: 'mal klicken', klock: 'oder hier' }
+          })
         + select('select', 'Auswahlliste', { '': 'bitte wählen', opt1: 'dies', opt2: 'das' }, 'vielleicht ein Pflichtfeld')
         + textarea('textareainput', 'steht schon was', 30, 5, 'Langtextfeld')
         + field('', {

@@ -78,14 +78,14 @@ describe('/boilerplate/tests/views/form.js', function () {
           assert.equal(inputCheckbox.value, 'gewählt');
           assert.equal(inputCheckbox.getAttribute('type'), 'checkbox');
 
-          const inputRadioContainer = document.querySelector('.field_radio');
+          const inputRadioContainer = document.querySelector('.field_radioinput');
           assert.equal(inputRadioContainer.textContent, 'Auswahlmal klickenoder hier');
           const inputRadio = inputRadioContainer.querySelectorAll('.input-radio');
           assert.equal(inputRadio.length, 2);
-          assert.equal(inputRadio[0].name, 'radio');
+          assert.equal(inputRadio[0].name, 'radioinput');
           assert.equal(inputRadio[0].value, 'klick');
           assert.equal(inputRadio[0].getAttribute('type'), 'radio');
-          assert.equal(inputRadio[1].name, 'radio');
+          assert.equal(inputRadio[1].name, 'radioinput');
           assert.equal(inputRadio[1].value, 'klock');
           assert.equal(inputRadio[1].getAttribute('type'), 'radio');
 
