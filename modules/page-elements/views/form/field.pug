@@ -1,0 +1,12 @@
+//- widgets/form/field.pug
+mixin field(pretext, attr, posttext)
+  .field(class='field_' + (attr.class ? attr.class : attr.name))
+    .field-label= pretext
+    .field-value
+      input(
+        class='input-' + attr.type,
+        id=attr.name,
+        value=post[attr.name]
+      )&attributes(attr)
+      if posttext
+        label(class=attr.type + '-label', for=attr.name)= posttext

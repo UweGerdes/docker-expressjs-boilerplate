@@ -65,17 +65,17 @@ describe('/boilerplate/tests/views/form.js', function () {
           assert.equal(inputButton.name, 'buttoninput');
           assert.equal(inputButton.getAttribute('type'), 'button');
 
-          const inputPasswordContainer = document.querySelector('.field_password');
+          const inputPasswordContainer = document.querySelector('.field_passwordinput');
           assert.equal(inputPasswordContainer.textContent, 'Passwort');
           const inputPassword = inputPasswordContainer.querySelector('.input-password');
-          assert.equal(inputPassword.name, 'password');
+          assert.equal(inputPassword.name, 'passwordinput');
           assert.equal(inputPassword.getAttribute('type'), 'password');
 
-          const inputCheckboxContainer = document.querySelector('.field_checkbox');
-          assert.equal(inputCheckboxContainer.textContent, 'Möglichkeiteingeloggt bleiben');
+          const inputCheckboxContainer = document.querySelector('.field_checkboxinput');
+          assert.equal(inputCheckboxContainer.textContent, 'Möglichkeitkann man wählen');
           const inputCheckbox = inputCheckboxContainer.querySelector('.input-checkbox');
-          assert.equal(inputCheckbox.name, 'checkbox');
-          assert.equal(inputCheckbox.value, 'stay');
+          assert.equal(inputCheckbox.name, 'checkboxinput');
+          assert.equal(inputCheckbox.value, 'gewählt');
           assert.equal(inputCheckbox.getAttribute('type'), 'checkbox');
 
           const inputRadioContainer = document.querySelector('.field_radio');
