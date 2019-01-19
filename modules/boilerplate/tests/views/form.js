@@ -19,10 +19,7 @@ describe('/boilerplate/tests/views/form.js', function () {
       chai.request('http://localhost:8080')
         .get('/boilerplate/form/')
         .end(function (err, res) {
-          expect(err).to.be.null;
-          expect(res).to.have.status(200);
-          expect(res).to.be.html;
-          const { document } = (new JSDOM(res.text)).window;
+          const document = getDocument(res, err);
           assert.equal(document.title, 'Formular');
           assert.equal(document.head.getElementsByTagName('script').length, 1);
           assert.equal(
@@ -36,48 +33,87 @@ describe('/boilerplate/tests/views/form.js', function () {
           done();
         });
     });
-    it('should have form and widgets', function (done) {
+    it('should have form', function (done) {
       chai.request('http://localhost:8080')
         .get('/boilerplate/form/')
         .end(function (err, res) {
-          expect(err).to.be.null;
-          expect(res).to.have.status(200);
-          expect(res).to.be.html;
-          const { document } = (new JSDOM(res.text)).window;
+          const document = getDocument(res, err);
           const form = document.querySelector('form');
           assert.equal(form.getAttribute('method'), 'POST');
           assert.equal(form.getAttribute('action'), '/boilerplate/form/');
-
+          done();
+        });
+    });
+    it('should have text input widget', function (done) {
+      chai.request('http://localhost:8080')
+        .get('/boilerplate/form/')
+        .end(function (err, res) {
+          const document = getDocument(res, err);
           const inputTextContainer = document.querySelector('.field_textinput');
           assert.equal(inputTextContainer.textContent, 'Texteingabe');
           const inputText = inputTextContainer.querySelector('.input-text');
           assert.equal(inputText.name, 'textinput');
           assert.equal(inputText.getAttribute('type'), 'text');
-
+          done();
+        });
+    });
+    it('should have hidden input widget', function (done) {
+      chai.request('http://localhost:8080')
+        .get('/boilerplate/form/')
+        .end(function (err, res) {
+          const document = getDocument(res, err);
           const inputHidden = document.querySelector('[name=hiddeninput]');
           assert.equal(inputHidden.name, 'hiddeninput');
           assert.equal(inputHidden.value, 'wert');
           assert.equal(inputHidden.getAttribute('type'), 'hidden');
-
+          done();
+        });
+    });
+    it('should have text button widget', function (done) {
+      chai.request('http://localhost:8080')
+        .get('/boilerplate/form/')
+        .end(function (err, res) {
+          const document = getDocument(res, err);
           const inputButtonContainer = document.querySelector('.field_buttoninput');
           assert.equal(inputButtonContainer.textContent, 'Button');
           const inputButton = inputButtonContainer.querySelector('.input-button');
           assert.equal(inputButton.name, 'buttoninput');
           assert.equal(inputButton.getAttribute('type'), 'button');
-
+          done();
+        });
+    });
+    it('should have password input widget', function (done) {
+      chai.request('http://localhost:8080')
+        .get('/boilerplate/form/')
+        .end(function (err, res) {
+          const document = getDocument(res, err);
           const inputPasswordContainer = document.querySelector('.field_passwordinput');
           assert.equal(inputPasswordContainer.textContent, 'Passwort');
           const inputPassword = inputPasswordContainer.querySelector('.input-password');
           assert.equal(inputPassword.name, 'passwordinput');
           assert.equal(inputPassword.getAttribute('type'), 'password');
-
+          done();
+        });
+    });
+    it('should have checkbox input widget', function (done) {
+      chai.request('http://localhost:8080')
+        .get('/boilerplate/form/')
+        .end(function (err, res) {
+          const document = getDocument(res, err);
           const inputCheckboxContainer = document.querySelector('.field_checkboxinput');
           assert.equal(inputCheckboxContainer.textContent, 'Möglichkeitkann man wählen');
           const inputCheckbox = inputCheckboxContainer.querySelector('.input-checkbox');
           assert.equal(inputCheckbox.name, 'checkboxinput');
           assert.equal(inputCheckbox.value, 'gewählt');
           assert.equal(inputCheckbox.getAttribute('type'), 'checkbox');
-
+          done();
+        });
+    });
+    it('should have radio input widget', function (done) {
+      chai.request('http://localhost:8080')
+        .get('/boilerplate/form/')
+        .end(function (err, res) {
+          const document = getDocument(res, err);
           const inputRadioContainer = document.querySelector('.field_radioinput');
           assert.equal(inputRadioContainer.textContent, 'Auswahlmal klickenoder hier');
           const inputRadio = inputRadioContainer.querySelectorAll('.input-radio');
@@ -88,7 +124,14 @@ describe('/boilerplate/tests/views/form.js', function () {
           assert.equal(inputRadio[1].name, 'radioinput');
           assert.equal(inputRadio[1].value, 'klock');
           assert.equal(inputRadio[1].getAttribute('type'), 'radio');
-
+          done();
+        });
+    });
+    it('should have select input widget', function (done) {
+      chai.request('http://localhost:8080')
+        .get('/boilerplate/form/')
+        .end(function (err, res) {
+          const document = getDocument(res, err);
           const inputSelectContainer = document.querySelector('.field_select');
           assert.equal(inputSelectContainer.textContent, 'Auswahllistebitte wählendiesdasvielleicht ein Pflichtfeld');
           const inputSelect = inputSelectContainer.querySelector('.input-select');
@@ -101,12 +144,26 @@ describe('/boilerplate/tests/views/form.js', function () {
           assert.equal(inputSelectOption[1].textContent, 'dies');
           assert.equal(inputSelectOption[2].value, 'opt2');
           assert.equal(inputSelectOption[2].textContent, 'das');
-
+          done();
+        });
+    });
+    it('should have textarea input widget', function (done) {
+      chai.request('http://localhost:8080')
+        .get('/boilerplate/form/')
+        .end(function (err, res) {
+          const document = getDocument(res, err);
           const inputTextareaContainer = document.querySelector('.field_textareainput');
           assert.equal(inputTextareaContainer.textContent, 'Langtextfeldsteht schon was');
           const inputTextarea = inputTextareaContainer.querySelector('.input-textarea');
           assert.equal(inputTextarea.name, 'textareainput');
-
+          done();
+        });
+    });
+    it('should have submit input widget', function (done) {
+      chai.request('http://localhost:8080')
+        .get('/boilerplate/form/')
+        .end(function (err, res) {
+          const document = getDocument(res, err);
           const inputSubmitContainer = document.querySelector('.field_submit');
           const inputSubmit = inputSubmitContainer.querySelector('.input-submit');
           assert.equal(inputSubmit.getAttribute('type'), 'submit');
@@ -116,3 +173,10 @@ describe('/boilerplate/tests/views/form.js', function () {
     });
   });
 });
+
+function getDocument (res, err) {
+  expect(err).to.be.null;
+  expect(res).to.have.status(200);
+  expect(res).to.be.html;
+  return (new JSDOM(res.text)).window.document;
+}

@@ -19,10 +19,7 @@ describe('/boilerplate/tests/views/index.js', function () {
       chai.request('http://localhost:8080')
         .get('/boilerplate/')
         .end(function (err, res) {
-          expect(err).to.be.null;
-          expect(res).to.have.status(200);
-          expect(res).to.be.html;
-          const { document } = (new JSDOM(res.text)).window;
+          const document = getDocument(res, err);
           assert.equal(document.title, 'boilerplate');
           assert.equal(document.head.getElementsByTagName('script').length, 1);
           assert.equal(
@@ -36,10 +33,7 @@ describe('/boilerplate/tests/views/index.js', function () {
       chai.request('http://localhost:8080')
         .get('/boilerplate/')
         .end(function (err, res) {
-          expect(err).to.be.null;
-          expect(res).to.have.status(200);
-          expect(res).to.be.html;
-          const { document } = (new JSDOM(res.text)).window;
+          const document = getDocument(res, err);
           const headline = document.getElementById('headline');
           assert.equal(headline.textContent, 'Boilerplate');
           done();
@@ -50,10 +44,7 @@ describe('/boilerplate/tests/views/index.js', function () {
         .get('/boilerplate/')
         .set('Accept-Language', 'de;q=0.8,en;q=0.3')
         .end(function (err, res) {
-          expect(err).to.be.null;
-          expect(res).to.have.status(200);
-          expect(res).to.be.html;
-          const { document } = (new JSDOM(res.text)).window;
+          const document = getDocument(res, err);
           const headline = document.querySelector('.boilerplate-headline');
           assert.equal(headline.textContent, 'Hier ist die Boilerplate');
           done();
@@ -64,10 +55,7 @@ describe('/boilerplate/tests/views/index.js', function () {
         .get('/boilerplate/')
         .set('Accept-Language', 'en;q=0.9,de;q=0.5')
         .end(function (err, res) {
-          expect(err).to.be.null;
-          expect(res).to.have.status(200);
-          expect(res).to.be.html;
-          const { document } = (new JSDOM(res.text)).window;
+          const document = getDocument(res, err);
           const headline = document.querySelector('.boilerplate-headline');
           assert.equal(headline.textContent, 'Welcome to Boilerplate');
           done();
@@ -75,3 +63,10 @@ describe('/boilerplate/tests/views/index.js', function () {
     });
   });
 });
+
+function getDocument (res, err) {
+  expect(err).to.be.null;
+  expect(res).to.have.status(200);
+  expect(res).to.be.html;
+  return (new JSDOM(res.text)).window.document;
+}
