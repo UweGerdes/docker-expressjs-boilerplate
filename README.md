@@ -48,3 +48,35 @@ You should add your project in the modules subdirectory with html/ejs/pug templa
 Other samples are in my projects docker-vcards, docker-rpi-nodejs-gpio (more to come).
 
 `server.js` will load `module/[project]/server/index.js` - this should be your router. Routes are prepended with `[project]`.
+
+### Templates: HTML / EJS / [Pug](https://pugjs.org/)
+
+You may combine different template languages.
+
+### Less / CSS
+
+The project provides global styles so you should only add styles to your module that are specific for your module.
+
+### ES6 / JavaScript
+
+Scripts in `modules/[module]/js/` will be copied to `public/js/[module]/`.
+
+### Iconfont
+
+### Graphviz
+
+### More Docker
+
+#### e2e-workflow
+
+Start the docker-e2e-workflow test dockers in your project directory (in another terminal to separate the vcards and e2e-workflow test output):
+
+```bash
+$ docker-compose -f docker-compose-e2e-workflow.yaml up
+```
+
+Start another terminal and attach to the `boilerplate-e2e-workflow` or `expressjs-boilerplate-e2e` docker (you might want to enter `rs[RETURN]` to trigger nodemon restart, CRTL-P + CRTL-Q to detach):
+
+```bash
+$ docker attach expressjs-boilerplate-e2e
+```

@@ -28,6 +28,14 @@ gulp:
       server:
         - 'server-changed'
         - 'tests'
+    staging:
+      gulp:
+        - 'server-start'
+      build: []
+      tests: []
+      lint: []
+      server:
+        - 'server-changed'
     production:
       gulp:
         - 'build'

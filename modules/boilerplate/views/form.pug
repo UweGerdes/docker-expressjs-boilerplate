@@ -16,11 +16,11 @@ append breadcrumbs
     .header-breadcrumb-label Formular
 
 block content
-  div#user.user.flex-wrapper
+  div#formular.formular.flex-wrapper
 
     include widgets/header.pug
 
-    #user-container.user-container.flex-block.flex-center
+    #formular-container.formular-container.flex-block.flex-center
       h2.subheadline Formular
       if (error)
         .error #{__(error, post.username)}

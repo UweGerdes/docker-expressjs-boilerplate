@@ -1,0 +1,74 @@
+# To execute this docker-compose yml file use docker-compose -f <file_name> up
+# Add the "-d" flag at the end for deattached execution
+version: "3.5"
+
+services:
+
+  expressjs-boilerplate-e2e:
+    build:
+      context: .
+    container_name: expressjs-boilerplate-e2e
+    hostname: boilerplate-e2e
+    image: uwegerdes/expressjs-boilerplate
+    environment:
+      - NODE_ENV=staging
+    ports:
+      - 51285:8080
+      - 51286:8081
+    stdin_open: true
+    tty: true
+    volumes:
+    - .:/home/node/app
+    command: npm run dev
+
+  boilerplate-e2e-hub:
+    image: selenium/hub:3.141.59-europium
+    container_name: boilerplate-e2e-hub
+    hostname: boilerplate-e2e-hub
+
+  boilerplate-e2e-chrome:
+    image: selenium/node-chrome:3.141.59-europium
+    container_name: boilerplate-e2e-chrome
+    volumes:
+      - /dev/shm:/dev/shm
+    depends_on:
+      - boilerplate-e2e-hub
+    environment:
+      - HUB_HOST=boilerplate-e2e-hub
+      - HUB_PORT=4444
+      - E2E_HOST=boilerplate-e2e-workflow
+      - JAVA_OPTS=-Dselenium.LOGGER.level=WARNING
+
+  boilerplate-e2e-firefox:
+    image: selenium/node-firefox:3.141.59-europium
+    container_name: boilerplate-e2e-firefox
+    volumes:
+      - /dev/shm:/dev/shm
+    depends_on:
+      - boilerplate-e2e-hub
+    environment:
+      - HUB_HOST=boilerplate-e2e-hub
+      - HUB_PORT=4444
+      - E2E_HOST=boilerplate-e2e-workflow
+      - JAVA_OPTS=-Dselenium.LOGGER.level=WARNING
+
+  boilerplate-e2e-workflow:
+    image: uwegerdes/e2e-workflow
+    container_name: boilerplate-e2e-workflow
+    hostname: boilerplate-e2e-workflow
+    ports:
+      - 51287:8080
+      - 51288:8081
+    stdin_open: true
+    tty: true
+    depends_on:
+      - boilerplate-e2e-hub
+    environment:
+      - HUB_HOST=boilerplate-e2e-hub
+      - HUB_PORT=4444
+      - NODE_ENV=staging
+    volumes:
+      - ../docker-e2e-workflow:/home/node/app
+      - ./modules:/home/node/app/config/modules
+#    command: npm start
+    command: npm run dev
