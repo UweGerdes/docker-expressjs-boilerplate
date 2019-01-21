@@ -1,0 +1,32 @@
+// styling for form
+
+.field-value {
+  &-input {
+    margin-bottom: 0.5em;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  // use for inline text input fields
+  &-group {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  &-group &-input {
+    flex: 1 100%;
+  }
+
+  @media all and (min-width: 768px) {
+    &-group {
+      justify-content: space-between;
+      width: 50%;
+    }
+    &-group &-input {
+      flex: 0 0 49%;
+    }
+  }
+}

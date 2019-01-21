@@ -3,9 +3,10 @@ mixin textarea(name, value, width, height, label)
   .field(class='field_' + name)
     label.field-label.field-label-textarea= label
     .field-value
-      textarea(
-        name=name,
-        class='input-textarea',
-        cols=width,
-        rows=height
-      )= value
+      .field-value-input(class='field-value-input-' + name)
+        textarea(
+          name=name,
+          class='input-textarea',
+          cols=width,
+          rows=height
+        )= value

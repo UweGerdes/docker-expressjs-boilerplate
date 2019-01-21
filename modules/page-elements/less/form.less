@@ -20,6 +20,10 @@
   }
 
   &-value {
+    &-input {
+      width: 100%;
+    }
+
     .input-text,
     .input-email,
     .input-password {
@@ -108,20 +112,18 @@
     align-items: baseline;
     display: flex;
 
-    .field-label {
+    &-label {
       flex-basis: 20%;
       flex-grow: 1;
       padding-right: 1em;
       text-align: right;
     }
 
-    .field-value {
+    &-value {
       flex-basis: 80%;
       flex-grow: 1;
 
-      .input-text,
-      .input-password,
-      .input-textarea {
+      & > &-input {
         width: 50%;
       }
     }

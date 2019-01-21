@@ -1,0 +1,37 @@
+//- widgets/form/group.pug
+mixin group(pretext, fields, posttext)
+  .field.field_group
+    .field-label= pretext
+    .field-value
+      .field-value-group
+        each field in fields
+          .field-value-input(class='field_' + (field.class ? field.class : field.name))
+            if (field.type === 'select')
+              select(
+                    id=field.name,
+                    name=field.name,
+                    class='input-select'
+                  )
+                each label, value in field.entries
+                  option(value=value)= label
+            else
+              if field.entries
+                - i = 0
+                each label, value in field.entries
+                  input(
+                    class='input-' + field.type,
+                    type=field.type,
+                    name=field.name,
+                    value=value,
+                    id=field.name + i
+                  )
+                  label(class=field.type + '-label', for=field.name + i++)= label
+              else
+                input(
+                  class='input-' + field.type,
+                  id=field.name,
+                  value=post[field.name]
+                )&attributes(field.attr)
+          if posttext
+            .field-value-posttext
+              label(class=attr.type + '-label', for=attr.name)= posttext

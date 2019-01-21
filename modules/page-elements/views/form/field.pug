@@ -3,22 +3,23 @@ mixin field(pretext, attr, posttext)
   .field(class='field_' + (attr.class ? attr.class : attr.name))
     .field-label= pretext
     .field-value
-      if attr.entries
-        - i = 0
-        each label, value in attr.entries
+      .field-value-input(class='field-value-input-' + attr.name)
+        if attr.entries
+          - i = 0
+          each label, value in attr.entries
+            input(
+              class='input-' + attr.type,
+              type=attr.type,
+              name=attr.name,
+              value=value,
+              id=attr.name + i
+            )
+            label(class=attr.type + '-label', for=attr.name + i++)= label
+        else
           input(
             class='input-' + attr.type,
-            type=attr.type,
-            name=attr.name,
-            value=value,
-            id=attr.name + i
-          )
-          label(class=attr.type + '-label', for=attr.name + i++)= label
-      else
-        input(
-          class='input-' + attr.type,
-          id=attr.name,
-          value=post[attr.name]
-        )&attributes(attr)
+            id=attr.name,
+            value=post[attr.name]
+          )&attributes(attr)
       if posttext
         label(class=attr.type + '-label', for=attr.name)= posttext

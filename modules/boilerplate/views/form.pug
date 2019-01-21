@@ -5,6 +5,7 @@ include ../../page-elements/views/form/field.pug
 include ../../page-elements/views/form/hidden.pug
 include ../../page-elements/views/form/select.pug
 include ../../page-elements/views/form/textarea.pug
+include ../../page-elements/views/form/group.pug
 
 include widgets/defaults.pug
 
@@ -49,11 +50,26 @@ block content
         + field('Auswahl', {
             type: 'radio',
             name: 'radioinput',
-            value: 'gewählt',
             entries: { klick: 'mal klicken', klock: 'oder hier' }
           })
         + select('select', 'Auswahlliste', { '': 'bitte wählen', opt1: 'dies', opt2: 'das' }, 'vielleicht ein Pflichtfeld')
         + textarea('textareainput', 'steht schon was', 30, 5, 'Langtextfeld')
+        + group('Feldgruppe', [{
+            type: 'text',
+            name: 'grouptextinput1',
+            size: 4
+          },
+          {
+            type: 'text',
+            name: 'grouptextinput2',
+            size: 8
+          },
+          {
+            type: 'radio',
+            name: 'groupradioinput',
+            value: 'gewählt',
+            entries: { klick: 'mal klicken', klock: 'oder hier' }
+          }])
         + field('', {
             type: 'submit',
             value: 'anmelden',

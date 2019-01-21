@@ -3,11 +3,12 @@ mixin select(name, pretext, entries, followtext)
   .field(class='field_' + name)
     .field-label= pretext
     .field-value
-      select(
-            id=name,
-            name=name,
-            class='input-select'
-          )
-        each label, value in entries
-          option(value=value)= label
-      span.select-followtext= followtext
+      .field-value-input(class='field-value-input-' + name)
+        select(
+              id=name,
+              name=name,
+              class='input-select'
+            )
+          each label, value in entries
+            option(value=value)= label
+        span.select-followtext= followtext
