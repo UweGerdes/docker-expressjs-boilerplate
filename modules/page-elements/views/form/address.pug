@@ -3,25 +3,21 @@ mixin address(pretext, groupname, fieldprefix)
   + group(pretext, groupname, [{
       type: 'text',
       name: fieldprefix + 'street',
-      size: 30,
       attr: { placeholder: __('Street') }
     },
     {
       type: 'text',
       name: fieldprefix + 'housenumber',
-      size: 3,
       attr: { placeholder: __('Number') }
     },
     {
       type: 'text',
       name: fieldprefix + 'zip',
-      size: 5,
       attr: { placeholder: __('Zip') }
     },
     {
       type: 'text',
       name: fieldprefix + 'city',
-      size: 30,
       attr: { placeholder: __('City') }
     }]
   )
