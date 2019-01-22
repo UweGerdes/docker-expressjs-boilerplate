@@ -164,7 +164,7 @@ describe('/boilerplate/tests/views/form.js', function () {
         .get('/boilerplate/form/')
         .end(function (err, res) {
           const document = getDocument(res, err);
-          const inputGroupContainer = document.querySelector('.field_group');
+          const inputGroupContainer = document.querySelector('.field_group1');
           assert.equal(inputGroupContainer.textContent, 'Feldgruppemal klickenoder hier');
           const inputText1 = inputGroupContainer.querySelector('.field_grouptextinput1 .input-text');
           assert.equal(inputText1.name, 'grouptextinput1');
@@ -173,6 +173,24 @@ describe('/boilerplate/tests/views/form.js', function () {
           const inputRadio = inputGroupContainer.querySelectorAll('.field_groupradioinput .input-radio');
           assert.equal(inputRadio.length, 2);
           assert.equal(inputRadio[0].name, 'groupradioinput');
+          done();
+        });
+    });
+    it('should have field address input widget', function (done) {
+      chai.request('http://localhost:8080')
+        .get('/boilerplate/form/')
+        .end(function (err, res) {
+          const document = getDocument(res, err);
+          const inputGroupContainer = document.querySelector('.field_address');
+          assert.equal(inputGroupContainer.textContent, 'Adresse');
+          const inputStreet = inputGroupContainer.querySelector('.field_address-street .input-text');
+          assert.equal(inputStreet.name, 'address-street');
+          const inputHousenumber = inputGroupContainer.querySelector('.field_address-housenumber .input-text');
+          assert.equal(inputHousenumber.name, 'address-housenumber');
+          const inputZip = inputGroupContainer.querySelector('.field_address-zip .input-text');
+          assert.equal(inputZip.name, 'address-zip');
+          const inputCity = inputGroupContainer.querySelector('.field_address-city .input-text');
+          assert.equal(inputCity.name, 'address-city');
           done();
         });
     });

@@ -1,6 +1,6 @@
 //- widgets/form/group.pug
 mixin group(pretext, groupname, fields, posttext)
-  .field.field_group
+  .field(class='field_' + groupname)
     .field-label= pretext
     .field-value
       .field-value-group

@@ -6,6 +6,7 @@ include ../../page-elements/views/form/hidden.pug
 include ../../page-elements/views/form/select.pug
 include ../../page-elements/views/form/textarea.pug
 include ../../page-elements/views/form/group.pug
+include ../../page-elements/views/form/address.pug
 
 include widgets/defaults.pug
 
@@ -70,6 +71,7 @@ block content
             value: 'gewählt',
             entries: { klick: 'mal klicken', klock: 'oder hier' }
           }])
+        + address('Adresse', 'address', 'address-')
         + field('', {
             type: 'submit',
             value: 'anmelden',
