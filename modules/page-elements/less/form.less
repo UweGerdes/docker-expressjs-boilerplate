@@ -64,8 +64,11 @@
       & + .radio-label {
         display: inline-block;
         line-height: 1.5em;
-        margin-left: -20px;
-        padding: 3px 1em 0 0;
+        padding: 3px 0 0;
+
+        &:nth-child(2) {
+          margin-left: -20px;
+        }
 
         &:before {
           content: '\25CE';
