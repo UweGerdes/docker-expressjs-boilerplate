@@ -54,7 +54,7 @@ block content
           })
         + select('select', 'Auswahlliste', { '': 'bitte wählen', opt1: 'dies', opt2: 'das' }, 'vielleicht ein Pflichtfeld')
         + textarea('textareainput', 'steht schon was', 30, 5, 'Langtextfeld')
-        + group('Feldgruppe', [{
+        + group('Feldgruppe', 'group1', [{
             type: 'text',
             name: 'grouptextinput1',
             size: 4

@@ -159,6 +159,23 @@ describe('/boilerplate/tests/views/form.js', function () {
           done();
         });
     });
+    it('should have field group input widget', function (done) {
+      chai.request('http://localhost:8080')
+        .get('/boilerplate/form/')
+        .end(function (err, res) {
+          const document = getDocument(res, err);
+          const inputGroupContainer = document.querySelector('.field_group');
+          assert.equal(inputGroupContainer.textContent, 'Feldgruppemal klickenoder hier');
+          const inputText1 = inputGroupContainer.querySelector('.field_grouptextinput1 .input-text');
+          assert.equal(inputText1.name, 'grouptextinput1');
+          const inputText2 = inputGroupContainer.querySelector('.field_grouptextinput2 .input-text');
+          assert.equal(inputText2.name, 'grouptextinput2');
+          const inputRadio = inputGroupContainer.querySelectorAll('.field_groupradioinput .input-radio');
+          assert.equal(inputRadio.length, 2);
+          assert.equal(inputRadio[0].name, 'groupradioinput');
+          done();
+        });
+    });
     it('should have submit input widget', function (done) {
       chai.request('http://localhost:8080')
         .get('/boilerplate/form/')

@@ -1,5 +1,5 @@
 //- widgets/form/group.pug
-mixin group(pretext, fields, posttext)
+mixin group(pretext, groupname, fields, posttext)
   .field.field_group
     .field-label= pretext
     .field-value
@@ -30,6 +30,7 @@ mixin group(pretext, fields, posttext)
                 input(
                   class='input-' + field.type,
                   id=field.name,
+                  name=field.name,
                   value=post[field.name]
                 )&attributes(field.attr)
           if posttext
