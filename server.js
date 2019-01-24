@@ -199,10 +199,13 @@ function viewPath(page = 'error', type = 'ejs') {
  * @param {String} req - request
  */
 function getHostData(req) {
-  let livereloadPort = config.server.livereloadPort;
-  const host = req.get('Host');
-  if (host.indexOf(':') > 0) {
-    livereloadPort = parseInt(host.split(':')[1], 10) + 1;
+  let livereloadPort;
+  if (process.env.NODE_ENV === 'development') {
+    livereloadPort = config.server.livereloadPort;
+    const host = req.get('Host');
+    if (host.indexOf(':') > 0) {
+      livereloadPort = parseInt(host.split(':')[1], 10) + 1;
+    }
   }
   return {
     hostname: req.hostname,

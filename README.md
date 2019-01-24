@@ -16,7 +16,7 @@ sudo adduser [yourusername] docker
 If you have proxy caches for apt-get and npm you should build my baseimage (or baseimage-arm32v7 for Raspberry Pi 3) and nodejs before building the image.
 
 ```bash
-$ docker build -t uwegerdes/expressjs-boilerplate .
+$ docker build -t uwegerdes/expressjs-boilerplate --build-arg NODE_ENV="development" .
 ```
 
 ## Run the Docker container
@@ -79,4 +79,32 @@ Start another terminal and attach to the `boilerplate-e2e-workflow` or `expressj
 
 ```bash
 $ docker attach expressjs-boilerplate-e2e
+```
+## Build production server
+
+Execute `gulp deploy` in development mode, the contents of the directory `deploy` are suitable for building a production server.
+
+Please keep in mind that this boilerplate has not been tested for performance or security. Don't use it in a realy productive environment.
+
+### Build the Docker image
+
+```bash
+$ docker build -t uwegerdes/expressjs-boilerplate-prod .
+```
+
+## Run the Docker container
+
+```bash
+$ docker run -d \
+	-p 8080:8080 \
+	-p 8081:8081 \
+	--name expressjs-boilerplate-prod \
+	uwegerdes/expressjs-boilerplate-prod
+```
+
+You may want to see the logs or open a shell in the container:
+
+```bash
+$ docker logs -f expressjs-boilerplate-prod
+$ docker exec -it  expressjs-boilerplate-prod bash
 ```

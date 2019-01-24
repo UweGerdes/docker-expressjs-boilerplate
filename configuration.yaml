@@ -120,6 +120,25 @@ gulp:
       dest: 'public/css'
     locales:
       dest: 'locales'
+    deploy:
+      src:
+        - 'CHANGELOG.md'
+        - 'configuration.yaml'
+        - 'Dockerfile'
+        - 'LICENSE'
+        - 'package.json'
+        - 'README.md'
+        - 'server.js'
+        - 'lib/**/*'
+        - 'locales/*'
+        - 'modules/*/*.json'
+        - 'modules/*/*.yaml'
+        - 'modules/*/server/**/*'
+        - 'modules/*/views/**/*'
+        - 'public/*'
+        - 'public/css/*'
+        - 'public/js/**/*'
+      dest: 'deploy'
 
 server:
   server: ./server.js

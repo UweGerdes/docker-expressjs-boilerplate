@@ -10,6 +10,7 @@ const axios = require('axios'),
   session = require('express-session'),
   fs = require('fs'),
   yaml = require('js-yaml'),
+  MemoryStore = require('memorystore')(session),
   path = require('path'),
   config = require('../../../lib/config'),
   model = require('./model.js');
@@ -93,6 +94,9 @@ const callback = async (req, res) => {
 
 const useExpress = (app) => {
   app.use(session({
+    store: new MemoryStore({
+      checkPeriod: 86400000 // prune expired entries every 24h
+    }),
     secret: 'uif fsranöaiorawrua vrw',
     resave: false,
     saveUninitialized: true

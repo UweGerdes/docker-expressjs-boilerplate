@@ -138,7 +138,18 @@ const tasks = {
     };
     gulp.src(config.gulp.build.jsdoc.src, { read: false })
       .pipe(jsdoc(jsdocConfig, callback));
-  }]
+  }],
+  /**
+   * #### Copy files to deploy
+   *
+   * @task deploy
+   * @namespace tasks
+   */
+  'deploy': () => {
+    return gulp.src(config.gulp.build.deploy.src, { "base" : "." })
+      .pipe(gulp.dest(config.gulp.build.deploy.dest))
+      .pipe(notify({ message: 'written: <%= file.path %>', title: 'Gulp deploy' }));
+  }
 };
 
 loadTasks.importTasks(tasks);
