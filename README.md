@@ -97,7 +97,6 @@ $ docker build -t uwegerdes/expressjs-boilerplate-prod .
 ```bash
 $ docker run -d \
 	-p 8080:8080 \
-	-p 8081:8081 \
 	--name expressjs-boilerplate-prod \
 	uwegerdes/expressjs-boilerplate-prod
 ```
