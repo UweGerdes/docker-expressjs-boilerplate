@@ -1,6 +1,6 @@
 # Docker with Express.js boilerplate
 
-### Install Docker
+## Install Docker
 
 For Windows or Mac users: open [https://www.docker.com/get-started](https://www.docker.com/get-started) in your browser.
 
@@ -11,7 +11,7 @@ curl -sSL https://get.docker.com | sh
 sudo adduser [yourusername] docker
 ```
 
-### Build the Docker image
+## Build the Docker image
 
 If you have proxy caches for apt-get and npm you should build my baseimage (or baseimage-arm32v7 for Raspberry Pi 3) and nodejs before building the image.
 
@@ -92,7 +92,7 @@ Please keep in mind that this boilerplate has not been tested for performance or
 $ docker build -t uwegerdes/expressjs-boilerplate-prod .
 ```
 
-## Run the Docker container
+### Run the Docker container
 
 ```bash
 $ docker run -d \
