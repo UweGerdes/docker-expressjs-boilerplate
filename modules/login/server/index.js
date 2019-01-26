@@ -13,6 +13,7 @@ const controller = require('./controller.js');
 // login overview
 router.get('/', controller.index);
 router.get('/callback', controller.callback);
+router.get('/logout', controller.logout);
 
 module.exports = {
   router: router,

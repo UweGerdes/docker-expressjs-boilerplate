@@ -73,7 +73,23 @@ const callback = async (req, res) => {
   }
 };
 
+/**
+ * ### logout and redirect to login page
+ *
+ * render the index page
+ *
+ * @param {object} req - request
+ * @param {object} res - result
+ */
+const logout = (req, res) => {
+  delete req.session.oauthProvider;
+  delete req.session.accessToken;
+  delete req.session.userdata;
+  res.redirect('/login/');
+};
+
 module.exports = {
   index: index,
-  callback: callback
+  callback: callback,
+  logout: logout
 };
