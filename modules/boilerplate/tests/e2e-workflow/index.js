@@ -19,7 +19,7 @@ module.exports = {
       uri: domain + '/boilerplate/',
       steps: {
         'Boilerplate': {
-          title: 'boilerplate',
+          title: 'Boilerplate',
           elements: {
             '//h1[@id="headline"]': 'Boilerplate',
             '//*[contains(@class, "boilerplate-headline")]': 'Welcome to Boilerplate',
