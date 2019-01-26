@@ -8,8 +8,7 @@
 
 const path = require('path'),
   config = require('../../../lib/config'),
-  model = require('./model.js'),
-  moduleConfig = require('../config.json');
+  model = require('./model.js');
 
 const viewBase = path.join(path.dirname(__dirname), 'views');
 
@@ -48,7 +47,7 @@ const form = (req, res) => {
       // the following command should throw if user unknown
       data.user = { username: req.body.username };
       data.user.name = req.body.username;
-      req.session.oauthProvider = moduleConfig.name;
+      req.session.oauthProvider = config.modules.boilerplate.name;
       req.session.userdata = data.user;
     } catch (error) {
       data.error = error.message;
@@ -79,7 +78,7 @@ function getServerData(req) {
     environment: process.env.NODE_ENV,
     hostname: req.hostname,
     livereloadPort: livereloadPort,
-    module: moduleConfig,
+    module: config.modules.boilerplate,
     session: req.session,
     data: false,
     model: model.getData(),

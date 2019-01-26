@@ -8,18 +8,12 @@
 
 const axios = require('axios'),
   session = require('express-session'),
-  fs = require('fs'),
-  yaml = require('js-yaml'),
   MemoryStore = require('memorystore')(session),
   path = require('path'),
   config = require('../../../lib/config'),
   model = require('./model.js');
 
 const viewBase = path.join(path.dirname(__dirname), 'views');
-
-const moduleConfig = yaml.safeLoad(
-  fs.readFileSync(path.join(__dirname, '..', 'configuration.yaml'), 'utf8')
-);
 
 const viewRenderParams = {
   // model data
@@ -59,7 +53,7 @@ const index = (req, res) => {
 const callback = async (req, res) => {
   const requestToken = req.query.code;
   if (requestToken) {
-    const oauth = moduleConfig.oauth2.GitHub;
+    const oauth = config.modules.login.oauth2.GitHub;
     req.session.oauthProvider = 'GitHub';
     const response = await axios({
       method: 'post',
@@ -125,7 +119,7 @@ function getHostData(req) {
     environment: process.env.NODE_ENV,
     hostname: req.hostname,
     livereloadPort: livereloadPort,
-    module: moduleConfig,
+    module: config.modules.login,
     session: req.session
   };
 }

@@ -21,8 +21,7 @@ const bodyParser = require('body-parser'),
   app = express(),
   server = require('http').createServer(app);
 
-let modules = { },
-  routers = { };
+let routers = { };
 
 /**
  * Weberver logging
@@ -41,13 +40,12 @@ if (config.server.verbose) {
 app.use(express.static(config.server.docroot));
 
 /**
- * load modules and set express (perhaps module will use
+ * load modules
  */
 glob.sync(config.server.modules + '/*/server/index.js')
   .forEach((filename) => {
     const regex = new RegExp(config.server.modules + '(/[^/]+)/server/index.js');
     const baseRoute = filename.replace(regex, '$1');
-    modules[baseRoute] = require('./' + path.join(config.server.modules, baseRoute, 'config.json'));
     routers[baseRoute] = require(filename);
   });
 // base directory for views
@@ -211,7 +209,7 @@ function getHostData(req) {
     hostname: req.hostname,
     httpPort: config.server.httpPort,
     livereloadPort: livereloadPort,
-    modules: modules,
+    modules: config.modules,
     session: req.session
   };
 }

@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.1.0
+module configuration with yaml file
+
 ## 0.0.14
 adding breadcrumbs and form elements
 
