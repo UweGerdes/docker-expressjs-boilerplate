@@ -67,9 +67,6 @@ const callback = async (req, res) => {
     req.session.unauthorized = true;
     let data = Object.assign({ },
       config.getData(req),
-      {
-        title: 'unauthorized'
-      },
       req.params,
       model.getData());
     res.status(401).render(path.join(viewBase, 'unauthorized.pug'), data);

@@ -8,7 +8,8 @@ include ../../page-elements/views/form/textarea.pug
 include ../../page-elements/views/form/group.pug
 include ../../page-elements/views/form/address.pug
 
-include widgets/defaults.pug
+append head
+  script(src='/js/'+ moduleName + '/script.js')
 
 block title
   | Formular
@@ -18,15 +19,13 @@ append breadcrumbs
     .header-breadcrumb-label Formular
 
 block content
-  div#formular.formular.flex-wrapper
-
-    include widgets/header.pug
-
-    #formular-container.formular-container.flex-block.flex-center
+  div#formular.formular
+    h1#headline.headline= module.name
+    #formular-container.formular-container
       h2.subheadline Formular
       if (error)
         .error #{__(error, post.username)}
-      form#loginform.loginform(method='POST', action='/boilerplate/form/')
+      form#loginform.loginform(method='POST', action='/'+ moduleName + '/form/')
         + hidden('hiddeninput', 'wert')
         + field('Texteingabe', {
             type: 'text',

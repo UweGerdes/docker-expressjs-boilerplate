@@ -5,4 +5,6 @@ block footer
       p#copyright.copyright &copy; 2019
         = " "
         a(href='mailto:entwicklung@uwegerdes.de') Uwe Gerdes
-  include footer-scripts.pug
+  if hostname && livereloadPort
+    script(src='http://' + hostname + ':' + livereloadPort + '/livereload.js')
+

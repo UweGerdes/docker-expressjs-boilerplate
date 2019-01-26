@@ -1,12 +1,10 @@
 //- index.pug
 extends ../../pages/views/page.pug
 
-include widgets/defaults.pug
-
 block content
-  div#login.login.flex-wrapper
-    include widgets/header.pug
-    #login-container.login-container.flex-block.flex-center
+  div#login.login
+    h1#headline.headline= module.name
+    #login-container.login-container
       if session.userdata
         h2 Welcome
           = ' ' + session.userdata.name

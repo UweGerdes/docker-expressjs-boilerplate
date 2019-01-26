@@ -20,7 +20,7 @@ describe('/boilerplate/tests/views/index.js', function () {
         .get('/boilerplate/')
         .end(function (err, res) {
           const document = getDocument(res, err);
-          assert.equal(document.title, 'boilerplate');
+          assert.equal(document.title, 'Boilerplate');
           assert.equal(document.head.getElementsByTagName('script').length, 1);
           assert.equal(
             document.head.getElementsByTagName('script')[0].attributes.src.nodeValue,
