@@ -3,6 +3,6 @@ if session
   #login-status.login-status
     block loginStatus
       if session.userdata
-        .login-status-ok= 'Angemeldet über ' + session.oauthProvider + ' als '  + session.userdata.username
+        .login-status-ok= 'Angemeldet über ' + session.oauthProvider + ' als '  + session.userdata.name
       else
         a.login-status-login(href='/login/') anmelden
