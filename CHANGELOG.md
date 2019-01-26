@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.1.1
+template refactoring, flexbox for page
+
 ## 0.1.0
 module configuration with yaml file
 
