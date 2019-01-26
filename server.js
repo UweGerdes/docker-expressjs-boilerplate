@@ -96,7 +96,7 @@ app.use(session({
 }));
 
 /**
- * use express in modules (e.g. use session in module login)
+ * use express in modules
  */
 for (const router of Object.values(routers)) {
   if (router.useExpress) {
@@ -124,7 +124,7 @@ app.get('/', (req, res) => {
  * @param {Object} res - response
  */
 app.get('/app', (req, res) => {
-  res.render(viewPath('app'), getHostData(req));
+  res.render(viewPath('app'), getServerData(req));
 });
 
 /**
@@ -134,7 +134,7 @@ app.get('/app', (req, res) => {
  * @param {Object} res - response
  */
 app.get('/i18n-ejs', (req, res) => {
-  res.render(viewPath('i18n-test'), getHostData(req));
+  res.render(viewPath('i18n-test'), getServerData(req));
 });
 
 // Fire it up!
@@ -164,7 +164,7 @@ app.get('*', (req, res) => {
       code: 404,
       name: 'not found'
     }
-  }, getHostData(req)));
+  }, getServerData(req)));
 });
 
 /**
@@ -185,7 +185,7 @@ app.use((err, req, res, next) => {
           name: 'server error',
           error: err
         }
-      }, getHostData(req)));
+      }, getServerData(req)));
   } else {
     next();
   }
@@ -203,12 +203,12 @@ function viewPath(page = 'error', type = 'ejs') {
 }
 
 /**
- * Get the host data for ports and modules
+ * Get the server data for ports, modules and session (too much information included)
  *
  * @private
  * @param {String} req - request
  */
-function getHostData(req) {
+function getServerData(req) {
   let livereloadPort;
   if (process.env.NODE_ENV === 'development') {
     livereloadPort = config.server.livereloadPort;
