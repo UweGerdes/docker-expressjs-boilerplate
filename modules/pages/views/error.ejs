@@ -9,32 +9,32 @@
 	</head>
 	<body>
 		<div class="page">
-			<div id="header" class="header">
 <%- include("../../page-elements/views/header.ejs") %>
-			</div>
-			<% if (locals.error && locals.error.code && locals.error.name) { %>
-				<h1 id="headline"><%= error.code %> - <%= __(error.name) %></h1>
-				<% if (locals.error.error) { %>
-					<% if (locals.error.error.msg) { %>
-						<p><%= error.error.msg %></p>
-						<% if (locals.error.error.filename) { %>
-							<p><%= error.error.filename %><% if (locals.error.error.line) { %>:<%= error.error.line %><% } %><% if (locals.error.error.column) { %>:<%= error.error.column %><% } %>
-							</p>
+			<div id="content" class="content">
+				<% if (locals.error && locals.error.code && locals.error.name) { %>
+					<h1 id="headline"><%= error.code %> - <%= __(error.name) %></h1>
+					<% if (locals.error.error) { %>
+						<% if (locals.error.error.msg) { %>
+							<p><%= error.error.msg %></p>
+							<% if (locals.error.error.filename) { %>
+								<p><%= error.error.filename %><% if (locals.error.error.line) { %>:<%= error.error.line %><% } %><% if (locals.error.error.column) { %>:<%= error.error.column %><% } %>
+								</p>
+							<% } %>
+						<% } else { %>
+							<pre><%= error.error.toString() %></pre>
 						<% } %>
-					<% } else { %>
-						<pre><%= error.error.toString() %></pre>
+					<% } %>
+				<% } else { %>
+					<h1 id="headline"><%= __('unkown error') %></h1>
+					<% if (locals.error) { %>
+						<% if (typeof locals.error === 'string') { %>
+							<pre><%= error %></pre>
+						<% } else if (typeof locals.error === 'object') { %>
+							<pre><%= JSON.stringify(error, null, 4) %></pre>
+						<% } %>
 					<% } %>
 				<% } %>
-			<% } else { %>
-				<h1 id="headline"><%= __('unkown error') %></h1>
-				<% if (locals.error) { %>
-					<% if (typeof locals.error === 'string') { %>
-						<pre><%= error %></pre>
-					<% } else if (typeof locals.error === 'object') { %>
-						<pre><%= JSON.stringify(error, null, 4) %></pre>
-					<% } %>
-				<% } %>
-			<% } %>
+			</div>
 <%- include("../../page-elements/views/footer.ejs") %>
 		</div>
 	</body>
