@@ -203,7 +203,7 @@ function viewPath(page = 'error', type = 'ejs') {
 }
 
 /**
- * Get the server data for ports, modules and session (too much information included)
+ * Get the server data for ports, modules and session
  *
  * @private
  * @param {String} req - request

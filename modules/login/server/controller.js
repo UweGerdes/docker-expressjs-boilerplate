@@ -13,11 +13,6 @@ const axios = require('axios'),
 
 const viewBase = path.join(path.dirname(__dirname), 'views');
 
-const viewRenderParams = {
-  // model data
-  // view helper functions
-};
-
 /**
  * ### index page
  *
@@ -32,7 +27,6 @@ const index = (req, res) => {
   },
   req.params,
   getHostData(req),
-  viewRenderParams,
   model.getData());
   if (req.session && req.session.userdata) {
     data.userdata = req.session.userdata;
@@ -78,7 +72,6 @@ const callback = async (req, res) => {
     },
     req.params,
     getHostData(req),
-    viewRenderParams,
     model.getData());
     res.status(401).render(path.join(viewBase, 'unauthorized.pug'), data);
   }

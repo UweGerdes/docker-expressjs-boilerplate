@@ -12,11 +12,6 @@ const path = require('path'),
 
 const viewBase = path.join(path.dirname(__dirname), 'views');
 
-const viewRenderParams = {
-  // model data
-  // view helper functions
-};
-
 /**
  * ### index page
  *
@@ -84,6 +79,5 @@ function getServerData(req) {
     model: model.getData(),
     post: { }
   },
-  req.params,
-  viewRenderParams);
+  req.params);
 }
