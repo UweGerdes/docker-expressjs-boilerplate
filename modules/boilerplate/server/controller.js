@@ -21,7 +21,7 @@ const viewBase = path.join(path.dirname(__dirname), 'views');
  * @param {object} res - result
  */
 const index = (req, res) => {
-  let data = getServerData(req);
+  let data = config.getData(req);
   res.render(path.join(viewBase, 'index.pug'), data);
 };
 
@@ -34,7 +34,13 @@ const index = (req, res) => {
  * @param {object} res - result
  */
 const form = (req, res) => {
-  let data = getServerData(req);
+  let data = Object.assign({ },
+    config.getData(req),
+    {
+      data: false,
+      model: model.getData(),
+      post: { }
+    });
   let statusCode = 200;
   if (req.method === 'POST' && req.body) {
     try {
@@ -56,28 +62,3 @@ module.exports = {
   index: index,
   form: form
 };
-
-/**
- * Get the basic data for the response
- *
- * @private
- * @param {String} req - request
- */
-function getServerData(req) {
-  let livereloadPort = config.server.livereloadPort || process.env.LIVERELOAD_PORT;
-  const host = req.get('Host');
-  if (host.indexOf(':') > 0) {
-    livereloadPort = parseInt(host.split(':')[1], 10) + 1;
-  }
-  return Object.assign({
-    environment: process.env.NODE_ENV,
-    hostname: req.hostname,
-    livereloadPort: livereloadPort,
-    module: config.modules.boilerplate,
-    session: req.session,
-    data: false,
-    model: model.getData(),
-    post: { }
-  },
-  req.params);
-}

@@ -22,12 +22,10 @@ const viewBase = path.join(path.dirname(__dirname), 'views');
  * @param {object} res - result
  */
 const index = (req, res) => {
-  let data = Object.assign({
-    title: 'Login'
-  },
-  req.params,
-  getHostData(req),
-  model.getData());
+  let data = Object.assign({ },
+    config.getData(req),
+    req.params,
+    model.getData());
   if (req.session && req.session.userdata) {
     data.userdata = req.session.userdata;
   }
@@ -67,12 +65,13 @@ const callback = async (req, res) => {
     res.redirect('/login/');
   } else {
     req.session.unauthorized = true;
-    let data = Object.assign({
-      title: 'unauthorized'
-    },
-    req.params,
-    getHostData(req),
-    model.getData());
+    let data = Object.assign({ },
+      config.getData(req),
+      {
+        title: 'unauthorized'
+      },
+      req.params,
+      model.getData());
     res.status(401).render(path.join(viewBase, 'unauthorized.pug'), data);
   }
 };
@@ -81,24 +80,3 @@ module.exports = {
   index: index,
   callback: callback
 };
-
-/**
- * Get the host data for livereload
- *
- * @private
- * @param {String} req - request
- */
-function getHostData(req) {
-  let livereloadPort = config.server.livereloadPort || process.env.LIVERELOAD_PORT;
-  const host = req.get('Host');
-  if (host.indexOf(':') > 0) {
-    livereloadPort = parseInt(host.split(':')[1], 10) + 1;
-  }
-  return {
-    environment: process.env.NODE_ENV,
-    hostname: req.hostname,
-    livereloadPort: livereloadPort,
-    module: config.modules.login,
-    session: req.session
-  };
-}

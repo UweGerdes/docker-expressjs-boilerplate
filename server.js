@@ -124,7 +124,7 @@ app.get('/', (req, res) => {
  * @param {Object} res - response
  */
 app.get('/app', (req, res) => {
-  res.render(viewPath('app'), getServerData(req));
+  res.render(viewPath('app'), config.getData(req));
 });
 
 /**
@@ -134,7 +134,7 @@ app.get('/app', (req, res) => {
  * @param {Object} res - response
  */
 app.get('/i18n-ejs', (req, res) => {
-  res.render(viewPath('i18n-test'), getServerData(req));
+  res.render(viewPath('i18n-test'), config.getData(req));
 });
 
 // Fire it up!
@@ -164,7 +164,7 @@ app.get('*', (req, res) => {
       code: 404,
       name: 'not found'
     }
-  }, getServerData(req)));
+  }, config.getData(req)));
 });
 
 /**
@@ -185,7 +185,7 @@ app.use((err, req, res, next) => {
           name: 'server error',
           error: err
         }
-      }, getServerData(req)));
+      }, config.getData(req)));
   } else {
     next();
   }
@@ -200,30 +200,6 @@ app.use((err, req, res, next) => {
  */
 function viewPath(page = 'error', type = 'ejs') {
   return config.server.modules + '/pages/views/' + page + '.' + type;
-}
-
-/**
- * Get the server data for ports, modules and session
- *
- * @private
- * @param {String} req - request
- */
-function getServerData(req) {
-  let livereloadPort;
-  if (process.env.NODE_ENV === 'development') {
-    livereloadPort = config.server.livereloadPort;
-    const host = req.get('Host');
-    if (host.indexOf(':') > 0) {
-      livereloadPort = parseInt(host.split(':')[1], 10) + 1;
-    }
-  }
-  return {
-    hostname: req.hostname,
-    httpPort: config.server.httpPort,
-    livereloadPort: livereloadPort,
-    modules: config.modules,
-    session: req.session
-  };
 }
 
 /**

@@ -1,16 +1,11 @@
 //- index.pug
 extends ../../pages/views/page.pug
 
-append head
-  script(src='/js/login/script.js')
+include widgets/defaults.pug
 
 block content
   div#login.login.flex-wrapper
-
-    #head.flex-block.flex-header
-      #header-wrapper.flex-wrapper
-        h1#headline.headline.flex-block.flex-left= module.name
-
+    include widgets/header.pug
     #login-container.login-container.flex-block.flex-center
       if session.userdata
         h2 Welcome

@@ -14,7 +14,7 @@ const chai = require('chai'),
 chai.use(chaiHttp);
 
 describe('/boilerplate/tests/views/form.js', function () {
-  describe('GET /boilerplate/', function () {
+  describe('GET /boilerplate/form/', function () {
     it('should have head, script and headline', function (done) {
       chai.request('http://localhost:8080')
         .get('/boilerplate/form/')

@@ -4,11 +4,11 @@ block title
   | #{module.name}
 
 append head
-  script(src='/js/boilerplate/script.js')
+  script(src='/js/login/script.js')
 
 append breadcrumbs
   li.header-breadcrumb
-    a.header-breadcrumb-link(href='/boilerplate/')= module.name
+    a.header-breadcrumb-link(href='/login/')= module.name
 
 append loginStatus
   if session.userdata
