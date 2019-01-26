@@ -8,7 +8,7 @@ const domain = 'http://expressjs-boilerplate-e2e:8080';
 
 module.exports = {
   group: 'Boilerplate E2E Test',
-  name: 'Index',
+  name: 'Boilerplate',
   viewports: {
     'Mobile': { width: 340, height: 568 },
     'Tablet': { width: 768, height: 1024 },
