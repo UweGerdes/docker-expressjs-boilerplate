@@ -11,8 +11,10 @@ const bodyParser = require('body-parser'),
   chalk = require('chalk'),
   dateFormat = require('dateformat'),
   express = require('express'),
+  session = require('express-session'),
   glob = require('glob'),
   i18n = require('i18n'),
+  MemoryStore = require('memorystore')(session),
   morgan = require('morgan'),
   path = require('path'),
   config = require('./lib/config'),
@@ -82,6 +84,16 @@ app.use((req, res, next) => {
   }
   next();
 });
+
+// initialize req.session
+app.use(session({
+  store: new MemoryStore({
+    checkPeriod: 86400000 // prune expired entries every 24h
+  }),
+  secret: 'uif fsranöaiorawrua vrw',
+  resave: false,
+  saveUninitialized: true
+}));
 
 /**
  * use express in modules (e.g. use session in module login)
