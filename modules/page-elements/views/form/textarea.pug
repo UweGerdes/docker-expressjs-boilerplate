@@ -9,4 +9,4 @@ mixin textarea(name, value, width, height, label)
           class='input-textarea',
           cols=width,
           rows=height
-        )= value
+        )= post[name] || value

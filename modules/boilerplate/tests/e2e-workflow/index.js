@@ -10,15 +10,15 @@ module.exports = {
   group: 'Boilerplate E2E Test',
   name: 'Boilerplate',
   viewports: {
-    // 'Mobile': { width: 340, height: 568 },
-    'Tablet': { width: 768, height: 1024 }
-    // , 'Desktop': { width: 1200, height: 900 }
+    'Mobile': { width: 340, height: 568 },
+    'Tablet': { width: 768, height: 1024 },
+    'Desktop': { width: 1200, height: 900 }
   },
   testCases: {
-    'Index': {
+    'Boilerplate': {
       uri: domain + '/boilerplate/',
       steps: {
-        'Boilerplate': {
+        'Index': {
           title: 'Boilerplate',
           elements: {
             '//h1[@id="headline"]': 'Boilerplate',
@@ -86,7 +86,8 @@ module.exports = {
             '//input[@name="passwordinput"]': 'somepassword',
             '//input[@type="checkbox"][@name="checkboxinput"]': true,
             '//input[@type="radio"][@name="radioinput"][2]': true,
-            '//select[@name="select"]/option[@value="opt2"]': true
+            '//select[@name="select"]/option[@value="opt2"]': true,
+            '//textarea[@name="textareainput"]': 'jetzt steht hier was neues'
           },
           click: '//input[@type="submit"][@value="absenden"]'
         },
@@ -98,7 +99,8 @@ module.exports = {
             '//input[@type="password"][@name="passwordinput"][@value="somepassword"]': '',
             '//input[@type="checkbox"][@name="checkboxinput"][@checked]': '',
             '//input[@type="radio"][@name="radioinput"][2][@checked]': '',
-            '//select[@name="select"]/option[@value="opt2"][@selected]': ''
+            '//select[@name="select"]/option[@value="opt2"][@selected]': '',
+            '//textarea[@name="textareainput"]': 'jetzt steht hier was neues'
           },
           elementsNotExist: [
             '//input[@type="radio"][@name="radioinput"][1][@checked]'
