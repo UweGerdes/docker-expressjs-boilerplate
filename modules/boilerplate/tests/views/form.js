@@ -165,7 +165,7 @@ describe('/boilerplate/tests/views/form.js', function () {
         .end(function (err, res) {
           const document = getDocument(res, err);
           const inputGroupContainer = document.querySelector('.field_group1');
-          assert.equal(inputGroupContainer.textContent, 'Feldgruppemal klickenoder hier');
+          assert.equal(inputGroupContainer.textContent, 'Feldgruppemal klickenoder hier- bitte wählen -Wahl 1Wahl 2');
           const inputText1 = inputGroupContainer.querySelector('.field_grouptextinput1 .input-text');
           assert.equal(inputText1.name, 'grouptextinput1');
           const inputText2 = inputGroupContainer.querySelector('.field_grouptextinput2 .input-text');
@@ -173,6 +173,14 @@ describe('/boilerplate/tests/views/form.js', function () {
           const inputRadio = inputGroupContainer.querySelectorAll('.field_groupradioinput .input-radio');
           assert.equal(inputRadio.length, 2);
           assert.equal(inputRadio[0].name, 'groupradioinput');
+          const selectOptions = inputGroupContainer.querySelectorAll('.field_groupselect option');
+          assert.equal(selectOptions.length, 3);
+          assert.equal(selectOptions[0].value, '');
+          assert.equal(selectOptions[0].textContent, '- bitte wählen -');
+          assert.equal(selectOptions[1].value, 'option1');
+          assert.equal(selectOptions[1].textContent, 'Wahl 1');
+          assert.equal(selectOptions[2].value, 'option2');
+          assert.equal(selectOptions[2].textContent, 'Wahl 2');
           done();
         });
     });

@@ -59,16 +59,21 @@ module.exports = {
             '//*[@class="select-followtext"]': 'vielleicht ein Pflichtfeld',
             '//*[contains(@class, "field_textareainput")]': 'Langtextfeld\nsteht schon was',
             '//textarea[@name="textareainput"]': 'steht schon was',
-            '//*[contains(@class, "field_group1")]': 'Feldgruppe\nmal klickenoder hier',
+            '//*[contains(@class, "field_group1")]': 'Feldgruppe\nmal klickenoder hier\n- bitte wählen -\nWahl 1\nWahl 2',
             '//*[contains(@class, "field_grouptextinput1")]': '',
             '//input[@type="text"][@name="grouptextinput1"]': '',
             '//*[contains(@class, "field_grouptextinput2")]': '',
             '//input[@type="text"][@name="grouptextinput2"]': '',
             '//*[contains(@class, "field_groupradioinput")]': 'mal klickenoder hier',
             '//input[@type="radio"][@name="groupradioinput"][@id="groupradioinput0"][@value="klick"]': '',
-            '//label[@for="radioinput0"]': 'mal klicken',
+            '//label[@for="groupradioinput0"]': 'mal klicken',
             '//input[@type="radio"][@name="groupradioinput"][@id="groupradioinput1"][@value="klock"]': '',
-            '//label[@for="radioinput1"]': 'oder hier',
+            '//label[@for="groupradioinput1"]': 'oder hier',
+            '//*[contains(@class, "field_groupselect")]': '- bitte wählen -\nWahl 1\nWahl 2',
+            '//select[@name="groupselect"]': '- bitte wählen -\nWahl 1\nWahl 2',
+            '//select[@name="groupselect"]/option[1][@value=""]': '- bitte wählen -',
+            '//select[@name="groupselect"]/option[2][@value="option1"]': 'Wahl 1',
+            '//select[@name="groupselect"]/option[3][@value="option2"]': 'Wahl 2',
             '//*[contains(@class, "field_address")]': 'Adresse',
             '//*[contains(@class, "field_address-street")]': '',
             '//input[@type="text"][@name="address-street"]': '',
@@ -87,7 +92,11 @@ module.exports = {
             '//input[@type="checkbox"][@name="checkboxinput"]': true,
             '//input[@type="radio"][@name="radioinput"][2]': true,
             '//select[@name="select"]/option[@value="opt2"]': true,
-            '//textarea[@name="textareainput"]': 'jetzt steht hier was neues'
+            '//textarea[@name="textareainput"]': 'jetzt steht hier was neues',
+            '//input[@name="grouptextinput1"]': '12345',
+            '//input[@name="radioinput"][2]': true,
+            '//input[@name="groupradioinput"][@value="klick"]': true,
+            '//select[@name="groupselect"]/option[@value="option1"]': true
           },
           click: '//input[@type="submit"][@value="absenden"]'
         },
@@ -100,10 +109,14 @@ module.exports = {
             '//input[@type="checkbox"][@name="checkboxinput"][@checked]': '',
             '//input[@type="radio"][@name="radioinput"][2][@checked]': '',
             '//select[@name="select"]/option[@value="opt2"][@selected]': '',
-            '//textarea[@name="textareainput"]': 'jetzt steht hier was neues'
+            '//textarea[@name="textareainput"]': 'jetzt steht hier was neues',
+            '//input[@type="text"][@name="grouptextinput1"][@value="12345"]': '',
+            '//input[@type="radio"][@name="groupradioinput"][1][@checked]': '',
+            '//select[@name="groupselect"]/option[2][@value="option1"][@selected]': 'Wahl 1'
           },
           elementsNotExist: [
-            '//input[@type="radio"][@name="radioinput"][1][@checked]'
+            '//input[@type="radio"][@name="radioinput"][1][@checked]',
+            '//input[@type="radio"][@name="groupradioinput"][2][@checked]'
           ]
         }
       }

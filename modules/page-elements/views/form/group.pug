@@ -13,7 +13,10 @@ mixin group(pretext, groupname, fields, posttext)
                     class='input-select'
                   )
                 each label, value in field.entries
-                  option(value=value)= label
+                  option(
+                    value=value,
+                    selected=(value == post[field.name])
+                  )= label
             else
               if field.entries
                 - i = 0
@@ -23,7 +26,8 @@ mixin group(pretext, groupname, fields, posttext)
                     type=field.type,
                     name=field.name,
                     value=value,
-                    id=field.name + i
+                    id=field.name + i,
+                    checked=(field.type == 'radio' && value == post[field.name])
                   )
                   label(class=field.type + '-label', for=field.name + i++)= label
               else

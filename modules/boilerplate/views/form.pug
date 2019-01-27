@@ -16,7 +16,7 @@ block title
 
 append breadcrumbs
   li.header-breadcrumb
-    .header-breadcrumb-label Formular
+    a.header-breadcrumb-link(href='/'+ moduleName + '/form/') Formular
 
 block content
   div#formular.formular
@@ -30,7 +30,7 @@ block content
         + field('Texteingabe', {
             type: 'text',
             name: 'textinput',
-            size: 30
+            value: 'ändern!'
           })
         + field('Button', {
             type: 'button',
@@ -39,8 +39,7 @@ block content
           })
         + field('Passwort', {
             type: 'password',
-            name: 'passwordinput',
-            size: 30
+            name: 'passwordinput'
           })
         + field('Möglichkeit', {
             type: 'checkbox',
@@ -57,18 +56,22 @@ block content
         + group('Feldgruppe', 'group1', [{
             type: 'text',
             name: 'grouptextinput1',
-            size: 4
+            value: 'x'
           },
           {
             type: 'text',
-            name: 'grouptextinput2',
-            size: 8
+            name: 'grouptextinput2'
           },
           {
             type: 'radio',
             name: 'groupradioinput',
             value: 'gewählt',
             entries: { klick: 'mal klicken', klock: 'oder hier' }
+          },
+          {
+            type: 'select',
+            name: 'groupselect',
+            entries: { '': '- bitte wählen -', option1: 'Wahl 1', option2: 'Wahl 2' }
           }])
         + address('Adresse', 'address', 'address-')
         + field('', {
