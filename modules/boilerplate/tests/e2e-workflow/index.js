@@ -26,7 +26,8 @@ module.exports = {
             '//*[contains(@class, "form-link")]': 'Formular'
           },
           elementsNotExist: [
-            '//a[@id="editButton"]'
+            '//form[@name="form"]',
+            '//input[@type="text"][@name="textinput"]'
           ],
           click: 'a[href="/boilerplate/form/"]'
         },
@@ -35,6 +36,7 @@ module.exports = {
           elements: {
             '//h1[@id="headline"]': 'Boilerplate',
             '//h2[@class="subheadline"]': 'Formular',
+            '//form[@class="form"][@name="form"][@action="/boilerplate/form/"]': '',
             '//*[contains(@class, "field_textinput")]': 'Texteingabe',
             '//input[@type="text"][@name="textinput"]': '',
             '//*[contains(@class, "field_buttoninput")]': 'Button',
@@ -66,7 +68,18 @@ module.exports = {
             '//input[@type="radio"][@name="groupradioinput"][@id="groupradioinput0"][@value="klick"]': '',
             '//label[@for="radioinput0"]': 'mal klicken',
             '//input[@type="radio"][@name="groupradioinput"][@id="groupradioinput1"][@value="klock"]': '',
-            '//label[@for="radioinput1"]': 'oder hier'
+            '//label[@for="radioinput1"]': 'oder hier',
+            '//*[contains(@class, "field_address")]': 'Adresse',
+            '//*[contains(@class, "field_address-street")]': '',
+            '//input[@type="text"][@name="address-street"]': '',
+            '//*[contains(@class, "field_address-housenumber")]': '',
+            '//input[@type="text"][@name="address-housenumber"]': '',
+            '//*[contains(@class, "field_address-zip")]': '',
+            '//input[@type="text"][@name="address-zip"]': '',
+            '//*[contains(@class, "field_address-city")]': '',
+            '//input[@type="text"][@name="address-city"]': '',
+            '//*[contains(@class, "field_submit")]': '',
+            '//input[@type="submit"][@value="absenden"]': ''
           }
         }
       }

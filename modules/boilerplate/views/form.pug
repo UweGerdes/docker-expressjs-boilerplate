@@ -25,7 +25,7 @@ block content
       h2.subheadline Formular
       if (error)
         .error #{__(error, post.username)}
-      form#loginform.loginform(method='POST', action='/'+ moduleName + '/form/')
+      form#form.form(method='POST', action='/'+ moduleName + '/form/', name='form')
         + hidden('hiddeninput', 'wert')
         + field('Texteingabe', {
             type: 'text',
@@ -73,6 +73,6 @@ block content
         + address('Adresse', 'address', 'address-')
         + field('', {
             type: 'submit',
-            value: 'anmelden',
+            value: 'absenden',
             class: 'submit'
           })
