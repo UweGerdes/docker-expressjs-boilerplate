@@ -44,6 +44,7 @@ const form = (req, res) => {
   let statusCode = 200;
   if (req.method === 'POST' && req.body) {
     data.post = req.body;
+    // delete data.post.password;
   }
   res.status(statusCode).render(path.join(viewBase, 'form.pug'), data);
 };
