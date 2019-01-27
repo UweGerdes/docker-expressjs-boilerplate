@@ -30,12 +30,15 @@ gulp:
         - 'tests'
     staging:
       gulp:
+        - 'watch'
         - 'server-start'
       build: []
       tests: []
       lint: []
       server:
         - 'server-changed'
+      watch:
+        - 'server'
     production:
       gulp:
         - 'build'
