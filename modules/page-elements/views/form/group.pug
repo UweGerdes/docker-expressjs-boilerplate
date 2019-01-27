@@ -29,6 +29,7 @@ mixin group(pretext, groupname, fields, posttext)
               else
                 input(
                   class='input-' + field.type,
+                  type=field.type,
                   id=field.name,
                   name=field.name,
                   value=post[field.name]
