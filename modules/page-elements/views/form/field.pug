@@ -12,14 +12,16 @@ mixin field(pretext, attr, posttext)
               type=attr.type,
               name=attr.name,
               value=value,
-              id=attr.name + i
+              id=attr.name + i,
+              checked=(attr.type == 'radio' && value == post[attr.name])
             )
             label(class=attr.type + '-label', for=attr.name + i++)= label
         else
           input(
             class='input-' + attr.type,
             id=attr.name,
-            value=post[attr.name]
+            value=(attr.type != 'checkbox' ? post[attr.name] : null),
+            checked=(attr.type == 'checkbox' && attr.value == post[attr.name])
           )&attributes(attr)
         if posttext
           label(class=attr.type + '-label', for=attr.name)= posttext

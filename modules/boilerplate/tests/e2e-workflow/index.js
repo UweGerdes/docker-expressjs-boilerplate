@@ -83,7 +83,9 @@ module.exports = {
           },
           input: {
             '//input[@name="textinput"]': 'Text-Eingabe',
-            '//input[@name="passwordinput"]': 'somepassword'
+            '//input[@name="passwordinput"]': 'somepassword',
+            '//input[@type="checkbox"][@name="checkboxinput"]': true,
+            '//input[@type="radio"][@name="radioinput"][2]': true
           },
           click: '//input[@type="submit"][@value="absenden"]'
         },
@@ -92,8 +94,13 @@ module.exports = {
           elements: {
             '//form[@class="form"][@name="form"][@action="/boilerplate/form/"]': '',
             '//input[@type="text"][@name="textinput"][@value="Text-Eingabe"]': '',
-            '//input[@type="password"][@name="passwordinput"][@value="somepassword"]': ''
-          }
+            '//input[@type="password"][@name="passwordinput"][@value="somepassword"]': '',
+            '//input[@type="checkbox"][@name="checkboxinput"][@checked]': '',
+            '//input[@type="radio"][@name="radioinput"][2][@checked]': ''
+          },
+          elementsNotExist: [
+            '//input[@type="radio"][@name="radioinput"][1][@checked]'
+          ]
         }
       }
     }
