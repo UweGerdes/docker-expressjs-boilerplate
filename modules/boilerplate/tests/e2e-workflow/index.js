@@ -85,7 +85,8 @@ module.exports = {
             '//input[@name="textinput"]': 'Text-Eingabe',
             '//input[@name="passwordinput"]': 'somepassword',
             '//input[@type="checkbox"][@name="checkboxinput"]': true,
-            '//input[@type="radio"][@name="radioinput"][2]': true
+            '//input[@type="radio"][@name="radioinput"][2]': true,
+            '//select[@name="select"]/option[@value="opt2"]': true
           },
           click: '//input[@type="submit"][@value="absenden"]'
         },
@@ -96,7 +97,8 @@ module.exports = {
             '//input[@type="text"][@name="textinput"][@value="Text-Eingabe"]': '',
             '//input[@type="password"][@name="passwordinput"][@value="somepassword"]': '',
             '//input[@type="checkbox"][@name="checkboxinput"][@checked]': '',
-            '//input[@type="radio"][@name="radioinput"][2][@checked]': ''
+            '//input[@type="radio"][@name="radioinput"][2][@checked]': '',
+            '//select[@name="select"]/option[@value="opt2"][@selected]': ''
           },
           elementsNotExist: [
             '//input[@type="radio"][@name="radioinput"][1][@checked]'

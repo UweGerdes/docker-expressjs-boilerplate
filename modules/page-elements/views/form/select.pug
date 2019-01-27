@@ -10,5 +10,8 @@ mixin select(name, pretext, entries, followtext)
               class='input-select'
             )
           each label, value in entries
-            option(value=value)= label
+            option(
+              value=value,
+              selected=(value == post[name])
+            )= label
         span.select-followtext= followtext
