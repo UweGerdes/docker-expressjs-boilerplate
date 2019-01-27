@@ -96,7 +96,11 @@ module.exports = {
             '//input[@name="grouptextinput1"]': '12345',
             '//input[@name="radioinput"][2]': true,
             '//input[@name="groupradioinput"][@value="klick"]': true,
-            '//select[@name="groupselect"]/option[@value="option1"]': true
+            '//select[@name="groupselect"]/option[@value="option1"]': true,
+            '//input[@name="address-street"]': 'Beispielstraße',
+            '//input[@name="address-housenumber"]': '17a',
+            '//input[@name="address-zip"]': '01234',
+            '//input[@name="address-city"]': 'Musterhausen'
           },
           click: '//input[@type="submit"][@value="absenden"]'
         },
@@ -112,7 +116,11 @@ module.exports = {
             '//textarea[@name="textareainput"]': 'jetzt steht hier was neues',
             '//input[@type="text"][@name="grouptextinput1"][@value="12345"]': '',
             '//input[@type="radio"][@name="groupradioinput"][1][@checked]': '',
-            '//select[@name="groupselect"]/option[2][@value="option1"][@selected]': 'Wahl 1'
+            '//select[@name="groupselect"]/option[2][@value="option1"][@selected]': 'Wahl 1',
+            '//input[@type="text"][@name="address-street"][@value="Beispielstraße"]': '',
+            '//input[@type="text"][@name="address-housenumber"][@value="17a"]': '',
+            '//input[@type="text"][@name="address-zip"][@value="01234"]': '',
+            '//input[@type="text"][@name="address-city"][@value="Musterhausen"]': ''
           },
           elementsNotExist: [
             '//input[@type="radio"][@name="radioinput"][1][@checked]',
