@@ -202,7 +202,7 @@ describe('/boilerplate/tests/views/form.js', function () {
           const inputSubmitContainer = document.querySelector('.field_submit');
           const inputSubmit = inputSubmitContainer.querySelector('.input-submit');
           assert.equal(inputSubmit.getAttribute('type'), 'submit');
-          assert.equal(inputSubmit.getAttribute('value'), 'anmelden');
+          assert.equal(inputSubmit.getAttribute('value'), 'absenden');
           done();
         });
     });

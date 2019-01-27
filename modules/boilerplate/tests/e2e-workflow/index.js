@@ -31,7 +31,7 @@ module.exports = {
           ],
           click: 'a[href="/boilerplate/form/"]'
         },
-        'Formular start': {
+        'Formular-Elemente': {
           title: 'Formular',
           elements: {
             '//h1[@id="headline"]': 'Boilerplate',
@@ -80,6 +80,19 @@ module.exports = {
             '//input[@type="text"][@name="address-city"]': '',
             '//*[contains(@class, "field_submit")]': '',
             '//input[@type="submit"][@value="absenden"]': ''
+          },
+          input: {
+            '//input[@name="textinput"]': 'Text-Eingabe',
+            '//input[@name="passwordinput"]': 'somepassword'
+          },
+          click: '//input[@type="submit"][@value="absenden"]'
+        },
+        'Formular-Eingaben': {
+          title: 'Formular',
+          elements: {
+            '//form[@class="form"][@name="form"][@action="/boilerplate/form/"]': '',
+            '//input[@type="text"][@name="textinput"][@value="Text-Eingabe"]': '',
+            '//input[@type="password"][@name="passwordinput"][@value="somepassword"]': ''
           }
         }
       }
