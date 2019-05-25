@@ -1,5 +1,5 @@
 /**
- * ## Gulp server tasks
+ * Gulp server tasks
  *
  * @module gulp/server
  */
@@ -20,11 +20,10 @@ const gulp = require('gulp'),
 
 const tasks = {
   /**
-   * ### server start
+   * Start all configured server tasks for current NODE_ENV setting
    *
-   * @task server
-   * @namespace tasks
-   * @param {function} callback - gulp callback
+   * @function server
+   * @param {function} callback - gulp callback to signal end of task
    */
   'server': [['eslint'], (callback) => {
     sequence(
@@ -33,11 +32,10 @@ const tasks = {
     );
   }],
   /**
-   * ### server start task
+   * Server start task
    *
-   * @task server-start
-   * @namespace tasks
-   * @param {function} callback - gulp callback
+   * @function server-start
+   * @param {function} callback - gulp callback to signal end of task
    */
   'server-start': (callback) => {
     server.listen({
@@ -47,11 +45,10 @@ const tasks = {
     callback);
   },
   /**
-   * ### server changed task
+   * Server changed task restarts server
    *
-   * @task server-changed
-   * @namespace tasks
-   * @param {function} callback - gulp callback
+   * @function server-changed
+   * @param {function} callback - gulp callback to signal end of task
    */
   'server-changed': (callback) => {
     server.changed((error) => {
@@ -62,10 +59,9 @@ const tasks = {
     });
   },
   /**
-   * ### server livereload task
+   * Server livereload task notifies clients
    *
-   * @task livereload
-   * @namespace tasks
+   * @function livereload
    */
   'livereload': () => {
     return gulp.src(config.gulp.watch.livereload)
@@ -74,10 +70,9 @@ const tasks = {
       .pipe(livereload({ quiet: true }));
   },
   /**
-   * ### trigger of livereload task with first file
+   * Trigger of livereload task with first file configured for livereload
    *
-   * @task livereload-index
-   * @namespace tasks
+   * @function livereload-index
    */
   'livereload-index': () => {
     return gulp.src(config.gulp.watch.livereload[0])
@@ -85,10 +80,9 @@ const tasks = {
       .pipe(livereload({ quiet: true }));
   },
   /**
-   * ### server livereload start task
+   * Livereload server start task
    *
-   * @task livereload-start
-   * @namespace tasks
+   * @function livereload-start
    */
   'livereload-start': () => {
     livereload.listen({

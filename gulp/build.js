@@ -1,4 +1,6 @@
 /**
+ * Gulp tasks for generation of compiled sources
+ *
  * @module gulp/build
  */
 
@@ -21,11 +23,12 @@ const gulp = require('gulp'),
 
 const tasks = {
   /**
-   * ### Default gulp build task
+   * Default gulp build task
    *
-   * @task build
-   * @namespace tasks
-   * @param {function} callback - gulp callback
+   * Build all tasks configured for current NODE_ENV setting
+   *
+   * @function build
+   * @param {function} callback - gulp callback to signal end of task
    */
   'build': (callback) => {
     sequence(
@@ -34,12 +37,9 @@ const tasks = {
     );
   },
   /**
-   * #### Compile less files
+   * Compile less files
    *
-   * compile less files
-   *
-   * @task less
-   * @namespace tasks
+   * @function less
    */
   'less': [['lesshint'], () => {
     return combiner.obj([
@@ -54,12 +54,9 @@ const tasks = {
       .on('error', () => { });
   }],
   /**
-   * #### Compile js files
+   * Compile js files
    *
-   * compile js files
-   *
-   * @task jsss
-   * @namespace tasks
+   * @function js
    */
   'js': [['eslint'], (callback) => {
     Promise.all(config.gulp.build.js.src.map(filePromises.getFilenames))
@@ -87,12 +84,9 @@ const tasks = {
       .catch(err => console.log(err));
   }],
   /**
-   * #### Compile locales files
+   * Compile locales files
    *
-   * compile locales files
-   *
-   * @task locales
-   * @namespace tasks
+   * @function locales
    */
   'locales': [['localesjsonlint'], () => {
     return gulp.src(config.gulp.watch.locales)
@@ -104,13 +98,10 @@ const tasks = {
       .pipe(notify({ message: 'written: <%= file.path %>', title: 'Gulp locales' }));
   }],
   /**
-   * #### Compile jsdoc
+   * Compile jsdoc
    *
-   * compile jsdoc
-   *
-   * @task jsdoc
-   * @namespace tasks
-   * @param {function} callback - gulp callback
+   * @function jsdoc
+   * @param {function} callback - gulp callback to signal end of task
    */
   'jsdoc': [['eslint'], (callback) => {
     const jsdocConfig = {
@@ -140,13 +131,12 @@ const tasks = {
       .pipe(jsdoc(jsdocConfig, callback));
   }],
   /**
-   * #### Copy files to deploy
+   * Copy files to deploy
    *
-   * @task deploy
-   * @namespace tasks
+   * @function deploy
    */
   'deploy': () => {
-    return gulp.src(config.gulp.build.deploy.src, { "base" : "." })
+    return gulp.src(config.gulp.build.deploy.src, { 'base': '.' })
       .pipe(gulp.dest(config.gulp.build.deploy.dest))
       .pipe(notify({ message: 'written: <%= file.path %>', title: 'Gulp deploy' }));
   }

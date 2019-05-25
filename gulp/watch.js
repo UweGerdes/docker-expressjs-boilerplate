@@ -13,12 +13,9 @@ const gulp = require('gulp'),
 
 const tasks = {
   /**
-   * ### watch
+   * Watch and execute tasks when files changed for all tasks configured for current NODE_ENV setting
    *
-   * watch and execute tasks when files changed
-   *
-   * @task watch
-   * @namespace tasks
+   * @function watch
    */
   'watch': () => {
     const tasks = loadTasks.tasks();
@@ -27,7 +24,6 @@ const tasks = {
       tasklist = config.gulp.start[process.env.NODE_ENV].watch
         .reduce((obj, key) => ({ ...obj, [key]: config.gulp.watch[key] }), {});
     }
-    console.log(tasklist);
     for (let task in tasklist) {
       if (config.gulp.watch.hasOwnProperty(task)) {
         if (tasks.indexOf(task) >= 0) {

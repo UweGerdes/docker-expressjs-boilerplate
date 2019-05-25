@@ -1,6 +1,7 @@
 /**
- * @module lib:files-promises
- * @private
+ * Promise functions for file access
+ *
+ * @module gulp/lib/files-promises
  */
 
 'use strict';
@@ -12,9 +13,8 @@ const fs = require('fs'),
 const recentTime = 10;
 
 /**
- * get list of files for glob pattern
+ * Get list of files for glob pattern
  *
- * @private
  * @param {function} path - patterns for paths
  */
 const getFilenames = (path) => {
@@ -30,7 +30,7 @@ const getFilenames = (path) => {
 };
 
 /**
- * get newest file from glob list - synchronous
+ * Get newest file from glob list - synchronous
  *
  * @param {array} files - list with glob paths
  */
@@ -59,7 +59,6 @@ function getRecentFiles(files) {
 /**
  * Get the file content
  *
- * @private
  * @param {function} filename - to open
  */
 const getFileContent = (filename) => {

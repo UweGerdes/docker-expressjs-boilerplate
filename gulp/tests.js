@@ -1,5 +1,5 @@
 /**
- * ## Gulp test tasks
+ * Gulp test tasks
  *
  * @module gulp/test
  */
@@ -17,11 +17,10 @@ const gulp = require('gulp'),
 
 const tasks = {
   /**
-   * ### test
+   * Start all tests configured for current NODE_ENV setting
    *
-   * @task test
-   * @namespace tasks
-   * @param {function} callback - gulp callback
+   * @function test
+   * @param {function} callback - gulp callback to signal end of task
    */
   'tests': (callback) => {
     sequence(
@@ -30,11 +29,10 @@ const tasks = {
     );
   },
   /**
-   * ### test-modules
+   * Start all tests configured in configuration gulp.test.modules
    *
-   * @task test-modules
-   * @namespace tasks
-   * @param {function} callback - gulp callback
+   * @function test-modules
+   * @param {function} callback - gulp callback to signal end of task
    */
   'test-modules': [['eslint', 'ejslint'], (callback) => {
     Promise.all(config.gulp.tests.modules.map(filePromises.getFilenames))
