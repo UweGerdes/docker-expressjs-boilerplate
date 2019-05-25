@@ -7,8 +7,8 @@
 'use strict';
 
 const bodyParser = require('body-parser'),
-  cookieParser = require('cookie-parser'),
   chalk = require('chalk'),
+  cookieParser = require('cookie-parser'),
   dateFormat = require('dateformat'),
   express = require('express'),
   session = require('express-session'),
@@ -40,9 +40,10 @@ if (config.server.verbose) {
 
 // Serve static files
 app.use(express.static(config.server.docroot));
+app.use('/jsdoc', express.static(config.gulp.build.jsdoc.dest));
 
 /**
- * load modules
+ * Routes from modules
  */
 glob.sync(config.server.modules + '/*/server/index.js')
   .forEach((filename) => {
@@ -50,6 +51,7 @@ glob.sync(config.server.modules + '/*/server/index.js')
     const baseRoute = filename.replace(regex, '$1');
     routers[baseRoute] = require(filename);
   });
+
 // base directory for views
 app.set('views', __dirname);
 
@@ -103,9 +105,6 @@ for (const router of Object.values(routers)) {
     router.useExpress(app);
   }
 }
-
-// Serve static files
-app.use(express.static(config.server.docroot));
 
 /**
  * Route for root dir
@@ -176,9 +175,10 @@ app.get('*', (req, res) => {
  * @param {Object} next - needed for complete signature
  */
 app.use((err, req, res, next) => {
-  console.error('SERVER ERROR:', err.toString());
+  console.error('SERVER ERROR:', err);
   if (err) {
-    res.status(500)
+    res
+      .status(500)
       .render(viewPath('error'), Object.assign({
         error: {
           code: 500,
