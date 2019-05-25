@@ -61,7 +61,11 @@ gulp:
     js:
       - 'modules/*/js/*.js'
     jsdoc:
-      - 'nofile.js'
+#      - 'nofile.js'
+      - '*.js'
+      - 'gulp/**/*.js'
+      - 'lib/**/*.js'
+      - 'modules/**/*.js'
     jsonlint:
       - '**/*.json'
       - '.lesshintrc'
