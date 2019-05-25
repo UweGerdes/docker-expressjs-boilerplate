@@ -1,6 +1,6 @@
 #
-/public/css
-/public/js
+/deploy
 /docs/jsdoc
 /locales
-/deploy
+/public/css
+/public/js

@@ -1,6 +1,7 @@
 /**
- * @module lib:helpers
- * @private
+ * wrapper for gulp-notify
+ *
+ * @module gulp/lib/notify
  */
 
 'use strict';

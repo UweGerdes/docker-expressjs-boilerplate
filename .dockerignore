@@ -1,7 +1,7 @@
 # dockerignore
-.git/
+.git
 docs/jsdoc
-public/css/
-public/js/
+public/css
+public/js
 locales
 deploy
