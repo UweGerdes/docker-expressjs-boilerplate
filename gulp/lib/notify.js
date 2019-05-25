@@ -13,7 +13,10 @@ const gulpNotify = require('gulp-notify');
  *
  * @param {pbject} options - setting options
  * @param {function} callback - gulp callback
+ * @type {function}
  */
-module.exports = gulpNotify.withReporter((options, callback) => {
+const notify = gulpNotify.withReporter((options, callback) => {
   callback();
 });
+
+module.exports = notify;
