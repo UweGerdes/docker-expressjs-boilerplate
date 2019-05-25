@@ -92,12 +92,12 @@ const tasks = {
    */
   'livereload-start': () => {
     livereload.listen({
-      port: config.server.livereloadPort || process.env.LIVERELOAD_PORT,
+      port: process.env.LIVERELOAD_PORT,
       delay: 2000,
       quiet: false
     });
     log.info('livereload listening on http://' +
-      ipv4addresses.get()[0] + ':' + config.server.livereloadPort);
+      ipv4addresses.get()[0] + ':' + process.env.LIVERELOAD_PORT);
   }
 };
 
