@@ -34,7 +34,7 @@ const gulp = require('gulp'),
  * start build and watch, some needed for changedInPlace dryrun
  *
  * @name module:gulpfile.default
- * @param {function} callback - gulp callback
+ * @param {function} callback - gulp callback to signal end of task
  */
 gulp.task('default', (callback) => {
   sequence(

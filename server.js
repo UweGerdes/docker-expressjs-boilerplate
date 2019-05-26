@@ -1,5 +1,5 @@
 /**
- * ## HTTP-Server for boilerplate
+ * HTTP-Server for project expressjs-boilerplate
  *
  * @module server
  */
@@ -26,9 +26,9 @@ const bodyParser = require('body-parser'),
 let routers = { };
 
 /**
- * Weberver logging
+ * Weberver logging: colored log format starting with [time]
  *
- * using log format starting with [time]
+ * @name set_logformat
  */
 if (config.server.verbose) {
   morgan.token('time', () => {
@@ -38,12 +38,18 @@ if (config.server.verbose) {
     ':method :status :url :res[content-length] Bytes - :response-time ms'));
 }
 
-// Serve static files
+/**
+ * Serve static files for base route and /jsdoc
+ *
+ * @name request_serve_static_files
+ */
 app.use(express.static(config.server.docroot));
 app.use('/jsdoc', express.static(config.gulp.build.jsdoc.dest));
 
 /**
  * Routes from modules
+ *
+ * @name module_router_loader
  */
 glob.sync(config.server.modules + '/*/server/index.js')
   .forEach((filename) => {
@@ -52,20 +58,40 @@ glob.sync(config.server.modules + '/*/server/index.js')
     routers[baseRoute] = require(filename);
   });
 
-// base directory for views
+/**
+ * Default base directory for views
+ *
+ * @name view_default_directory
+ */
 app.set('views', __dirname);
 
-// render ejs files
+/**
+ * Default render ejs files
+ *
+ * @name view_engine_default_ejs
+ */
 app.set('view engine', 'ejs');
 
-// work on post requests
+/**
+ * Use body-parser.json on post requests
+ *
+ * @name use_bodyParser
+ */
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// work on cookies
+/**
+ * Use cookie-parser on requests
+ *
+ * @name use_cookieParser
+ */
 app.use(cookieParser());
 
-// set up i18n
+/**
+ * Use i18n for requests
+ *
+ * @name use_i18n
+ */
 i18n.configure({
   defaultLocale: 'de',
   directory: config.gulp.build.locales.dest,
@@ -87,7 +113,11 @@ app.use((req, res, next) => {
   next();
 });
 
-// initialize req.session
+/**
+ * Use session handling with 24h memorystore
+ *
+ * @name use_session
+ */
 app.use(session({
   store: new MemoryStore({
     checkPeriod: 86400000 // prune expired entries every 24h
@@ -98,7 +128,9 @@ app.use(session({
 }));
 
 /**
- * use express in modules
+ * Use express in modules
+ *
+ * @name module_router_use_express
  */
 for (const router of Object.values(routers)) {
   if (router.useExpress) {
@@ -109,40 +141,59 @@ for (const router of Object.values(routers)) {
 /**
  * Route for root dir
  *
- * @param {Object} req - request
- * @param {Object} res - response
+ * @param {object} req - request
+ * @param {object} res - response
  */
-app.get('/', (req, res) => {
+const requestGetBaseRoute = (req, res) => {
   res.sendFile(path.join(config.server.docroot, 'index.html'));
-});
+};
+app.get('/', requestGetBaseRoute);
 
 /**
  * Route for app main page
  *
- * @param {Object} req - request
- * @param {Object} res - response
+ * @param {object} req - request
+ * @param {object} res - response
  */
-app.get('/app', (req, res) => {
+const requestGetAppRoute = (req, res) => {
   res.render(viewPath('app'), config.getData(req));
-});
+};
+app.get('/app', requestGetAppRoute);
 
 /**
  * Route for i18n ejs test page
  *
- * @param {Object} req - request
- * @param {Object} res - response
+ * @param {object} req - request
+ * @param {object} res - response
  */
-app.get('/i18n-ejs', (req, res) => {
+const requestGetI18nRoute = (req, res) => {
   res.render(viewPath('i18n-test'), config.getData(req));
-});
+};
+app.get('/i18n-ejs', requestGetI18nRoute);
 
-// Fire it up!
+/**
+ * Server listens on configured port
+ *
+ * @name server_listen
+ */
 server.listen(config.server.httpPort);
+/**
+ * Server fires on error
+ *
+ * @event server_listen:onError
+ */
 server.on('error', onError);
+/**
+ * Server fires on listening
+ *
+ * @event server_listen:onListening
+ */
 server.on('listening', onListening);
 
 /**
  * connect server and use routes from modules
+ *
+ * @name module_router_connect_server
  */
 for (const [baseRoute, router] of Object.entries(routers)) {
   if (router.connectServer) {
@@ -152,29 +203,30 @@ for (const [baseRoute, router] of Object.entries(routers)) {
 }
 
 /**
- * Route for everything else
+ * Route for not found errors
  *
- * @param {Object} req - request
- * @param {Object} res - response
+ * @param {object} req - request
+ * @param {object} res - response
  */
-app.get('*', (req, res) => {
+const requestGet404Route = (req, res) => {
   res.status(404).render(viewPath('error'), Object.assign({
     error: {
       code: 404,
       name: 'not found'
     }
   }, config.getData(req)));
-});
+}
+app.get('*', requestGet404Route);
 
 /**
  * Handle server errors
  *
- * @param {Object} err - error
- * @param {Object} req - request
- * @param {Object} res - response
- * @param {Object} next - needed for complete signature
+ * @param {object} err - error
+ * @param {object} req - request
+ * @param {object} res - response
+ * @param {object} next - needed for complete signature
  */
-app.use((err, req, res, next) => {
+const requestError500Handler = (err, req, res, next) => {
   console.error('SERVER ERROR:', err);
   if (err) {
     res
@@ -189,14 +241,15 @@ app.use((err, req, res, next) => {
   } else {
     next();
   }
-});
+};
+app.use(requestError500Handler);
 
 /**
  * Get the path for file to render
  *
  * @private
- * @param {String} page - page type
- * @param {String} type - file type (ejs, jade, pug, html)
+ * @param {string} page - page type
+ * @param {string} type - file type (ejs, jade, pug, html)
  */
 function viewPath(page = 'error', type = 'ejs') {
   return config.server.modules + '/pages/views/' + page + '.' + type;
@@ -204,6 +257,9 @@ function viewPath(page = 'error', type = 'ejs') {
 
 /**
  * Event listener for HTTP server "error" event.
+ *
+ * @param {object} error - error object
+ * @listens server_listen:onError
  */
 function onError(error) {
   if (error.syscall !== 'listen') {
@@ -226,6 +282,8 @@ function onError(error) {
 
 /**
  * Event listener for HTTP server "listening" event.
+ *
+ * @listens server_listen:onListening
  */
 function onListening() {
   log.info('server listening on ' +
