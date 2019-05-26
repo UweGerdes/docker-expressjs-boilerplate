@@ -1,7 +1,11 @@
 /**
  * Gulp test tasks
  *
- * @module gulp/test
+ * @module gulp/tests
+ * @requires module:lib/config
+ * @requires module:gulp/lib/files-promises
+ * @requires module:gulp/lib/load-tasks
+ * @requires module:gulp/lib/notify
  */
 
 'use strict';

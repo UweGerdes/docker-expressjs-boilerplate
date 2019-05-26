@@ -1,13 +1,15 @@
 /**
- * gulpfile
- *
- * (c) Uwe Gerdes, entwicklung@uwegerdes.de
+ * Gulpfile for this project
  *
  * Gulp uses configuration variables stored in `./configuration.yaml`
  *
- * @name gulp
- * @module
- *
+ * @module gulpfile
+ * @requires module:gulp/build
+ * @requires module:gulp/lint
+ * @requires module:gulp/server
+ * @requires module:gulp/tests
+ * @requires module:gulp/watch
+ * @requires module:lib/config
  */
 
 'use strict';
@@ -27,10 +29,11 @@ const gulp = require('gulp'),
   config = require('./lib/config');
 
 /**
- * #### default task
+ * Default task
  *
  * start build and watch, some needed for changedInPlace dryrun
  *
+ * @name module:gulpfile.default
  * @param {function} callback - gulp callback
  */
 gulp.task('default', (callback) => {

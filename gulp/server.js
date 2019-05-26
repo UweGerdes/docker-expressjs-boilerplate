@@ -2,6 +2,11 @@
  * Gulp server tasks
  *
  * @module gulp/server
+ * @requires module:lib/config
+ * @requires module:lib/ipv4addresses
+ * @requires module:gulp/lib/files-promises
+ * @requires module:gulp/lib/load-tasks
+ * @requires module:gulp/lib/notify
  */
 
 'use strict';
@@ -12,7 +17,7 @@ const gulp = require('gulp'),
   livereload = require('gulp-livereload'),
   sequence = require('gulp-sequence'),
   config = require('../lib/config'),
-  ipv4addresses = require('../lib/ipv4addresses.js'),
+  ipv4addresses = require('../lib/ipv4addresses'),
   loadTasks = require('./lib/load-tasks'),
   log = require('../lib/log'),
   notify = require('./lib/notify');

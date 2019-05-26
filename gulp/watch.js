@@ -2,14 +2,17 @@
  * ## Gulp watch task
  *
  * @module gulp/watch
+ * @requires module:lib/config
+ * @requires module:lib/log
+ * @requires module:gulp/lib/load-tasks
  */
 
 'use strict';
 
 const gulp = require('gulp'),
   config = require('../lib/config'),
-  loadTasks = require('./lib/load-tasks'),
-  log = require('../lib/log');
+  log = require('../lib/log'),
+  loadTasks = require('./lib/load-tasks');
 
 const tasks = {
   /**

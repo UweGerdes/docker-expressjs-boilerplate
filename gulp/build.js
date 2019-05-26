@@ -2,6 +2,10 @@
  * Gulp tasks for generation of compiled sources
  *
  * @module gulp/build
+ * @requires module:lib/config
+ * @requires module:gulp/lib/files-promises
+ * @requires module:gulp/lib/load-tasks
+ * @requires module:gulp/lib/notify
  */
 
 'use strict';
