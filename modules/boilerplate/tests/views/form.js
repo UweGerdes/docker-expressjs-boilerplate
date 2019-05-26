@@ -1,5 +1,5 @@
 /**
- * Test for boilerplate form elements
+ * Test for boilerplate form elements and fill post data structure when submitted
  */
 
 'use strict';
@@ -7,11 +7,21 @@
 const chai = require('chai'),
   chaiHttp = require('chai-http'),
   jsdom = require('jsdom'),
+  request = require('supertest'),
   assert = chai.assert,
   expect = chai.expect,
+  app = 'https://localhost:8443',
   { JSDOM } = jsdom;
 
 chai.use(chaiHttp);
+
+const agent = request.agent(app);
+
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+
+let res,
+  document,
+  err = null;
 
 describe('/boilerplate/tests/views/form.js', function () {
   describe('GET /boilerplate/form/', function () {
@@ -54,6 +64,7 @@ describe('/boilerplate/tests/views/form.js', function () {
           const inputText = inputTextContainer.querySelector('.input-text');
           assert.equal(inputText.name, 'textinput');
           assert.equal(inputText.getAttribute('type'), 'text');
+          assert.equal(inputText.getAttribute('value'), 'ändern!');
           done();
         });
     });
@@ -214,6 +225,40 @@ describe('/boilerplate/tests/views/form.js', function () {
           done();
         });
     });
+    it('should have submit input widget', function (done) {
+      chai.request('http://localhost:8080')
+        .get('/boilerplate/form/')
+        .end(function (err, res) {
+          const document = getDocument(res, err);
+          const inputSubmitContainer = document.querySelector('.field_submit');
+          const inputSubmit = inputSubmitContainer.querySelector('.input-submit');
+          assert.equal(inputSubmit.getAttribute('type'), 'submit');
+          assert.equal(inputSubmit.getAttribute('value'), 'absenden');
+          done();
+        });
+    });
+  });
+  describe('POST /boilerplate/form/', () => {
+    it('should fill textinput value and show submitted data', async () => {
+      try {
+        res = await agent.post('/boilerplate/form/')
+          .set('content-type', 'application/x-www-form-urlencoded')
+          .send({
+            textinput: 'changed content'
+          });
+      } catch (error) {
+        err = error;
+      }
+      document = checkResponse(res, err);
+      checkPage(document, 'Formular', 'anmelden');
+      testError();
+      testElement('.field_textinput', { }, 'Texteingabe');
+      testElement('.input-text', { name: 'textinput', type: 'text', value: 'changed content' }, null);
+      const postdata = document.querySelectorAll('#postdata');
+      assert.equal(postdata.length, 1);
+      const data = JSON.parse(postdata[0].textContent);
+      assert.equal(data.textinput, 'changed content');
+    });
   });
 });
 
@@ -222,4 +267,51 @@ function getDocument (res, err) {
   expect(res).to.have.status(200);
   expect(res).to.be.html;
   return (new JSDOM(res.text)).window.document;
+}
+
+function checkResponse (res, err) {
+  expect(err).to.be.null;
+  expect(res).to.have.status(200);
+  expect(res).to.be.html;
+  return (new JSDOM(res.text)).window.document;
+}
+
+function checkPage (document, title, loginStatusLabel) {
+  assert.equal(document.title, title);
+  const loginStatus = document.querySelectorAll('.login-status');
+  assert.equal(loginStatus.length, 1);
+  assert.equal(loginStatus[0].textContent, loginStatusLabel);
+}
+
+/**
+ * test error message in document
+ *
+ * @param {String} msg - error message or no error
+ */
+function testError(msg) {
+  const errors = document.querySelectorAll('.error');
+  if (msg) {
+    assert.equal(errors.length, 1, 'errors');
+    assert.equal(errors[0].textContent, msg, 'error');
+  } else {
+    assert.equal(errors.length, 0, errors.length > 0 ? 'error ' + errors[0].textContent : 'errors');
+  }
+}
+
+/**
+ * test DOM element properties
+ *
+ * @param {String} selector - to test
+ * @param {Object} attr - element attributes to verify
+ * @param {String} text - element.textContent
+ */
+function testElement(selector, attr, text) {
+  const element = document.querySelectorAll(selector)[0];
+  assert.exists(element, 'element ' + selector);
+  for (const [name, value] of Object.entries(attr)) {
+    assert.equal(element.getAttribute(name), value, 'element ' + selector + '.' + name);
+  }
+  if (text) {
+    assert.equal(element.textContent, text, 'element ' + selector + ' text');
+  }
 }
