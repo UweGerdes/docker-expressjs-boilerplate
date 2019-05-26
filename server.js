@@ -215,7 +215,7 @@ const requestGet404Route = (req, res) => {
       name: 'not found'
     }
   }, config.getData(req)));
-}
+};
 app.get('*', requestGet404Route);
 
 /**

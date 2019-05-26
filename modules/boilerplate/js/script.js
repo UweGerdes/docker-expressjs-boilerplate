@@ -1,5 +1,7 @@
 /**
- * scripts for boilerplate
+ * Scripts for boilerplate frontend
+ *
+ * @module modules/boilerplate/js
  */
 
 'use strict';
@@ -7,7 +9,9 @@
 let handler = {};
 
 /**
- * open url from selection
+ * Add click event handler to element: open url
+ *
+ * @name data-open-url
  */
 handler['data-open-url'] = {
   elements: document.querySelectorAll('[data-open-url]'),
@@ -19,7 +23,7 @@ handler['data-open-url'] = {
 };
 
 /**
- * attach event to elements
+ * Attach event to elements
  *
  * @param {DOMelement} element - to attach event
  * @param {string} event - type
