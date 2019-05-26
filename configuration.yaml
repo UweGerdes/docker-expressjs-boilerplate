@@ -153,3 +153,5 @@ server:
   modules: ./modules
   httpPort: 8080
   verbose: false
+  httpsKey: ./key/selfsigned.key
+  httpsCert: ./key/selfsigned.crt

@@ -12,7 +12,9 @@ const bodyParser = require('body-parser'),
   dateFormat = require('dateformat'),
   express = require('express'),
   session = require('express-session'),
+  fs = require('fs'),
   glob = require('glob'),
+  https = require('https'),
   i18n = require('i18n'),
   MemoryStore = require('memorystore')(session),
   morgan = require('morgan'),
@@ -22,6 +24,12 @@ const bodyParser = require('body-parser'),
   log = require('./lib/log'),
   app = express(),
   server = require('http').createServer(app);
+
+const options = {
+  key: fs.readFileSync(path.join(__dirname, config.server.httpsKey)),
+  cert: fs.readFileSync(path.join(__dirname, config.server.httpsCert))
+};
+const httpsServer = https.createServer(options, app);
 
 let routers = { };
 
@@ -124,7 +132,14 @@ app.use(session({
   }),
   secret: 'uif fsranöaiorawrua vrw',
   resave: false,
-  saveUninitialized: true
+  saveUninitialized: true,
+  cookie: {
+    // secure: true, // HTTPS
+    // domain: 'example.com',
+    // path: 'foo/bar',
+    // expires: expiryDate,
+    // httpOnly: true
+  }
 }));
 
 /**
@@ -191,13 +206,32 @@ server.on('error', onError);
 server.on('listening', onListening);
 
 /**
+ * Server listens on process.env.HTTPS_PORT
+ *
+ * @name server_listen
+ */
+httpsServer.listen(process.env.HTTPS_PORT);
+/**
+ * Server fires on error
+ *
+ * @event server_listen:onError
+ */
+httpsServer.on('error', onError);
+/**
+ * Server fires on listening
+ *
+ * @event server_listen:onListeningHttps
+ */
+httpsServer.on('listening', onListeningHttps);
+
+/**
  * connect server and use routes from modules
  *
  * @name module_router_connect_server
  */
 for (const [baseRoute, router] of Object.entries(routers)) {
   if (router.connectServer) {
-    router.connectServer(server);
+    router.connectServer(server, httpsServer);
   }
   app.use(baseRoute, router.router);
 }
@@ -281,11 +315,21 @@ function onError(error) {
 }
 
 /**
- * Event listener for HTTP server "listening" event.
+ * Event listener for HTTP server "listening" event
  *
  * @listens server_listen:onListening
  */
 function onListening() {
   log.info('server listening on ' +
     chalk.greenBright('http://' + ipv4addresses.get()[0] + ':' + config.server.httpPort));
+}
+
+/**
+ * Event listener for HTTPS server "listening" event
+ *
+ * @listens server_listen:onListeningHttps
+ */
+function onListeningHttps() {
+  log.info('server listening on ' +
+    chalk.greenBright('https://' + ipv4addresses.get()[0] + ':' + process.env.HTTPS_PORT));
 }

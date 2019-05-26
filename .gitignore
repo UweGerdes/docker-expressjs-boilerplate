@@ -1,6 +1,7 @@
 #
-/deploy
-/docs/jsdoc
-/locales
-/public/css
-/public/js
+deploy
+docs/jsdoc
+key
+locales
+public/css
+public/js

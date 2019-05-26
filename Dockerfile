@@ -7,15 +7,18 @@ MAINTAINER Uwe Gerdes <entwicklung@uwegerdes.de>
 
 ARG NODE_ENV='production'
 ARG SERVER_PORT='8080'
+ARG HTTPS_PORT='8443'
 ARG LIVERELOAD_PORT='8081'
 
 ENV NODE_ENV ${NODE_ENV}
 ENV SERVER_PORT ${SERVER_PORT}
+ENV HTTPS_PORT ${HTTPS_PORT}
 ENV LIVERELOAD_PORT ${LIVERELOAD_PORT}
 
 USER root
 
 COPY package.json ${NODE_HOME}/
+COPY . ${APP_HOME}
 
 RUN apt-get update && \
 	apt-get dist-upgrade -y && \
@@ -29,9 +32,9 @@ RUN apt-get update && \
 					nodemon ; \
 	fi
 
-COPY . ${APP_HOME}
-
-RUN chown -R ${USER_NAME}:${USER_NAME} ${APP_HOME}
+COPY entrypoint.sh /usr/local/bin/
+RUN chmod 755 /usr/local/bin/entrypoint.sh
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 
 USER ${USER_NAME}
 
@@ -41,6 +44,6 @@ RUN npm install --cache /tmp/node-cache
 
 WORKDIR ${APP_HOME}
 
-EXPOSE ${SERVER_PORT} ${LIVERELOAD_PORT}
+EXPOSE ${SERVER_PORT} ${HTTPS_PORT} ${LIVERELOAD_PORT}
 
 CMD [ "npm", "start" ]

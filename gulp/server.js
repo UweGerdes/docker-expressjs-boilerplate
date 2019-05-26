@@ -11,11 +11,13 @@
 
 'use strict';
 
-const gulp = require('gulp'),
+const fs = require('fs'),
+  gulp = require('gulp'),
   changedInPlace = require('gulp-changed-in-place'),
   server = require('gulp-develop-server'),
   livereload = require('gulp-livereload'),
   sequence = require('gulp-sequence'),
+  path = require('path'),
   config = require('../lib/config'),
   ipv4addresses = require('../lib/ipv4addresses'),
   loadTasks = require('./lib/load-tasks'),
@@ -93,7 +95,9 @@ const tasks = {
     livereload.listen({
       port: process.env.LIVERELOAD_PORT,
       delay: 2000,
-      quiet: false
+      quiet: false,
+      key: fs.readFileSync(path.join(__dirname, '..', config.server.httpsKey)),
+      cert: fs.readFileSync(path.join(__dirname, '..', config.server.httpsCert))
     });
     log.info('livereload listening on http://' +
       ipv4addresses.get()[0] + ':' + process.env.LIVERELOAD_PORT);

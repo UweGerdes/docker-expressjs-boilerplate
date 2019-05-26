@@ -26,8 +26,10 @@ Run the container with:
 ```bash
 $ docker run -it \
 	-v $(pwd):/home/node/app \
-	-p 8080:8080 \
-	-p 8081:8081 \
+	-p 28080:8080 \
+	-p 28081:8081 \
+	-p 28443:8443 \
+	-e "LIVERELOAD_PORT=28081" \
 	--name expressjs-boilerplate \
 	uwegerdes/expressjs-boilerplate \
 	bash
