@@ -187,11 +187,11 @@ const requestGetI18nRoute = (req, res) => {
 app.get('/i18n-ejs', requestGetI18nRoute);
 
 /**
- * Server listens on configured port
+ * Server listens on process.env.SERVER_PORT
  *
  * @name server_listen
  */
-server.listen(config.server.httpPort);
+server.listen(process.env.SERVER_PORT);
 /**
  * Server fires on error
  *
@@ -302,11 +302,11 @@ function onError(error) {
   // handle specific listen errors with friendly messages
   switch (error.code) {
     case 'EACCES':
-      console.error(config.server.httpPort + ' requires elevated privileges');
+      console.error(process.env.SERVER_PORT + ' requires elevated privileges');
       process.exit(1);
       break;
     case 'EADDRINUSE':
-      console.error(config.server.httpPort + ' is already in use');
+      console.error(process.env.SERVER_PORT + ' is already in use');
       process.exit(1);
       break;
     default:
@@ -321,7 +321,7 @@ function onError(error) {
  */
 function onListening() {
   log.info('server listening on ' +
-    chalk.greenBright('http://' + ipv4addresses.get()[0] + ':' + config.server.httpPort));
+    chalk.greenBright('http://' + ipv4addresses.get()[0] + ':' + process.env.SERVER_PORT));
 }
 
 /**
