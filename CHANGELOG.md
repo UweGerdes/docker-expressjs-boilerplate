@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.1.2
+updates from other projects, dependency updates, better jsdoc
+
 ## 0.1.1
 template refactoring, flexbox for page
 
