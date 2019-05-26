@@ -1,18 +1,35 @@
 /**
  * Routes for login
  *
- * @module login/index
+ * @module modules/login/server/index
+ * @requires module:modules/login/server/controller
  */
 
 'use strict';
 
 const router = require('express').Router(); // eslint-disable-line new-cap
 
-const controller = require('./controller.js');
+const controller = require('./controller');
 
-// login overview
+/**
+ * GET / route
+ *
+ * @name get_default_route
+ */
 router.get('/', controller.index);
+
+/**
+ * GET /callback route
+ *
+ * @name get_callback_route
+ */
 router.get('/callback', controller.callback);
+
+/**
+ * GET /logout route
+ *
+ * @name get_logout_route
+ */
 router.get('/logout', controller.logout);
 
 module.exports = {

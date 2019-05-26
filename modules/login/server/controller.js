@@ -1,7 +1,9 @@
 /**
- * ## Controller for login
+ * Controller for login
  *
- * @module login/controller
+ * @module modules/login/server/controller
+ * @requires modules/login/server/model
+ * @requires module:lib/config
  */
 
 'use strict';
@@ -14,9 +16,7 @@ const axios = require('axios'),
 const viewBase = path.join(path.dirname(__dirname), 'views');
 
 /**
- * ### index page
- *
- * render the index page
+ * Render the index page
  *
  * @param {object} req - request
  * @param {object} res - result
@@ -33,9 +33,7 @@ const index = (req, res) => {
 };
 
 /**
- * ### callback page
- *
- * render the callback page
+ * Render callback page
  *
  * @param {object} req - request
  * @param {object} res - result
@@ -74,9 +72,7 @@ const callback = async (req, res) => {
 };
 
 /**
- * ### logout and redirect to login page
- *
- * render the index page
+ * Logout and redirect to login page
  *
  * @param {object} req - request
  * @param {object} res - result

@@ -1,7 +1,7 @@
 /**
- * ## Model for login
+ * Model for login
  *
- * @module login/model
+ * @module modules/login/server/model
  */
 
 'use strict';
@@ -10,7 +10,7 @@ let data = { modelData: 'login data' };
 
 module.exports = {
   /**
-   * get data
+   * Get data
    *
    * @returns {object} model data
    */
