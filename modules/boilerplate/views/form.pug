@@ -23,8 +23,10 @@ block content
     h1#headline.headline= module.name
     #formular-container.formular-container
       h2.subheadline Formular
-      if (error)
+      if locals.error
         .error #{__(error, post.username)}
+      if locals.post
+        pre#postdata= JSON.stringify(post, null, 2)
       form#form.form(method='POST', action='/'+ moduleName + '/form/', name='form')
         + hidden('hiddeninput', 'wert')
         + field('Texteingabe', {
