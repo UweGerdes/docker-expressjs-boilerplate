@@ -1,20 +1,35 @@
 /**
  * Routes for boilerplate
  *
- * @module boilerplate/index
+ * @module modules/boilerplate/server/index
+ * @requires module:modules/boilerplate/server/controller
  */
 
 'use strict';
 
 const router = require('express').Router(); // eslint-disable-line new-cap
 
-const controller = require('./controller.js');
+const controller = require('./controller');
 
-// boilerplate overview
+/**
+ * GET / route
+ *
+ * @name get_default_route
+ */
 router.get('/', controller.index);
 
-// boilerplate form
+/**
+ * GET /form route
+ *
+ * @name get_form_route
+ */
 router.get('/form', controller.form);
+
+/**
+ * POST /form route
+ *
+ * @name post_form_route
+ */
 router.post('/form', controller.form);
 
 module.exports = {

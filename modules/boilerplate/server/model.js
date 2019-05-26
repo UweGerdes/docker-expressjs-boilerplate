@@ -1,7 +1,7 @@
 /**
- * ## Model for boilerplate
+ * Model for boilerplate
  *
- * @module boilerplate/model
+ * @module modules/boilerplate/server/model
  */
 
 'use strict';
@@ -10,7 +10,7 @@ let data = { modelData: 'boilerplate data' };
 
 module.exports = {
   /**
-   * get data
+   * Get data
    *
    * @returns {object} model data
    */

@@ -1,21 +1,21 @@
 /**
- * ## Controller for boilerplate
+ * Controller for boilerplate
  *
- * @module boilerplate/controller
+ * @module modules/boilerplate/server/controller
+ * @requires modules/boilerplate/server/model
+ * @requires module:lib/config
  */
 
 'use strict';
 
 const path = require('path'),
   config = require('../../../lib/config'),
-  model = require('./model.js');
+  model = require('./model');
 
 const viewBase = path.join(path.dirname(__dirname), 'views');
 
 /**
- * ### index page
- *
- * render the index page
+ * render index page
  *
  * @param {object} req - request
  * @param {object} res - result
