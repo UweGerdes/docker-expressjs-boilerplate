@@ -74,7 +74,7 @@ const tasks = {
     return gulp.src(config.gulp.watch.livereload)
       .pipe(changedInPlace({ howToDetermineDifference: 'modification-time' }))
       .pipe(notify({ message: '<%= file.path %>', title: 'livereload' }))
-      .pipe(livereload({ quiet: true }));
+      .pipe(livereload({ quiet: false }));
   },
   /**
    * Trigger of livereload task with first file configured for livereload
@@ -84,7 +84,7 @@ const tasks = {
   'livereload-index': () => {
     return gulp.src(config.gulp.watch.livereload[0])
       .pipe(notify({ message: 'triggered', title: 'livereload' }))
-      .pipe(livereload({ quiet: true }));
+      .pipe(livereload({ quiet: false }));
   },
   /**
    * Livereload server start task
@@ -93,8 +93,8 @@ const tasks = {
    */
   'livereload-start': () => {
     livereload.listen({
+      host: ipv4addresses.get()[0],
       port: process.env.LIVERELOAD_PORT,
-      delay: 2000,
       quiet: false,
       key: fs.readFileSync(path.join(__dirname, '..', config.server.httpsKey)),
       cert: fs.readFileSync(path.join(__dirname, '..', config.server.httpsCert))
