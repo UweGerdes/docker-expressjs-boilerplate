@@ -11,6 +11,7 @@ gulp:
         - 'livereload-start'
         - 'server-start'
         - 'tests'
+#        - 'livereload-all'
       build:
         - 'less'
         - 'js'
@@ -90,12 +91,13 @@ gulp:
       - 'modules/*/*.yaml'
     livereload:
       - 'public/**/*.html'
-      - 'modules/**/*.ejs'
-      - 'modules/**/*.pug'
       - 'public/img/**/*.*'
       - 'public/css/*.css'
-    livereload-index:
+      - 'modules/**/*.ejs'
+      - 'modules/**/*.pug'
+    livereload-all:
       - 'public/js/**/*.js'
+      - 'locales/**/*.*'
     test-modules:
       - 'modules/**/tests/model/*.*'
       - 'modules/**/tests/server/*.*'

@@ -79,9 +79,11 @@ const tasks = {
   /**
    * Trigger of livereload task with first file configured for livereload
    *
-   * @function livereload-index
+   * used for full page reload if js or locales change
+   *
+   * @function livereload-all
    */
-  'livereload-index': () => {
+  'livereload-all': () => {
     return gulp.src(config.gulp.watch.livereload[0])
       .pipe(notify({ message: 'triggered', title: 'livereload' }))
       .pipe(livereload({ quiet: false }));
