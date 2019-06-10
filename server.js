@@ -137,8 +137,7 @@ app.use(session({
     // secure: true, // HTTPS
     // domain: 'example.com',
     // path: 'foo/bar',
-    // expires: expiryDate,
-    // httpOnly: true
+    // maxAge: expiryDate
   }
 }));
 

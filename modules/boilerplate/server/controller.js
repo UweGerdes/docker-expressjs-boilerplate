@@ -15,7 +15,7 @@ const path = require('path'),
 const viewBase = path.join(path.dirname(__dirname), 'views');
 
 /**
- * render index page
+ * Render index page
  *
  * @param {object} req - request
  * @param {object} res - result
@@ -26,9 +26,7 @@ const index = (req, res) => {
 };
 
 /**
- * ### form page
- *
- * render the form page
+ * Render form page
  *
  * @param {object} req - request
  * @param {object} res - result

@@ -30,7 +30,7 @@ module.exports = {
   /**
    * Get the task list
    *
-   * @param {object} tasks - task list
+   * @return {Array} task list
    */
   tasks: () => {
     return list;
