@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.1.3
+use env for server ports, update livereload
+
 ## 0.1.2
 updates from other projects, dependency updates, better jsdoc
 
