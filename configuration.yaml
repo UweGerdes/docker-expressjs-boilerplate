@@ -125,7 +125,9 @@ gulp:
       replace:
         'modules/([^/]+)/js/(.+)*/.+': '$1/$2'
     less:
-      src: 'src/less/app.less'
+      src:
+        - 'src/less/app.less'
+        - 'modules/*/less/layout.less'
       dest: 'public/css'
     locales:
       dest: 'locales'

@@ -52,6 +52,10 @@ const tasks = {
         plugins: [lessPluginGlob]
       }),
       autoprefixer('last 3 version', 'safari 5', 'ie 8', 'ie 9', 'ios 6', 'android 4'),
+      rename(path => {
+        path.dirname = path.dirname.replace(/\/less$/, '');
+        return path;
+      }),
       gulp.dest(config.gulp.build.less.dest),
       notify({ message: 'written: <%= file.path %>', title: 'Gulp less' })
     ])
