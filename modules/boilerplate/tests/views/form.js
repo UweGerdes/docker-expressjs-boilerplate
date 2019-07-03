@@ -31,6 +31,23 @@ describe('/boilerplate/tests/views/form.js', function () {
         .end(function (err, res) {
           const document = getDocument(res, err);
           assert.equal(document.title, 'Formular');
+          assert.equal(document.head.getElementsByTagName('link').length, 2);
+          assert.equal(
+            document.head.getElementsByTagName('link')[0].attributes.rel.nodeValue,
+            'stylesheet'
+          );
+          assert.equal(
+            document.head.getElementsByTagName('link')[0].attributes.href.nodeValue,
+            '/css/app.css'
+          );
+          assert.equal(
+            document.head.getElementsByTagName('link')[1].attributes.rel.nodeValue,
+            'stylesheet'
+          );
+          assert.equal(
+            document.head.getElementsByTagName('link')[1].attributes.href.nodeValue,
+            '/css/boilerplate/layout.css'
+          );
           assert.equal(document.head.getElementsByTagName('script').length, 1);
           assert.equal(
             document.head.getElementsByTagName('script')[0].attributes.src.nodeValue,
@@ -252,7 +269,6 @@ describe('/boilerplate/tests/views/form.js', function () {
       document = checkResponse(res, err);
       checkPage(document, 'Formular', 'anmelden');
       testError();
-      testElement('.field_textinput', { }, 'Texteingabe');
       testElement('.input-text', { name: 'textinput', type: 'text', value: 'changed content' }, null);
       const postdata = document.querySelectorAll('#postdata');
       assert.equal(postdata.length, 1);

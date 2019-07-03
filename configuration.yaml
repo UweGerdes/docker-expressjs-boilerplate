@@ -92,7 +92,7 @@ gulp:
     livereload:
       - 'public/**/*.html'
       - 'public/img/**/*.*'
-      - 'public/css/*.css'
+      - 'public/css/**/*.css'
       - 'modules/**/*.ejs'
       - 'modules/**/*.pug'
     livereload-all:
@@ -102,7 +102,6 @@ gulp:
       - 'modules/**/tests/model/*.*'
       - 'modules/**/tests/server/*.*'
       - 'modules/**/views/**/*.*'
-      - 'htdocs/css/*.css'
       - 'htdocs/js/**/*.js'
   tests:
     modules:
