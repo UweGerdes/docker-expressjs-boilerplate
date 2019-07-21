@@ -30,7 +30,8 @@ RUN apt-get update && \
 		npm install -g --cache /tmp/root-cache \
 					gulp-cli \
 					nodemon ; \
-	fi
+	fi && \
+	rm -r /tmp/*
 
 COPY entrypoint.sh /usr/local/bin/
 RUN chmod 755 /usr/local/bin/entrypoint.sh
@@ -40,7 +41,8 @@ USER ${USER_NAME}
 
 WORKDIR ${NODE_HOME}
 
-RUN npm install --cache /tmp/node-cache
+RUN npm install --cache /tmp/node-cache && \
+	rm -r /tmp/*
 
 WORKDIR ${APP_HOME}
 
