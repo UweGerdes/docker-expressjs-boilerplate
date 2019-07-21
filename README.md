@@ -33,7 +33,9 @@ $ docker run -it \
 	bash
 ```
 
-You should start `npm start` or `npm run dev` and open localhost:8080 for the server, localhost:8081 is the livereload port.
+You should start `npm start` or `npm run dev` and open localhost:28080 for the server, localhost:28443 is the https port.
+
+You may want to access the livereload port, add `-p 28081:8081 -e 'LIVERELOAD_PORT=28081'` to the run command.
 
 Restart it later with:
 
