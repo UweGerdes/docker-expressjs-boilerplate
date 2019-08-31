@@ -1,6 +1,7 @@
 #
 /deploy
 /docs/jsdoc
+/generated
 /key
 /locales
 /public/css
