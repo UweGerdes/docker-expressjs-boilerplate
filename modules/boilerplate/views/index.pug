@@ -5,6 +5,10 @@ append head
   link(rel='stylesheet', href='/'+ moduleName + '/layout.css')
   script(src='/'+ moduleName + '/script.js')
 
+append breadcrumbs
+  li.header-breadcrumb
+    a.header-breadcrumb-link(href='/'+ moduleName + '/')= module.name
+
 block content
   div#boilerplate.boilerplate
     h1#headline.headline= module.name

@@ -17,6 +17,8 @@ block title
 
 append breadcrumbs
   li.header-breadcrumb
+    a.header-breadcrumb-link(href='/'+ moduleName + '/')= module.name
+  li.header-breadcrumb
     a.header-breadcrumb-link(href='/'+ moduleName + '/form/') Formular
 
 block content

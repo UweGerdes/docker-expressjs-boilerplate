@@ -1,6 +1,10 @@
 //- index.pug
 extends ../../pages/views/page.pug
 
+append breadcrumbs
+  li.header-breadcrumb
+    a.header-breadcrumb-link(href='/'+ moduleName + '/')= module.name
+
 block content
   div#login.login
     h1#headline.headline= module.name
