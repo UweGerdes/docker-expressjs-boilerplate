@@ -1,4 +1,12 @@
 //- widgets/form.pug
+
+include ../../page-elements/views/form/field.pug
+include ../../page-elements/views/form/hidden.pug
+include ../../page-elements/views/form/select.pug
+include ../../page-elements/views/form/textarea.pug
+include ../../page-elements/views/form/group.pug
+include ../../page-elements/views/form/address.pug
+
 mixin form(form, action)
   form#form.form(method='POST', action=action, name=form.name)
     each section, section_name in form.sections
