@@ -8,6 +8,10 @@ mixin field(attr)
         - name=attr.name
         if attr.type == 'submit'
           - delete(attr.name)
+        - text = ''
+        if attr.text != ''
+          - text = __(attr.text)
+          - delete(attr.text)
         if attr.entries
           - i = 0
           each label, value in attr.entries
@@ -34,5 +38,5 @@ mixin field(attr)
             id=attr.name,
             checked=(attr.type == 'checkbox' && attr.value == post[attr.name])
           )&attributes(attr)
-        if attr.text
-          label(class=attr.type + '-label', for=attr.name)= __(attr.text)
+        if text
+          label(class=attr.type + '-label', for=attr.name)= text
