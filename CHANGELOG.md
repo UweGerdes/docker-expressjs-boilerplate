@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.1.4
+building less and js to generated, changes for reuse in other projects
+
 ## 0.1.3
 use env for server ports, update livereload
 
