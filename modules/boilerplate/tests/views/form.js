@@ -10,8 +10,7 @@ const chai = require('chai'),
   request = require('supertest'),
   assert = chai.assert,
   expect = chai.expect,
-  app = 'https://localhost:8443',
-  { JSDOM } = jsdom;
+  app = 'https://localhost:8443';
 
 chai.use(chaiHttp);
 
@@ -179,7 +178,7 @@ describe('/boilerplate/tests/views/form.js', function () {
       } catch (error) {
         err = error;
       }
-      document = checkResponse(res, err);
+      document = getDocument(res, err);
       checkPage(document, 'Formular', 'anmelden');
       testError();
       testElement('.input-text', { name: 'textinput', type: 'text', value: 'changed content' }, null);
@@ -227,14 +226,7 @@ function getDocument (res, err) {
   expect(err).to.be.null;
   expect(res).to.have.status(200);
   expect(res).to.be.html;
-  return (new JSDOM(res.text)).window.document;
-}
-
-function checkResponse (res, err) {
-  expect(err).to.be.null;
-  expect(res).to.have.status(200);
-  expect(res).to.be.html;
-  return (new JSDOM(res.text)).window.document;
+  return (new jsdom.JSDOM(res.text)).window.document;
 }
 
 function checkPage (document, title, loginStatusLabel) {
