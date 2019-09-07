@@ -21,7 +21,7 @@ form:
         - name: textareainput
           type: textarea
           label: Textarea Input Field
-          height: 5
+          rows: 5
           value: already written
           placeholder: please write much text
     click:
@@ -62,10 +62,9 @@ form:
           fields:
             - name: grouptextinput1
               type: text
-              value: remove this group text
-              placeholder: please write group text
             - name: grouptextinput2
               type: text
+              placeholder: enter group text
             - name: groupradioinput
               type: radio
               entries:

@@ -29,7 +29,7 @@ describe('/boilerplate/tests/views/form.js', function () {
       chai.request('http://localhost:8080')
         .get('/boilerplate/form/')
         .end(function (err, res) {
-          const document = getDocument(res, err);
+          document = getDocument(res, err);
           assert.equal(document.title, 'Formular');
           assert.equal(document.head.getElementsByTagName('link').length, 2);
           assert.equal(
@@ -53,192 +53,104 @@ describe('/boilerplate/tests/views/form.js', function () {
             document.head.getElementsByTagName('script')[0].attributes.src.nodeValue,
             '/boilerplate/script.js'
           );
-          const headline = document.getElementById('headline');
-          assert.equal(headline.textContent, 'Boilerplate');
-          const subHeadline = document.querySelector('.subheadline');
-          assert.equal(subHeadline.textContent, 'Formular');
+          testElement('.headline', { }, 'Boilerplate');
+          testElement('.subheadline', { }, 'Formular');
           done();
         });
     });
-    it('should have form', function (done) {
+    it('should have form and elements', function (done) {
       chai.request('http://localhost:8080')
         .get('/boilerplate/form/')
         .end(function (err, res) {
-          const document = getDocument(res, err);
-          const form = document.querySelector('form');
-          assert.equal(form.getAttribute('method'), 'POST');
-          assert.equal(form.getAttribute('action'), '/boilerplate/form/');
-          done();
-        });
-    });
-    it('should have text input widget', function (done) {
-      chai.request('http://localhost:8080')
-        .get('/boilerplate/form/')
-        .end(function (err, res) {
-          const document = getDocument(res, err);
-          const inputTextContainer = document.querySelector('.field_textinput');
-          assert.equal(inputTextContainer.textContent, 'Texteingabe');
-          const inputText = inputTextContainer.querySelector('.input-text');
-          assert.equal(inputText.name, 'textinput');
-          assert.equal(inputText.getAttribute('type'), 'text');
-          assert.equal(inputText.getAttribute('value'), 'ändern!');
-          done();
-        });
-    });
-    it('should have hidden input widget', function (done) {
-      chai.request('http://localhost:8080')
-        .get('/boilerplate/form/')
-        .end(function (err, res) {
-          const document = getDocument(res, err);
-          const inputHidden = document.querySelector('[name=hiddeninput]');
-          assert.equal(inputHidden.name, 'hiddeninput');
-          assert.equal(inputHidden.value, 'some hidden value');
-          assert.equal(inputHidden.getAttribute('type'), 'hidden');
-          done();
-        });
-    });
-    it('should have text button widget', function (done) {
-      chai.request('http://localhost:8080')
-        .get('/boilerplate/form/')
-        .end(function (err, res) {
-          const document = getDocument(res, err);
-          const inputButtonContainer = document.querySelector('.field_buttoninput');
-          assert.equal(inputButtonContainer.textContent, 'Button');
-          const inputButton = inputButtonContainer.querySelector('.input-button');
-          assert.equal(inputButton.name, 'buttoninput');
-          assert.equal(inputButton.getAttribute('type'), 'button');
-          done();
-        });
-    });
-    it('should have password input widget', function (done) {
-      chai.request('http://localhost:8080')
-        .get('/boilerplate/form/')
-        .end(function (err, res) {
-          const document = getDocument(res, err);
-          const inputPasswordContainer = document.querySelector('.field_passwordinput');
-          assert.equal(inputPasswordContainer.textContent, 'Passwort');
-          const inputPassword = inputPasswordContainer.querySelector('.input-password');
-          assert.equal(inputPassword.name, 'passwordinput');
-          assert.equal(inputPassword.getAttribute('type'), 'password');
-          done();
-        });
-    });
-    it('should have checkbox input widget', function (done) {
-      chai.request('http://localhost:8080')
-        .get('/boilerplate/form/')
-        .end(function (err, res) {
-          const document = getDocument(res, err);
-          const inputCheckboxContainer = document.querySelector('.field_checkboxinput');
-          assert.equal(inputCheckboxContainer.textContent, 'Möglichkeitkann man wählen');
-          const inputCheckbox = inputCheckboxContainer.querySelector('.input-checkbox');
-          assert.equal(inputCheckbox.name, 'checkboxinput');
-          assert.equal(inputCheckbox.value, 'checkbox checked');
-          assert.equal(inputCheckbox.getAttribute('type'), 'checkbox');
-          done();
-        });
-    });
-    it('should have radio input widget', function (done) {
-      chai.request('http://localhost:8080')
-        .get('/boilerplate/form/')
-        .end(function (err, res) {
-          const document = getDocument(res, err);
-          const inputRadioContainer = document.querySelector('.field_radioinput');
-          assert.equal(inputRadioContainer.textContent, 'Auswahlmal klickenoder hier');
-          const inputRadio = inputRadioContainer.querySelectorAll('.input-radio');
-          assert.equal(inputRadio.length, 2);
-          assert.equal(inputRadio[0].name, 'radioinput');
-          assert.equal(inputRadio[0].value, 'checked first radio');
-          assert.equal(inputRadio[0].getAttribute('type'), 'radio');
-          assert.equal(inputRadio[1].name, 'radioinput');
-          assert.equal(inputRadio[1].value, 'checked second radio');
-          assert.equal(inputRadio[1].getAttribute('type'), 'radio');
-          done();
-        });
-    });
-    it('should have select input widget', function (done) {
-      chai.request('http://localhost:8080')
-        .get('/boilerplate/form/')
-        .end(function (err, res) {
-          const document = getDocument(res, err);
-          const inputSelectContainer = document.querySelector('.field_selectinput');
-          assert.equal(inputSelectContainer.textContent, 'Auswahlliste- bitte wählen -diesdasvielleicht ein Pflichtfeld');
-          const inputSelect = inputSelectContainer.querySelector('.input-select');
-          assert.equal(inputSelect.name, 'selectinput');
-          const inputSelectOption = inputSelect.querySelectorAll('option');
-          assert.equal(inputSelectOption.length, 3);
-          assert.equal(inputSelectOption[0].value, '');
-          assert.equal(inputSelectOption[0].textContent, '- bitte wählen -');
-          assert.equal(inputSelectOption[1].value, 'opt1');
-          assert.equal(inputSelectOption[1].textContent, 'dies');
-          assert.equal(inputSelectOption[2].value, 'opt2');
-          assert.equal(inputSelectOption[2].textContent, 'das');
-          done();
-        });
-    });
-    it('should have textarea input widget', function (done) {
-      chai.request('http://localhost:8080')
-        .get('/boilerplate/form/')
-        .end(function (err, res) {
-          const document = getDocument(res, err);
-          const inputTextareaContainer = document.querySelector('.field_textareainput');
-          assert.equal(inputTextareaContainer.textContent, 'Langtextfeldsteht schon was');
-          const inputTextarea = inputTextareaContainer.querySelector('.input-textarea');
-          assert.equal(inputTextarea.name, 'textareainput');
-          done();
-        });
-    });
-    it('should have field group input widget', function (done) {
-      chai.request('http://localhost:8080')
-        .get('/boilerplate/form/')
-        .end(function (err, res) {
-          const document = getDocument(res, err);
-          const inputGroupContainer = document.querySelector('.field_groupOfFields');
-          assert.equal(inputGroupContainer.textContent, 'Feldgruppemal klickenoder hier- bitte wählen -Wahl 1Wahl 2');
-          const inputText1 = inputGroupContainer.querySelector('.field_grouptextinput1 .input-text');
-          assert.equal(inputText1.name, 'grouptextinput1');
-          const inputText2 = inputGroupContainer.querySelector('.field_grouptextinput2 .input-text');
-          assert.equal(inputText2.name, 'grouptextinput2');
-          const inputRadio = inputGroupContainer.querySelectorAll('.field_groupradioinput .input-radio');
-          assert.equal(inputRadio.length, 2);
-          assert.equal(inputRadio[0].name, 'groupradioinput');
-          const selectOptions = inputGroupContainer.querySelectorAll('.field_groupselectinput option');
-          assert.equal(selectOptions.length, 3);
-          assert.equal(selectOptions[0].value, '');
-          assert.equal(selectOptions[0].textContent, '- bitte wählen -');
-          assert.equal(selectOptions[1].value, 'option1');
-          assert.equal(selectOptions[1].textContent, 'Wahl 1');
-          assert.equal(selectOptions[2].value, 'option2');
-          assert.equal(selectOptions[2].textContent, 'Wahl 2');
-          done();
-        });
-    });
-    it('should have field address input widget', function (done) {
-      chai.request('http://localhost:8080')
-        .get('/boilerplate/form/')
-        .end(function (err, res) {
-          const document = getDocument(res, err);
-          const inputGroupContainer = document.querySelector('.field_address');
-          assert.equal(inputGroupContainer.textContent, 'Adresse');
-          const inputStreet = inputGroupContainer.querySelector('.field_address-street .input-text');
-          assert.equal(inputStreet.name, 'address-street');
-          const inputHousenumber = inputGroupContainer.querySelector('.field_address-housenumber .input-text');
-          assert.equal(inputHousenumber.name, 'address-housenumber');
-          const inputZip = inputGroupContainer.querySelector('.field_address-zip .input-text');
-          assert.equal(inputZip.name, 'address-zip');
-          const inputCity = inputGroupContainer.querySelector('.field_address-city .input-text');
-          assert.equal(inputCity.name, 'address-city');
-          done();
-        });
-    });
-    it('should have submit input widget', function (done) {
-      chai.request('http://localhost:8080')
-        .get('/boilerplate/form/')
-        .end(function (err, res) {
-          const document = getDocument(res, err);
-          const inputSubmitContainer = document.querySelector('.field_submit');
-          const inputSubmit = inputSubmitContainer.querySelector('.input-submit');
-          assert.equal(inputSubmit.getAttribute('type'), 'submit');
-          assert.equal(inputSubmit.getAttribute('value'), 'absenden');
+          document = getDocument(res, err);
+          testElement('.form', {
+            name: 'sampleform',
+            method: 'POST',
+            action: '/boilerplate/form/'
+          }, null);
+          testElement('[name=hiddeninput]', {
+            name: 'hiddeninput',
+            type: 'hidden',
+            value: 'some hidden value'
+          }, null);
+          testElement('.field_textinput', { }, 'Texteingabe');
+          testElement('.field_textinput .input-text', {
+            name: 'textinput', type: 'text', value: 'ändern!', placeholder: 'bitte Text eingeben'
+          }, null);
+          testElement('.field_passwordinput', { }, 'Passwort');
+          testElement('.field_passwordinput .input-password', {
+            name: 'passwordinput',
+            type: 'password'
+          }, null);
+          testElement('.field_textareainput', { }, 'Langtextfeldsteht schon was');
+          testElement('.field_textareainput .input-textarea', {
+            name: 'textareainput',
+            placeholder: 'bitte viel Text eingeben'
+          }, 'steht schon was');
+          testElement('.field_buttoninput', { }, 'Button');
+          testElement('.field_buttoninput .input-button', {
+            name: 'buttoninput',
+            type: 'button',
+            value: 'hier klicken'
+          }, null);
+          testElement('.field_checkboxinput', { }, 'Möglichkeitkann man wählen');
+          testElement('.field_checkboxinput .input-checkbox', {
+            name: 'checkboxinput',
+            type: 'checkbox',
+            value: 'checkbox checked'
+          }, null);
+          testElement('.field_radioinput', { }, 'Auswahlmal klickenoder hier');
+          testElement('.field_radioinput [for=radioinput0]', { }, 'mal klicken');
+          testElement('.field_radioinput .input-radio:nth-of-type(1)', {
+            name: 'radioinput',
+            type: 'radio',
+            value: 'checked first radio'
+          }, null);
+          testElement('.field_radioinput [for=radioinput1]', { }, 'oder hier');
+          testElement('.field_radioinput .input-radio:nth-of-type(2)', {
+            name: 'radioinput',
+            type: 'radio',
+            value: 'checked second radio'
+          }, null);
+          testElement('.field_selectinput', { }, 'Auswahlliste- bitte wählen -diesdasvielleicht ein Pflichtfeld');
+          testElement('.field_selectinput .input-select', { name: 'selectinput' }, null);
+          testElement('.field_selectinput .input-select option:nth-of-type(1)', { value: '' }, '- bitte wählen -');
+          testElement('.field_selectinput .input-select option:nth-of-type(2)', { value: 'opt1' }, 'dies');
+          testElement('.field_selectinput .input-select option:nth-of-type(3)', { value: 'opt2' }, 'das');
+          testElement('.field_selectinput .select-followtext', { }, 'vielleicht ein Pflichtfeld');
+          testElement('.field_groupOfFields', { }, 'Feldgruppemal klickenoder hier- bitte wählen -Wahl 1Wahl 2');
+          testElement('.field_groupOfFields .field_grouptextinput1 .input-text', { name: 'grouptextinput1' }, null);
+          testElement('.field_groupOfFields .field_grouptextinput2 .input-text', {
+            name: 'grouptextinput2',
+            placeholder: 'Text in Gruppenfeld eintragen'
+          }, null);
+          testElement('.field_groupradioinput [for=groupradioinput0]', { }, 'mal klicken');
+          testElement('.field_groupradioinput .input-radio:nth-of-type(1)', {
+            name: 'groupradioinput',
+            type: 'radio',
+            value: 'group first radio'
+          }, null);
+          testElement('.field_groupradioinput [for=groupradioinput1]', { }, 'oder hier');
+          testElement('.field_groupradioinput .input-radio:nth-of-type(2)', {
+            name: 'groupradioinput',
+            type: 'radio',
+            value: 'group second radio'
+          }, null);
+          testElement('.field_groupselectinput', { }, '- bitte wählen -Wahl 1Wahl 2');
+          testElement('.field_groupselectinput .input-select', { name: 'groupselectinput' }, null);
+          testElement('.field_groupselectinput .input-select option:nth-of-type(1)', { value: '' }, '- bitte wählen -');
+          testElement('.field_groupselectinput .input-select option:nth-of-type(2)', { value: 'option1' }, 'Wahl 1');
+          testElement('.field_groupselectinput .input-select option:nth-of-type(3)', { value: 'option2' }, 'Wahl 2');
+          testElement('.field_address', { }, 'Adresse');
+          testElement('.field_address .field_address-street .input-text', { name: 'address-street' }, null);
+          testElement('.field_address .field_address-housenumber .input-text', { name: 'address-housenumber' }, null);
+          testElement('.field_address .field_address-zip .input-text', { name: 'address-zip' }, null);
+          testElement('.field_address .field_address-city .input-text', { name: 'address-city' }, null);
+          testElement('.field_submit', { }, '');
+          testElement('.field_submit .input-submit', {
+            type: 'submit',
+            value: 'absenden'
+          }, null);
           done();
         });
     });
@@ -249,7 +161,20 @@ describe('/boilerplate/tests/views/form.js', function () {
         res = await agent.post('/boilerplate/form/')
           .set('content-type', 'application/x-www-form-urlencoded')
           .send({
-            textinput: 'changed content'
+            textinput: 'changed content',
+            passwordinput: 'password',
+            textareainput: 'Langtexteingabe',
+            checkboxinput: 'checkbox checked',
+            radioinput: 'checked second radio',
+            selectinput: 'opt1',
+            grouptextinput1: 'text1',
+            grouptextinput2: 'text2',
+            groupradioinput: 'group first radio',
+            groupselectinput: 'option2',
+            'address-street': 'Str.',
+            'address-housenumber': '1',
+            'address-zip': '12345',
+            'address-city': 'Wohnort'
           });
       } catch (error) {
         err = error;
@@ -258,10 +183,42 @@ describe('/boilerplate/tests/views/form.js', function () {
       checkPage(document, 'Formular', 'anmelden');
       testError();
       testElement('.input-text', { name: 'textinput', type: 'text', value: 'changed content' }, null);
+      testElement('.input-password', { name: 'passwordinput', type: 'password', value: 'password' }, null);
+      testElement('.field_textareainput .input-textarea', { name: 'textareainput' }, 'Langtexteingabe');
+      testElement('.field_checkboxinput .input-checkbox', {
+        name: 'checkboxinput', type: 'checkbox', value: 'checkbox checked', checked: 'checked'
+      }, null);
+      testElement('.field_radioinput .input-radio:nth-of-type(2)', {
+        name: 'radioinput', type: 'radio', value: 'checked second radio', checked: 'checked'
+      }, null);
+      testElement('.field_selectinput .input-select option:nth-of-type(2)', { value: 'opt1', selected: 'selected' }, 'dies');
+      testElement('.field_groupOfFields .field_grouptextinput1 .input-text', { name: 'grouptextinput1', value: 'text1' }, null);
+      testElement('.field_groupOfFields .field_grouptextinput2 .input-text', { name: 'grouptextinput2', value: 'text2' }, null);
+      testElement('.field_groupradioinput .input-radio:nth-of-type(1)', {
+        name: 'groupradioinput', type: 'radio', value: 'group first radio', checked: 'checked'
+      }, null);
+      testElement('.field_groupselectinput .input-select option:nth-of-type(3)', { value: 'option2', selected: 'selected' }, 'Wahl 2');
+      testElement('.field_address .field_address-street .input-text', { name: 'address-street', value: 'Str.' }, null);
+      testElement('.field_address .field_address-housenumber .input-text', { name: 'address-housenumber', value: '1' }, null);
+      testElement('.field_address .field_address-zip .input-text', { name: 'address-zip', value: '12345' }, null);
+      testElement('.field_address .field_address-city .input-text', { name: 'address-city', value: 'Wohnort' }, null);
       const postdata = document.querySelectorAll('#postdata');
       assert.equal(postdata.length, 1);
       const data = JSON.parse(postdata[0].textContent);
       assert.equal(data.textinput, 'changed content');
+      assert.equal(data.passwordinput, 'password');
+      assert.equal(data.textareainput, 'Langtexteingabe');
+      assert.equal(data.checkboxinput, 'checkbox checked');
+      assert.equal(data.radioinput, 'checked second radio');
+      assert.equal(data.selectinput, 'opt1');
+      assert.equal(data.grouptextinput1, 'text1');
+      assert.equal(data.grouptextinput2, 'text2');
+      assert.equal(data.groupradioinput, 'group first radio');
+      assert.equal(data.groupselectinput, 'option2');
+      assert.equal(data['address-street'], 'Str.');
+      assert.equal(data['address-housenumber'], '1');
+      assert.equal(data['address-zip'], '12345');
+      assert.equal(data['address-city'], 'Wohnort');
     });
   });
 });
