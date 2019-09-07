@@ -1,10 +1,27 @@
 {
   "Hello": "Hier ist die Boilerplate",
+
+  "Input Fields": "Eingabefelder",
+
   "Text Input Field": "Texteingabe",
-  "Password Input Field": "Passwort",
-  "Textarea Input Field": "Langtextfeld",
-  "changed content": "bitte ändern!",
   "please write text": "bitte Text eingeben",
+  "changed content": "bitte ändern!",
+
+  "Password Input Field": "Passwort",
+
+  "Textarea Input Field": "Langtextfeld",
+  "please write much text": "bitte viel Text eingeben",
   "already written": "steht schon was",
-  "please write much text": "bitte viel Text eingeben"
+
+  "Click Fields": "Klick-Felder",
+
+  "Button Click Field": "Button",
+  "click here": "hier klicken",
+
+  "Checkbox Click Field": "Möglichkeit",
+  "check here": "kann man wählen",
+
+  "Radio Select Field": "Auswahl",
+  "click me": "mal klicken",
+  "or me": "oder hier"
 }
