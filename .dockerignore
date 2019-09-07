@@ -2,3 +2,8 @@
 /.git
 /deploy
 /docs/jsdoc
+
+# not needed by inheriting projects
+/modules/boilerplate
+/modules/login
+/modules/pages/tests
