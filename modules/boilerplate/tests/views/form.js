@@ -222,6 +222,13 @@ describe('/boilerplate/tests/views/form.js', function () {
   });
 });
 
+/**
+ * Check the response and error and return document
+ *
+ * @param {Object} res - result object
+ * @param {Object} err - error object
+ * @returns {Object} - document
+ */
 function getDocument (res, err) {
   expect(err).to.be.null;
   expect(res).to.have.status(200);
@@ -229,6 +236,14 @@ function getDocument (res, err) {
   return (new jsdom.JSDOM(res.text)).window.document;
 }
 
+/**
+ * Test several elements and error message in document
+ *
+ * @param {Object} document - document tree
+ * @param {String} title - page title
+ * @param {String} breadcrumb - text for third breadcrumb
+ * @param {String} loginStatusLabel - text to show in .login-status
+ */
 function checkPage (document, title, loginStatusLabel) {
   assert.equal(document.title, title);
   const loginStatus = document.querySelectorAll('.login-status');
