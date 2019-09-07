@@ -54,7 +54,7 @@ describe('/pages/tests/views/app.js', function () {
           assert.equal(footer.textContent.trim(), '© 2019 Uwe Gerdes');
           assert.equal(
             document.body.getElementsByTagName('script')[0].attributes.src.nodeValue,
-            'https://' + ipv4addresses.get()[0] + ':' + process.env.LIVERELOAD_PORT + '/livereload.js'
+            'https://localhost:' + process.env.LIVERELOAD_PORT + '/livereload.js'
           );
           done();
         });
