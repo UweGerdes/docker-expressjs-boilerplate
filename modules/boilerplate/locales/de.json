@@ -5,7 +5,7 @@
 
   "Text Input Field": "Texteingabe",
   "please write text": "bitte Text eingeben",
-  "changed content": "bitte ändern!",
+  "change this text": "bitte ändern!",
 
   "Password Input Field": "Passwort",
 
@@ -38,8 +38,8 @@
 
   "Group of Input Fields": "Gruppe von Eingabefeldern",
   "Field Group": "Feldgruppe",
-  "": "",
-  "": "",
-  "": "",
-  "": ""
+
+  "Submit": "Absenden",
+  "Click to Submit": " ",
+  "submit form": "absenden"
 }
