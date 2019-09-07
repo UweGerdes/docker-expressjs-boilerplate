@@ -30,8 +30,9 @@ mixin group(label, groupname, fields, posttext)
                   )
                   label(class=field.type + '-label', for=field.name + i++)= __(label)
               else
+                - placeholder = ''
                 if field.placeholder
-                  - placeholder=__(field.placeholder)
+                  - placeholder = __(field.placeholder)
                 input(
                   class='input-' + field.type,
                   type=field.type,
