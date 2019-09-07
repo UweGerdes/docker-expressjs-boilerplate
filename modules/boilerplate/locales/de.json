@@ -1,3 +1,10 @@
 {
-  "Hello": "Hier ist die Boilerplate"
+  "Hello": "Hier ist die Boilerplate",
+  "Text Input Field": "Texteingabe",
+  "Password Input Field": "Passwort",
+  "Textarea Input Field": "Langtextfeld",
+  "changed content": "bitte ändern!",
+  "please write text": "bitte Text eingeben",
+  "already written": "steht schon was",
+  "please write much text": "bitte viel Text eingeben"
 }

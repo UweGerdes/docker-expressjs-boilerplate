@@ -57,7 +57,14 @@ block content
             entries: { klick: 'mal klicken', klock: 'oder hier' }
           })
         + select('select', 'Auswahlliste', { '': 'bitte wählen', opt1: 'dies', opt2: 'das' }, 'vielleicht ein Pflichtfeld')
-        + textarea('textareainput', 'steht schon was', 30, 5, 'Langtextfeld')
+        + textarea({
+            type: 'textarea',
+            name: 'textareainput',
+            label: 'Langtextfeld',
+            value: 'already written',
+            placeholder: 'please write much text',
+            height: 5
+          })
         + group('Feldgruppe', 'group1', [{
             type: 'text',
             name: 'grouptextinput1',
