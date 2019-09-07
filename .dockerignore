@@ -2,6 +2,3 @@
 /.git
 /deploy
 /docs/jsdoc
-/public/css
-/public/js
-/locales
