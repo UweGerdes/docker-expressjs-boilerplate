@@ -1,0 +1,19 @@
+//- widgets/form.pug
+mixin form(form, action)
+  form#form.form(method='POST', action=action, name=form.name)
+    each section, section_name in form.sections
+      fieldset(class=section_name)
+        legend= __(section.label)
+        each field in section.fields
+          if field.type == 'hidden'
+            + hidden(field.name, field.value)
+          else if field.type == 'textarea'
+            + textarea(Object.assign({}, field))
+          else if field.type == 'select'
+            + select(Object.assign({}, field))
+          else if field.type == 'address'
+            + address(field.label, field.name, field.prefix)
+          else if field.type == 'group'
+            + group(field.label, field.name, field.fields)
+          else
+            + field(Object.assign({}, field))

@@ -1,6 +1,7 @@
 //- index.pug
 extends ../../pages/views/page.pug
 
+include ../../page-elements/views/form.pug
 include ../../page-elements/views/form/field.pug
 include ../../page-elements/views/form/hidden.pug
 include ../../page-elements/views/form/select.pug
@@ -30,48 +31,39 @@ block content
         .error #{__(error, post.username)}
       if locals.post && Object.keys(locals.post).length > 0
         pre#postdata= JSON.stringify(post, null, 2)
-      form#form.form(method='POST', action='/'+ moduleName + '/form/', name='form')
-        if locals.modules[moduleName] && modules[moduleName].form
-          each section, section_name in modules[moduleName].form.sections
-            fieldset(class=section_name)
-              legend= __(section.label)
-              each field in section.fields
-                if field.type == 'hidden'
-                  + hidden(field.name, field.value)
-                else if field.type == 'textarea'
-                  + textarea(Object.assign({}, field))
-                else if field.type == 'select'
-                  + select(Object.assign({}, field))
-                else if field.type == 'address'
-                  + address(field.label, field.name, field.prefix)
-                else if field.type == 'group'
-                  + group(field.label, field.name, field.fields)
-                else
-                  + field(field.label, Object.assign({}, field), field.text)
-        else
+      if locals.modules[moduleName] && modules[moduleName].form
+        + form(modules[moduleName].form, '/'+ moduleName + '/form/')
+      else
+        form#form.form(method='POST', action='/'+ moduleName + '/form/', name='form')
           + hidden('hiddeninput', 'wert')
-          + field('Texteingabe', {
+          + field({
               type: 'text',
               name: 'textinput',
+              label: 'Texteingabe',
               value: 'ändern!'
             })
-          + field('Button', {
+          + field({
               type: 'button',
               name: 'buttoninput',
+              label: 'Button',
               value: 'hier klicken'
             })
-          + field('Passwort', {
+          + field({
               type: 'password',
-              name: 'passwordinput'
+              name: 'passwordinput',
+              label: 'Passwort'
             })
-          + field('Möglichkeit', {
+          + field({
               type: 'checkbox',
               name: 'checkboxinput',
-              value: 'gewählt'
-            }, 'kann man wählen')
-          + field('Auswahl', {
+              label: 'Möglichkeit',
+              value: 'gewählt',
+              text: 'kann man wählen'
+            })
+          + field({
               type: 'radio',
               name: 'radioinput',
+              label: 'Auswahl',
               entries: { klick: 'mal klicken', klock: 'oder hier' }
             })
           + select({
@@ -114,7 +106,7 @@ block content
               entries: { '': '- bitte wählen -', option1: 'Wahl 1', option2: 'Wahl 2' }
             }])
           + address('Adresse', 'address', 'address-')
-          + field('', {
+          + field({
               type: 'submit',
               value: 'absenden',
               class: 'submit'

@@ -1,7 +1,7 @@
 //- widgets/form/field.pug
-mixin field(pretext, attr, posttext)
+mixin field(attr)
   .field(class='field_' + (attr.class ? attr.class : attr.name))
-    .field-label= __(pretext)
+    .field-label= __(attr.label)
     .field-value
       .field-value-input(class='field-value-input-' + attr.name)
         if attr.entries
@@ -30,5 +30,5 @@ mixin field(pretext, attr, posttext)
             id=attr.name,
             checked=(attr.type == 'checkbox' && attr.value == post[attr.name])
           )&attributes(attr)
-        if posttext
-          label(class=attr.type + '-label', for=attr.name)= __(posttext)
+        if attr.text
+          label(class=attr.type + '-label', for=attr.name)= __(attr.text)

@@ -15,6 +15,6 @@ mixin select(attr)
           each label, value in options
             option(
               value=value,
-              selected=(value == post[name])
+              selected=(value == post[attr.name])
             )= __(label)
         span.select-followtext= __(text)
