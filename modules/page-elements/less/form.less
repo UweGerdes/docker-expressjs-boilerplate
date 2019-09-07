@@ -25,7 +25,12 @@
 
   &-value {
     &-input {
+      margin-bottom: 0.5em;
       width: 100%;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
     }
 
     .input-text,
@@ -114,6 +119,43 @@
       margin-right: 0.5em;
       padding: 4px 6px;
     }
+
+    &-group {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+
+    &-group-input {
+      flex: 1 0 100%;
+      margin-bottom: 1em;
+
+      &.field_address-street {
+        flex: 1 0 70%;
+        margin-right: 0.5em;
+
+        @media all and (min-width: 500px) {
+          flex: 1 0 84%;
+        }
+
+        @media all and (min-width: 768px) {
+          flex: 1 0 75%;
+        }
+      }
+
+      &.field_address-housenumber {
+        flex: 0 0 6em;
+      }
+
+      &.field_address-zip {
+        flex: 0 0 5em;
+        margin-right: 0.5em;
+      }
+
+      &.field_address-city {
+        flex: 1 0 49%;
+      }
+    }
   }
 
   @media all and (min-width: 768px) {
@@ -133,6 +175,15 @@
 
       & > &-input {
         width: 50%;
+      }
+
+      &-group {
+        justify-content: space-between;
+        width: 50%;
+      }
+
+      &-group &-input {
+        flex: 0 0 49%;
       }
     }
   }

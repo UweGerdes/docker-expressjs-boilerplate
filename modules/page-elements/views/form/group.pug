@@ -5,7 +5,7 @@ mixin group(pretext, groupname, fields, posttext)
     .field-value
       .field-value-group
         each field in fields
-          .field-value-input(class='field_' + (field.class ? field.class : field.name))
+          .field-value-group-input(class='field_' + (field.class ? field.class : field.name))
             if (field.type === 'select')
               select(
                     id=field.name,

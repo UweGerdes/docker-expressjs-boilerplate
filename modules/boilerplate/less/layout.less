@@ -1,74 +1,20 @@
-// styling for form
+// boilerplate form.less
 
-@import '../../../src/less/vars';
-
-.field-value {
-  &-input {
-    margin-bottom: 0.5em;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-
-  // use for inline text input fields
-  &-group {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-
-  &-group &-input {
-    flex: 1 100%;
-
-    &.field_grouptextinput1 {
-      flex: 0 0 80px;
-      margin-right: 0.5em;
-    }
-
-    &.field_grouptextinput2 {
-      flex: 1 0 49%;
-    }
-
-    &.field_groupradioinput {
-      flex: 1 0 100%;
-    }
-
-    &.field_address-street {
-      flex: 1 0 70%;
-      margin-right: 0.5em;
-
-      @media all and (min-width: 500px) {
-        flex: 1 0 84%;
+.field {
+  &-value {
+    &-group-input {
+      &.field_grouptextinput1 {
+        flex: 0 0 80px;
+        margin-right: 0.5em;
       }
 
-      @media all and (min-width: 768px) {
-        flex: 1 0 75%;
+      &.field_grouptextinput2 {
+        flex: 1 0 49%;
       }
-    }
 
-    &.field_address-housenumber {
-      flex: 0 0 3em;
-    }
-
-    &.field_address-zip {
-      flex: 0 0 5em;
-      margin-right: 0.5em;
-    }
-
-    &.field_address-city {
-      flex: 1 0 49%;
-    }
-  }
-
-  @media all and (min-width: 768px) {
-    &-group {
-      justify-content: space-between;
-      width: 50%;
-    }
-
-    &-group &-input {
-      flex: 0 0 49%;
+      &.field_groupradioinput {
+        flex: 1 0 100%;
+      }
     }
   }
 }
