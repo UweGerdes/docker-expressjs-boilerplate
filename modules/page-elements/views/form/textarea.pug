@@ -9,7 +9,8 @@ mixin textarea(attr)
         else
           if attr.value != ''
             - value = __(attr.value)
-        - delete(attr.value)
         if attr.placeholder != ''
           - attr.placeholder = __(attr.placeholder)
+        - delete(attr.label)
+        - delete(attr.value)
         textarea.input-textarea&attributes(attr)= value
