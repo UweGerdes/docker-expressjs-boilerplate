@@ -1,5 +1,5 @@
 //- widgets/textarea.pug
-mixin textarea(name, value, width, height, label)
+mixin textarea(name, value, width, height, label, placeholder)
   .field(class='field_' + name)
     label.field-label.field-label-textarea= label
     .field-value
@@ -8,5 +8,6 @@ mixin textarea(name, value, width, height, label)
           name=name,
           class='input-textarea',
           cols=width,
-          rows=height
+          rows=height,
+          placeholder=placeholder
         )= post[name] || value
