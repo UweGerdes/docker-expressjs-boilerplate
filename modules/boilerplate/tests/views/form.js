@@ -92,7 +92,7 @@ describe('/boilerplate/tests/views/form.js', function () {
           const document = getDocument(res, err);
           const inputHidden = document.querySelector('[name=hiddeninput]');
           assert.equal(inputHidden.name, 'hiddeninput');
-          assert.equal(inputHidden.value, 'wert');
+          assert.equal(inputHidden.value, 'some hidden value');
           assert.equal(inputHidden.getAttribute('type'), 'hidden');
           done();
         });
@@ -132,7 +132,7 @@ describe('/boilerplate/tests/views/form.js', function () {
           assert.equal(inputCheckboxContainer.textContent, 'Möglichkeitkann man wählen');
           const inputCheckbox = inputCheckboxContainer.querySelector('.input-checkbox');
           assert.equal(inputCheckbox.name, 'checkboxinput');
-          assert.equal(inputCheckbox.value, 'gewählt');
+          assert.equal(inputCheckbox.value, 'checkbox checked');
           assert.equal(inputCheckbox.getAttribute('type'), 'checkbox');
           done();
         });
@@ -147,10 +147,10 @@ describe('/boilerplate/tests/views/form.js', function () {
           const inputRadio = inputRadioContainer.querySelectorAll('.input-radio');
           assert.equal(inputRadio.length, 2);
           assert.equal(inputRadio[0].name, 'radioinput');
-          assert.equal(inputRadio[0].value, 'klick');
+          assert.equal(inputRadio[0].value, 'checked first radio');
           assert.equal(inputRadio[0].getAttribute('type'), 'radio');
           assert.equal(inputRadio[1].name, 'radioinput');
-          assert.equal(inputRadio[1].value, 'klock');
+          assert.equal(inputRadio[1].value, 'checked second radio');
           assert.equal(inputRadio[1].getAttribute('type'), 'radio');
           done();
         });
@@ -161,13 +161,13 @@ describe('/boilerplate/tests/views/form.js', function () {
         .end(function (err, res) {
           const document = getDocument(res, err);
           const inputSelectContainer = document.querySelector('.field_selectinput');
-          assert.equal(inputSelectContainer.textContent, 'Auswahllistebitte wählendiesdasvielleicht ein Pflichtfeld');
+          assert.equal(inputSelectContainer.textContent, 'Auswahlliste- bitte wählen -diesdasvielleicht ein Pflichtfeld');
           const inputSelect = inputSelectContainer.querySelector('.input-select');
           assert.equal(inputSelect.name, 'selectinput');
           const inputSelectOption = inputSelect.querySelectorAll('option');
           assert.equal(inputSelectOption.length, 3);
           assert.equal(inputSelectOption[0].value, '');
-          assert.equal(inputSelectOption[0].textContent, 'bitte wählen');
+          assert.equal(inputSelectOption[0].textContent, '- bitte wählen -');
           assert.equal(inputSelectOption[1].value, 'opt1');
           assert.equal(inputSelectOption[1].textContent, 'dies');
           assert.equal(inputSelectOption[2].value, 'opt2');
@@ -192,7 +192,7 @@ describe('/boilerplate/tests/views/form.js', function () {
         .get('/boilerplate/form/')
         .end(function (err, res) {
           const document = getDocument(res, err);
-          const inputGroupContainer = document.querySelector('.field_group1');
+          const inputGroupContainer = document.querySelector('.field_groupOfFields');
           assert.equal(inputGroupContainer.textContent, 'Feldgruppemal klickenoder hier- bitte wählen -Wahl 1Wahl 2');
           const inputText1 = inputGroupContainer.querySelector('.field_grouptextinput1 .input-text');
           assert.equal(inputText1.name, 'grouptextinput1');
@@ -201,7 +201,7 @@ describe('/boilerplate/tests/views/form.js', function () {
           const inputRadio = inputGroupContainer.querySelectorAll('.field_groupradioinput .input-radio');
           assert.equal(inputRadio.length, 2);
           assert.equal(inputRadio[0].name, 'groupradioinput');
-          const selectOptions = inputGroupContainer.querySelectorAll('.field_groupselect option');
+          const selectOptions = inputGroupContainer.querySelectorAll('.field_groupselectinput option');
           assert.equal(selectOptions.length, 3);
           assert.equal(selectOptions[0].value, '');
           assert.equal(selectOptions[0].textContent, '- bitte wählen -');
@@ -227,18 +227,6 @@ describe('/boilerplate/tests/views/form.js', function () {
           assert.equal(inputZip.name, 'address-zip');
           const inputCity = inputGroupContainer.querySelector('.field_address-city .input-text');
           assert.equal(inputCity.name, 'address-city');
-          done();
-        });
-    });
-    it('should have submit input widget', function (done) {
-      chai.request('http://localhost:8080')
-        .get('/boilerplate/form/')
-        .end(function (err, res) {
-          const document = getDocument(res, err);
-          const inputSubmitContainer = document.querySelector('.field_submit');
-          const inputSubmit = inputSubmitContainer.querySelector('.input-submit');
-          assert.equal(inputSubmit.getAttribute('type'), 'submit');
-          assert.equal(inputSubmit.getAttribute('value'), 'absenden');
           done();
         });
     });

@@ -31,73 +31,91 @@ block content
       if locals.post && Object.keys(locals.post).length > 0
         pre#postdata= JSON.stringify(post, null, 2)
       form#form.form(method='POST', action='/'+ moduleName + '/form/', name='form')
-        + hidden('hiddeninput', 'wert')
-        + field('Texteingabe', {
-            type: 'text',
-            name: 'textinput',
-            value: 'ändern!'
-          })
-        + field('Button', {
-            type: 'button',
-            name: 'buttoninput',
-            value: 'hier klicken'
-          })
-        + field('Passwort', {
-            type: 'password',
-            name: 'passwordinput'
-          })
-        + field('Möglichkeit', {
-            type: 'checkbox',
-            name: 'checkboxinput',
-            value: 'gewählt'
-          }, 'kann man wählen')
-        + field('Auswahl', {
-            type: 'radio',
-            name: 'radioinput',
-            entries: { klick: 'mal klicken', klock: 'oder hier' }
-          })
-        + select({
-            type: 'select',
-            name: 'selectinput',
-            label: 'Select Option Field',
-            options: {
-              '': '- please select -',
-              opt1: 'first option',
-              opt2: 'second option'
+        if locals.modules[moduleName] && modules[moduleName].form
+          each section, section_name in modules[moduleName].form.sections
+            fieldset(class=section_name)
+              legend= __(section.label)
+              each field in section.fields
+                if field.type == 'hidden'
+                  + hidden(field.name, field.value)
+                else if field.type == 'textarea'
+                  + textarea(Object.assign({}, field))
+                else if field.type == 'select'
+                  + select(Object.assign({}, field))
+                else if field.type == 'address'
+                  + address(field.label, field.name, field.prefix)
+                else if field.type == 'group'
+                  + group(field.label, field.name, field.fields)
+                else
+                  + field(field.label, Object.assign({}, field), field.text)
+        else
+          + hidden('hiddeninput', 'wert')
+          + field('Texteingabe', {
+              type: 'text',
+              name: 'textinput',
+              value: 'ändern!'
+            })
+          + field('Button', {
+              type: 'button',
+              name: 'buttoninput',
+              value: 'hier klicken'
+            })
+          + field('Passwort', {
+              type: 'password',
+              name: 'passwordinput'
+            })
+          + field('Möglichkeit', {
+              type: 'checkbox',
+              name: 'checkboxinput',
+              value: 'gewählt'
+            }, 'kann man wählen')
+          + field('Auswahl', {
+              type: 'radio',
+              name: 'radioinput',
+              entries: { klick: 'mal klicken', klock: 'oder hier' }
+            })
+          + select({
+              type: 'select',
+              name: 'selectinput',
+              label: 'Select Option Field',
+              options: {
+                '': '- please select -',
+                opt1: 'first option',
+                opt2: 'second option'
+              },
+              text: 'select an option'
+            })
+          + textarea({
+              type: 'textarea',
+              name: 'textareainput',
+              label: 'Langtextfeld',
+              value: 'already written',
+              placeholder: 'please write much text',
+              height: 5
+            })
+          + group('Feldgruppe', 'group1', [{
+              type: 'text',
+              name: 'grouptextinput1',
+              value: 'x'
             },
-            text: 'select an option'
-          })
-        + textarea({
-            type: 'textarea',
-            name: 'textareainput',
-            label: 'Langtextfeld',
-            value: 'already written',
-            placeholder: 'please write much text',
-            height: 5
-          })
-        + group('Feldgruppe', 'group1', [{
-            type: 'text',
-            name: 'grouptextinput1',
-            value: 'x'
-          },
-          {
-            type: 'text',
-            name: 'grouptextinput2'
-          },
-          {
-            type: 'radio',
-            name: 'groupradioinput',
-            value: 'gewählt',
-            entries: { klick: 'mal klicken', klock: 'oder hier' }
-          },
-          {
-            type: 'select',
-            name: 'groupselect',
-            entries: { '': '- bitte wählen -', option1: 'Wahl 1', option2: 'Wahl 2' }
-          }])
-        + address('Adresse', 'address', 'address-')
-        + field('', {
-            type: 'submit',
-            value: 'absenden',
-            class: 'submit'
-          })
+            {
+              type: 'text',
+              name: 'grouptextinput2'
+            },
+            {
+              type: 'radio',
+              name: 'groupradioinput',
+              value: 'gewählt',
+              entries: { klick: 'mal klicken', klock: 'oder hier' }
+            },
+            {
+              type: 'select',
+              name: 'groupselect',
+              entries: { '': '- bitte wählen -', option1: 'Wahl 1', option2: 'Wahl 2' }
+            }])
+          + address('Adresse', 'address', 'address-')
+          + field('', {
+              type: 'submit',
+              value: 'absenden',
+              class: 'submit'
+            })

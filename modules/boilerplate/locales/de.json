@@ -5,7 +5,7 @@
 
   "Text Input Field": "Texteingabe",
   "please write text": "bitte Text eingeben",
-  "change this text": "bitte ändern!",
+  "change this text": "ändern!",
 
   "Password Input Field": "Passwort",
 
@@ -28,16 +28,21 @@
   "or me": "oder hier",
 
   "Select Option Field": "Auswahlliste",
-  "- please select -": "bitte wählen",
+  "- please select -": "- bitte wählen -",
   "first option": "dies",
   "second option": "das",
   "select an option": "vielleicht ein Pflichtfeld",
 
   "Address Input": "Adress-Eingabe",
-  "Address Input Field": "Adress-Eingabe-Felder",
+  "Address Input Field": "Adresse",
 
   "Group of Input Fields": "Gruppe von Eingabefeldern",
   "Field Group": "Feldgruppe",
+  "click me": "mal klicken",
+  "or me": "oder hier",
+  "first group option": "Wahl 1",
+  "second group option": "Wahl 2",
+  "select a group option": "hier etwas auswählen",
 
   "Submit": "Absenden",
   "Click to Submit": " ",

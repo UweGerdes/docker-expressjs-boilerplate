@@ -1,1 +1,94 @@
 name: Boilerplate
+
+form:
+  name: sampleform
+  title: Sample Form
+  sections:
+    simple:
+      label: Input Fields
+      fields:
+        - name: hiddeninput
+          type: hidden
+          value: some hidden value
+        - name: textinput
+          type: text
+          label: Text Input Field
+          value: change this text
+          placeholder: please write text
+        - name: passwordinput
+          type: password
+          label: Password Input Field
+        - name: textareainput
+          type: textarea
+          label: Textarea Input Field
+          height: 5
+          value: already written
+          placeholder: please write much text
+    click:
+      label: Click Fields
+      fields:
+        - name: buttoninput
+          type: button
+          label: Button Click Field
+          value: click here
+        - name: checkboxinput
+          type: checkbox
+          label: Checkbox Click Field
+          value: checkbox checked
+          text: check here
+    select:
+      label: Select Fields
+      fields:
+        - name: radioinput
+          type: radio
+          label: Radio Select Field
+          entries:
+            'checked first radio': click me
+            'checked second radio': or me
+        - name: selectinput
+          type: select
+          label: Select Option Field
+          options:
+            '': '- please select -'
+            opt1: first option
+            opt2: second option
+          text: select an option
+    group:
+      label: Group of Input Fields
+      fields:
+        - name: groupOfFields
+          label: Field Group
+          type: group
+          fields:
+            - name: grouptextinput1
+              type: text
+              value: remove this group text
+              placeholder: please write group text
+            - name: grouptextinput2
+              type: text
+            - name: groupradioinput
+              type: radio
+              entries:
+                'group first radio': click me
+                'group second radio': or me
+            - name: groupselectinput
+              type: select
+              entries:
+                '': '- please select -'
+                option1: first group option
+                option2: second group option
+              text: select a group option
+    address:
+      label: Address Input
+      fields:
+        - prefix: 'address-'
+          type: address
+          name: address
+          label: Address Input Field
+    submit:
+      label: Submit
+      fields:
+        - type: submit
+          name: submit
+          label: Click to Submit
+          value: submit form
