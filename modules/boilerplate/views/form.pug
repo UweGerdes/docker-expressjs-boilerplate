@@ -28,7 +28,7 @@ block content
       h2.subheadline Formular
       if locals.error
         .error #{__(error, post.username)}
-      if locals.post
+      if locals.post && Object.keys(locals.post) > 0
         pre#postdata= JSON.stringify(post, null, 2)
       form#form.form(method='POST', action='/'+ moduleName + '/form/', name='form')
         + hidden('hiddeninput', 'wert')
