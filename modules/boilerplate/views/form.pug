@@ -56,7 +56,17 @@ block content
             name: 'radioinput',
             entries: { klick: 'mal klicken', klock: 'oder hier' }
           })
-        + select('select', 'Auswahlliste', { '': 'bitte wählen', opt1: 'dies', opt2: 'das' }, 'vielleicht ein Pflichtfeld')
+        + select({
+            type: 'select',
+            name: 'selectinput',
+            label: 'Select Option Field',
+            options: {
+              '': '- please select -',
+              opt1: 'first option',
+              opt2: 'second option'
+            },
+            text: 'select an option'
+          })
         + textarea({
             type: 'textarea',
             name: 'textareainput',

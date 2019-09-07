@@ -160,10 +160,10 @@ describe('/boilerplate/tests/views/form.js', function () {
         .get('/boilerplate/form/')
         .end(function (err, res) {
           const document = getDocument(res, err);
-          const inputSelectContainer = document.querySelector('.field_select');
+          const inputSelectContainer = document.querySelector('.field_selectinput');
           assert.equal(inputSelectContainer.textContent, 'Auswahllistebitte wählendiesdasvielleicht ein Pflichtfeld');
           const inputSelect = inputSelectContainer.querySelector('.input-select');
-          assert.equal(inputSelect.name, 'select');
+          assert.equal(inputSelect.name, 'selectinput');
           const inputSelectOption = inputSelect.querySelectorAll('option');
           assert.equal(inputSelectOption.length, 3);
           assert.equal(inputSelectOption[0].value, '');

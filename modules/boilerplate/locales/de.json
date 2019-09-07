@@ -23,5 +23,11 @@
 
   "Radio Select Field": "Auswahl",
   "click me": "mal klicken",
-  "or me": "oder hier"
+  "or me": "oder hier",
+
+  "Select Option Field": "Auswahlliste",
+  "- please select -": "bitte wählen",
+  "first option": "dies",
+  "second option": "das",
+  "select an option": "vielleicht ein Pflichtfeld"
 }
