@@ -11,6 +11,7 @@ gulp:
         - 'livereload-start'
         - 'server-start'
         - 'tests'
+        - 'livereload'
 #        - 'livereload-all'
       build:
         - 'less'
@@ -87,16 +88,17 @@ gulp:
       - '**/*.pug'
     server:
       - 'server.js'
+      - 'lib/*.js'
       - 'modules/*/server/*.js'
       - 'modules/*/*.yaml'
     livereload:
       - 'public/**/*.html'
       - 'public/img/**/*.*'
-      - 'public/css/**/*.css'
+      - 'generated/**/*.css'
       - 'modules/**/*.ejs'
       - 'modules/**/*.pug'
     livereload-all:
-      - 'public/js/**/*.js'
+      - 'generated/**/*.js'
       - 'locales/**/*.*'
     test-modules:
       - 'modules/**/tests/model/*.*'
@@ -119,15 +121,15 @@ gulp:
       dest: 'docs/jsdoc'
     js:
       src:
-        - 'modules/*/js/**/*.js'
-      dest: 'public/js'
+        - 'modules/*/js/*.js'
+      dest: 'generated'
       replace:
-        'modules/([^/]+)/js/(.+)*/.+': '$1/$2'
+        'modules/(.+/)js/.+': '$1'
     less:
       src:
         - 'src/less/app.less'
         - 'modules/*/less/layout.less'
-      dest: 'public/css'
+      dest: 'generated'
     locales:
       dest: 'locales'
     deploy:
@@ -139,20 +141,20 @@ gulp:
         - 'package.json'
         - 'README.md'
         - 'server.js'
+        - 'generated/*'
         - 'lib/**/*'
         - 'locales/*'
         - 'modules/*/*.json'
         - 'modules/*/*.yaml'
         - 'modules/*/server/**/*'
         - 'modules/*/views/**/*'
-        - 'public/*'
-        - 'public/css/*'
-        - 'public/js/**/*'
+        - 'public/**/*'
       dest: 'deploy'
 
 server:
   server: ./server.js
   docroot: ./public
+  generated: ./generated
   modules: ./modules
   verbose: false
   httpsKey: ./key/selfsigned.key

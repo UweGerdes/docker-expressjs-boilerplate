@@ -2,7 +2,8 @@
 extends ../../pages/views/page.pug
 
 append head
-  script(src='/js/'+ moduleName + '/script.js')
+  link(rel='stylesheet', href='/'+ moduleName + '/layout.css')
+  script(src='/'+ moduleName + '/script.js')
 
 block content
   div#boilerplate.boilerplate

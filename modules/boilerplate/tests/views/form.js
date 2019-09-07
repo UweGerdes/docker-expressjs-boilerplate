@@ -38,7 +38,7 @@ describe('/boilerplate/tests/views/form.js', function () {
           );
           assert.equal(
             document.head.getElementsByTagName('link')[0].attributes.href.nodeValue,
-            '/css/app.css'
+            '/app.css'
           );
           assert.equal(
             document.head.getElementsByTagName('link')[1].attributes.rel.nodeValue,
@@ -46,12 +46,12 @@ describe('/boilerplate/tests/views/form.js', function () {
           );
           assert.equal(
             document.head.getElementsByTagName('link')[1].attributes.href.nodeValue,
-            '/css/boilerplate/layout.css'
+            '/boilerplate/layout.css'
           );
           assert.equal(document.head.getElementsByTagName('script').length, 1);
           assert.equal(
             document.head.getElementsByTagName('script')[0].attributes.src.nodeValue,
-            '/js/boilerplate/script.js'
+            '/boilerplate/script.js'
           );
           const headline = document.getElementById('headline');
           assert.equal(headline.textContent, 'Boilerplate');
@@ -300,7 +300,7 @@ function checkPage (document, title, loginStatusLabel) {
 }
 
 /**
- * test error message in document
+ * Test error message in document
  *
  * @param {String} msg - error message or no error
  */
@@ -315,7 +315,7 @@ function testError(msg) {
 }
 
 /**
- * test DOM element properties
+ * Test DOM element properties
  *
  * @param {String} selector - to test
  * @param {Object} attr - element attributes to verify

@@ -1,5 +1,7 @@
 /**
  * Test for page elements
+ *
+ * @requires module:lib/config
  */
 
 'use strict';
@@ -7,7 +9,6 @@
 const chai = require('chai'),
   chaiHttp = require('chai-http'),
   jsdom = require('jsdom'),
-  ipv4addresses = require('../../../../lib/ipv4addresses'),
   assert = chai.assert,
   expect = chai.expect,
   { JSDOM } = jsdom;
@@ -25,7 +26,7 @@ describe('/pages/tests/views/app.js', function () {
           assert.equal(document.head.getElementsByTagName('link').length, 1);
           assert.equal(
             document.head.getElementsByTagName('link')[0].attributes.href.nodeValue,
-            '/css/app.css'
+            '/app.css'
           );
           const headline = document.getElementById('headline');
           assert.equal(headline.textContent, 'Module:');

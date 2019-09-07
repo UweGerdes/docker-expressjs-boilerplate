@@ -24,7 +24,7 @@ describe('/boilerplate/tests/views/index.js', function () {
           assert.equal(document.head.getElementsByTagName('script').length, 1);
           assert.equal(
             document.head.getElementsByTagName('script')[0].attributes.src.nodeValue,
-            '/js/boilerplate/script.js'
+            '/boilerplate/script.js'
           );
           done();
         });
