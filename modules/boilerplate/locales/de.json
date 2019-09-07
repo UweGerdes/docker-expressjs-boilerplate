@@ -21,6 +21,8 @@
   "Checkbox Click Field": "Möglichkeit",
   "check here": "kann man wählen",
 
+  "Select Fields": "Auswahl-Felder",
+
   "Radio Select Field": "Auswahl",
   "click me": "mal klicken",
   "or me": "oder hier",
@@ -29,5 +31,15 @@
   "- please select -": "bitte wählen",
   "first option": "dies",
   "second option": "das",
-  "select an option": "vielleicht ein Pflichtfeld"
+  "select an option": "vielleicht ein Pflichtfeld",
+
+  "Address Input": "Adress-Eingabe",
+  "Address Input Field": "Adress-Eingabe-Felder",
+
+  "Group of Input Fields": "Gruppe von Eingabefeldern",
+  "Field Group": "Feldgruppe",
+  "": "",
+  "": "",
+  "": "",
+  "": ""
 }
