@@ -12,9 +12,9 @@ mixin field(attr)
         if attr.text != ''
           - text = __(attr.text)
           - delete(attr.text)
-        if attr.entries
+        if attr.options
           - i = 0
-          each label, value in attr.entries
+          each label, value in attr.options
             input(
               class='input-' + attr.type,
               type=attr.type,

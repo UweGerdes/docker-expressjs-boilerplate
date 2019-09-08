@@ -42,7 +42,7 @@ form:
         - name: radioinput
           type: radio
           label: Radio Select Field
-          entries:
+          options:
             'checked first radio': click me
             'checked second radio': or me
         - name: selectinput
@@ -67,12 +67,12 @@ form:
               placeholder: enter group text
             - name: groupradioinput
               type: radio
-              entries:
+              options:
                 'group first radio': click me
                 'group second radio': or me
             - name: groupselectinput
               type: select
-              entries:
+              options:
                 '': '- please select -'
                 option1: first group option
                 option2: second group option

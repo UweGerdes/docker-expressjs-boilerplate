@@ -72,12 +72,12 @@ describe('/boilerplate/tests/views/form.js', function () {
             type: 'hidden',
             value: 'some hidden value'
           }, null);
-          testElement('.field_textinput', { }, 'Texteingabe');
-          testElement('.field_textinput .input-text', {
+          testElement('.fieldcontainer_textinput', { }, 'Texteingabe');
+          testElement('.fieldcontainer_textinput .input-text', {
             name: 'textinput', type: 'text', value: 'ändern!', placeholder: 'bitte Text eingeben'
           }, null);
-          testElement('.field_passwordinput', { }, 'Passwort');
-          testElement('.field_passwordinput .input-password', {
+          testElement('.fieldcontainer_passwordinput', { }, 'Passwort');
+          testElement('.fieldcontainer_passwordinput .input-password', {
             name: 'passwordinput',
             type: 'password'
           }, null);
@@ -86,27 +86,27 @@ describe('/boilerplate/tests/views/form.js', function () {
             name: 'textareainput',
             placeholder: 'bitte viel Text eingeben'
           }, 'steht schon was');
-          testElement('.field_buttoninput', { }, 'Button');
-          testElement('.field_buttoninput .input-button', {
+          testElement('.fieldcontainer_buttoninput', { }, 'Button');
+          testElement('.fieldcontainer_buttoninput .input-button', {
             name: 'buttoninput',
             type: 'button',
             value: 'hier klicken'
           }, null);
-          testElement('.field_checkboxinput', { }, 'Möglichkeitkann man wählen');
-          testElement('.field_checkboxinput .input-checkbox', {
+          testElement('.fieldcontainer_checkboxinput', { }, 'Möglichkeitkann man wählen');
+          testElement('.fieldcontainer_checkboxinput .input-checkbox', {
             name: 'checkboxinput',
             type: 'checkbox',
             value: 'checkbox checked'
           }, null);
-          testElement('.field_radioinput', { }, 'Auswahlmal klickenoder hier');
-          testElement('.field_radioinput [for=radioinput0]', { }, 'mal klicken');
-          testElement('.field_radioinput .input-radio:nth-of-type(1)', {
+          testElement('.fieldcontainer_radioinput', { }, 'Auswahlmal klickenoder hier');
+          testElement('.fieldcontainer_radioinput [for=radioinput0]', { }, 'mal klicken');
+          testElement('.fieldcontainer_radioinput .input-radio:nth-of-type(1)', {
             name: 'radioinput',
             type: 'radio',
             value: 'checked first radio'
           }, null);
-          testElement('.field_radioinput [for=radioinput1]', { }, 'oder hier');
-          testElement('.field_radioinput .input-radio:nth-of-type(2)', {
+          testElement('.fieldcontainer_radioinput [for=radioinput1]', { }, 'oder hier');
+          testElement('.fieldcontainer_radioinput .input-radio:nth-of-type(2)', {
             name: 'radioinput',
             type: 'radio',
             value: 'checked second radio'
@@ -145,8 +145,8 @@ describe('/boilerplate/tests/views/form.js', function () {
           testElement('.field_address .field_address-housenumber .input-text', { name: 'address-housenumber' }, null);
           testElement('.field_address .field_address-zip .input-text', { name: 'address-zip' }, null);
           testElement('.field_address .field_address-city .input-text', { name: 'address-city' }, null);
-          testElement('.field_submit', { }, '');
-          testElement('.field_submit .input-submit', {
+          testElement('.fieldcontainer_submit', { }, '');
+          testElement('.fieldcontainer_submit .input-submit', {
             type: 'submit',
             value: 'absenden'
           }, null);
@@ -181,13 +181,13 @@ describe('/boilerplate/tests/views/form.js', function () {
       document = getDocument(res, err);
       checkPage(document, 'Formular', 'anmelden');
       testError();
-      testElement('.input-text', { name: 'textinput', type: 'text', value: 'changed content' }, null);
-      testElement('.input-password', { name: 'passwordinput', type: 'password', value: 'password' }, null);
+      testElement('.fieldcontainer_textinput .input-text', { name: 'textinput', type: 'text', value: 'changed content' }, null);
+      testElement('.fieldcontainer_passwordinput .input-password', { name: 'passwordinput', type: 'password', value: 'password' }, null);
       testElement('.field_textareainput .input-textarea', { name: 'textareainput' }, 'Langtexteingabe');
-      testElement('.field_checkboxinput .input-checkbox', {
+      testElement('.fieldcontainer_checkboxinput .input-checkbox', {
         name: 'checkboxinput', type: 'checkbox', value: 'checkbox checked', checked: 'checked'
       }, null);
-      testElement('.field_radioinput .input-radio:nth-of-type(2)', {
+      testElement('.fieldcontainer_radioinput .input-radio:nth-of-type(2)', {
         name: 'radioinput', type: 'radio', value: 'checked second radio', checked: 'checked'
       }, null);
       testElement('.field_selectinput .input-select option:nth-of-type(2)', { value: 'opt1', selected: 'selected' }, 'dies');

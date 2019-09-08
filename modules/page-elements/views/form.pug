@@ -1,16 +1,25 @@
 //- widgets/form.pug
 
 include ../../page-elements/views/form/field.pug
+include ../../page-elements/views/form/input.pug
 include ../../page-elements/views/form/hidden.pug
 include ../../page-elements/views/form/select.pug
 include ../../page-elements/views/form/textarea.pug
 include ../../page-elements/views/form/group.pug
 include ../../page-elements/views/form/address.pug
 
+mixin fieldcontainer(attr)
+  .fieldcontainer(class='fieldcontainer_' + (attr.class ? attr.class : attr.name))
+    .field-label= __(attr.label)
+    - delete(attr.label)
+    .field-value
+      .field-value-input(class='field-value-input-' + attr.name)
+        + input(attr)
+
 mixin form(form, action)
   form#form.form(method='POST', action=action, name=form.name)
     each section, section_name in form.sections
-      fieldset(class=section_name)
+      fieldset.fieldset(class=section_name)
         legend= __(section.label)
         each field in section.fields
           if field.type == 'hidden'
@@ -24,4 +33,4 @@ mixin form(form, action)
           else if field.type == 'group'
             + group(field.label, field.name, field.fields)
           else
-            + field(Object.assign({}, field))
+            + fieldcontainer(Object.assign({}, field))

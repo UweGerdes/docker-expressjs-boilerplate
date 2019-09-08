@@ -11,15 +11,15 @@ mixin group(label, groupname, fields, posttext)
                     id=field.name,
                     name=field.name
                   )
-                each label, value in field.entries
+                each label, value in field.options
                   option(
                     value=value,
                     selected=(value == post[field.name])
                   )= __(label)
             else
-              if field.entries
+              if field.options
                 - i = 0
-                each label, value in field.entries
+                each label, value in field.options
                   input(
                     class='input-' + field.type,
                     type=field.type,
