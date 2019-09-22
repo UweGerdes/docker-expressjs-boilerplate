@@ -27,7 +27,7 @@ mixin form(form, action)
           else if field.type == 'textarea'
             + textarea(Object.assign({}, field))
           else if field.type == 'select'
-            + select(Object.assign({}, field))
+            + fieldcontainer(Object.assign({}, field))
           else if field.type == 'address'
             + address(field.label, field.name, field.prefix)
           else if field.type == 'group'

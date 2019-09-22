@@ -111,12 +111,12 @@ describe('/boilerplate/tests/views/form.js', function () {
             type: 'radio',
             value: 'checked second radio'
           }, null);
-          testElement('.field_selectinput', { }, 'Auswahlliste- bitte wählen -diesdasvielleicht ein Pflichtfeld');
-          testElement('.field_selectinput .input-select', { name: 'selectinput' }, null);
-          testElement('.field_selectinput .input-select option:nth-of-type(1)', { value: '' }, '- bitte wählen -');
-          testElement('.field_selectinput .input-select option:nth-of-type(2)', { value: 'opt1' }, 'dies');
-          testElement('.field_selectinput .input-select option:nth-of-type(3)', { value: 'opt2' }, 'das');
-          testElement('.field_selectinput .select-followtext', { }, 'vielleicht ein Pflichtfeld');
+          testElement('.fieldcontainer_selectinput', { }, 'Auswahlliste- bitte wählen -diesdasvielleicht ein Pflichtfeld');
+          testElement('.fieldcontainer_selectinput .input-select', { name: 'selectinput' }, null);
+          testElement('.fieldcontainer_selectinput .input-select option:nth-of-type(1)', { value: '' }, '- bitte wählen -');
+          testElement('.fieldcontainer_selectinput .input-select option:nth-of-type(2)', { value: 'opt1' }, 'dies');
+          testElement('.fieldcontainer_selectinput .input-select option:nth-of-type(3)', { value: 'opt2' }, 'das');
+          testElement('.fieldcontainer_selectinput .select-label', { }, 'vielleicht ein Pflichtfeld');
           testElement('.field_groupOfFields', { }, 'Feldgruppemal klickenoder hier- bitte wählen -Wahl 1Wahl 2');
           testElement('.field_groupOfFields .field_grouptextinput1 .input-text', { name: 'grouptextinput1' }, null);
           testElement('.field_groupOfFields .field_grouptextinput2 .input-text', {
@@ -190,7 +190,7 @@ describe('/boilerplate/tests/views/form.js', function () {
       testElement('.fieldcontainer_radioinput .input-radio:nth-of-type(2)', {
         name: 'radioinput', type: 'radio', value: 'checked second radio', checked: 'checked'
       }, null);
-      testElement('.field_selectinput .input-select option:nth-of-type(2)', { value: 'opt1', selected: 'selected' }, 'dies');
+      testElement('.fieldcontainer_selectinput .input-select option:nth-of-type(2)', { value: 'opt1', selected: 'selected' }, 'dies');
       testElement('.field_groupOfFields .field_grouptextinput1 .input-text', { name: 'grouptextinput1', value: 'text1' }, null);
       testElement('.field_groupOfFields .field_grouptextinput2 .input-text', { name: 'grouptextinput2', value: 'text2' }, null);
       testElement('.field_groupradioinput .input-radio:nth-of-type(1)', {
