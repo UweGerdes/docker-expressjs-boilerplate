@@ -27,7 +27,8 @@ RUN apt-get update && \
 	if [ "${NODE_ENV}" = "development" ] ; then \
 		npm install -g --cache /tmp/root-cache \
 					gulp-cli \
-					nodemon ; \
+					nodemon \
+					npm ; \
 	fi && \
 	rm -r /tmp/*
 
