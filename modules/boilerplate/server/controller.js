@@ -32,13 +32,12 @@ const index = (req, res) => {
  * @param {object} res - result
  */
 const form = (req, res) => {
-  let data = Object.assign({ },
-    config.getData(req),
-    {
-      data: false,
-      model: model.getData(),
-      post: { }
-    });
+  let data = {
+    ...config.getData(req),
+    data: false,
+    model: model.getData(),
+    post: { }
+  };
   let statusCode = 200;
   if (req.method === 'POST' && req.body) {
     data.post = req.body;
