@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.1.5
+added form generator view using configuration.yaml, changed form widgets
+
 ## 0.1.4
 building less and js to generated, changes for reuse in other projects
 
