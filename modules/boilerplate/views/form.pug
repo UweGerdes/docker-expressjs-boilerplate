@@ -2,12 +2,6 @@
 extends ../../pages/views/page.pug
 
 include ../../page-elements/views/form.pug
-include ../../page-elements/views/form/field.pug
-include ../../page-elements/views/form/hidden.pug
-include ../../page-elements/views/form/select.pug
-include ../../page-elements/views/form/textarea.pug
-include ../../page-elements/views/form/group.pug
-include ../../page-elements/views/form/address.pug
 
 append head
   link(rel='stylesheet', href='/'+ moduleName + '/layout.css')
@@ -31,83 +25,4 @@ block content
         .error #{__(error, post.username)}
       if locals.post && Object.keys(locals.post).length > 0
         pre#postdata= JSON.stringify(post, null, 2)
-      if locals.modules[moduleName] && modules[moduleName].form
-        + form(modules[moduleName].form, '/'+ moduleName + '/form/')
-      else
-        form#form.form(method='POST', action='/'+ moduleName + '/form/', name='form')
-          + hidden('hiddeninput', 'wert')
-          + field({
-              type: 'text',
-              name: 'textinput',
-              label: 'Texteingabe',
-              value: 'ändern!'
-            })
-          + field({
-              type: 'button',
-              name: 'buttoninput',
-              label: 'Button',
-              value: 'hier klicken'
-            })
-          + field({
-              type: 'password',
-              name: 'passwordinput',
-              label: 'Passwort'
-            })
-          + field({
-              type: 'checkbox',
-              name: 'checkboxinput',
-              label: 'Möglichkeit',
-              value: 'gewählt',
-              text: 'kann man wählen'
-            })
-          + field({
-              type: 'radio',
-              name: 'radioinput',
-              label: 'Auswahl',
-              entries: { klick: 'mal klicken', klock: 'oder hier' }
-            })
-          + select({
-              type: 'select',
-              name: 'selectinput',
-              label: 'Select Option Field',
-              options: {
-                '': '- please select -',
-                opt1: 'first option',
-                opt2: 'second option'
-              },
-              text: 'select an option'
-            })
-          + textarea({
-              type: 'textarea',
-              name: 'textareainput',
-              label: 'Langtextfeld',
-              value: 'already written',
-              placeholder: 'please write much text',
-              height: 5
-            })
-          + group('Feldgruppe', 'group1', [{
-              type: 'text',
-              name: 'grouptextinput1',
-              value: 'x'
-            },
-            {
-              type: 'text',
-              name: 'grouptextinput2'
-            },
-            {
-              type: 'radio',
-              name: 'groupradioinput',
-              value: 'gewählt',
-              entries: { klick: 'mal klicken', klock: 'oder hier' }
-            },
-            {
-              type: 'select',
-              name: 'groupselect',
-              entries: { '': '- bitte wählen -', option1: 'Wahl 1', option2: 'Wahl 2' }
-            }])
-          + address('Adresse', 'address', 'address-')
-          + field({
-              type: 'submit',
-              value: 'absenden',
-              class: 'submit'
-            })
+      + form(modules[moduleName].form, '/'+ moduleName + '/form/')
