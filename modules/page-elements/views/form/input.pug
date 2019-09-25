@@ -34,6 +34,17 @@ mixin input(attr)
           checked=(attr.type == 'radio' && value == post[attr.name])
         )
         label(class=attr.type + '-label', for=attr.name + i++)= __(label)
+  else if attr.type == 'textarea'
+    if post[attr.name]
+      - value = post[attr.name]
+    else
+      if attr.value != ''
+        - value = __(attr.value)
+    if attr.placeholder != ''
+      - attr.placeholder = __(attr.placeholder)
+    - delete(attr.label)
+    - delete(attr.value)
+    textarea.input-textarea&attributes(attr)= value
   else
     if post[attr.name]
       if attr.type != 'checkbox'

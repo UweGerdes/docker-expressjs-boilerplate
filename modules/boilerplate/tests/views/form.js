@@ -81,8 +81,8 @@ describe('/boilerplate/tests/views/form.js', function () {
             name: 'passwordinput',
             type: 'password'
           }, null);
-          testElement('.field_textareainput', { }, 'Langtextfeldsteht schon was');
-          testElement('.field_textareainput .input-textarea', {
+          testElement('.fieldcontainer_textareainput', { }, 'Langtextfeldsteht schon was');
+          testElement('.fieldcontainer_textareainput .input-textarea', {
             name: 'textareainput',
             placeholder: 'bitte viel Text eingeben'
           }, 'steht schon was');
@@ -183,7 +183,7 @@ describe('/boilerplate/tests/views/form.js', function () {
       testError();
       testElement('.fieldcontainer_textinput .input-text', { name: 'textinput', type: 'text', value: 'changed content' }, null);
       testElement('.fieldcontainer_passwordinput .input-password', { name: 'passwordinput', type: 'password', value: 'password' }, null);
-      testElement('.field_textareainput .input-textarea', { name: 'textareainput' }, 'Langtexteingabe');
+      testElement('.fieldcontainer_textareainput .input-textarea', { name: 'textareainput' }, 'Langtexteingabe');
       testElement('.fieldcontainer_checkboxinput .input-checkbox', {
         name: 'checkboxinput', type: 'checkbox', value: 'checkbox checked', checked: 'checked'
       }, null);
