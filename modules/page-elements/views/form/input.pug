@@ -34,6 +34,12 @@ mixin input(attr)
           checked=(attr.type == 'radio' && value == post[attr.name])
         )
         label(class=attr.type + '-label', for=attr.name + i++)= __(label)
+  else if attr.type == 'hidden'
+    input(
+      type='hidden',
+      name=attr.name,
+      value=attr.value
+    )
   else if attr.type == 'textarea'
     if post[attr.name]
       - value = post[attr.name]

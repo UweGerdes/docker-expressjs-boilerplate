@@ -1,8 +1,6 @@
 //- widgets/form.pug
 
-include ../../page-elements/views/form/field.pug
 include ../../page-elements/views/form/input.pug
-include ../../page-elements/views/form/hidden.pug
 include ../../page-elements/views/form/group.pug
 include ../../page-elements/views/form/address.pug
 
@@ -20,15 +18,9 @@ mixin form(form, action)
       fieldset.fieldset(class=section_name)
         legend= __(section.label)
         each field in section.fields
-          if field.type == 'hidden'
-            + hidden(field.name, field.value)
-          else if field.type == 'textarea'
-            + fieldcontainer(Object.assign({}, field))
-          else if field.type == 'select'
-            + fieldcontainer(Object.assign({}, field))
+          if field.type == 'group'
+            + group(field.label, field.name, field.fields)
           else if field.type == 'address'
             + address(field.label, field.name, field.prefix)
-          else if field.type == 'group'
-            + group(field.label, field.name, field.fields)
           else
             + fieldcontainer(Object.assign({}, field))
