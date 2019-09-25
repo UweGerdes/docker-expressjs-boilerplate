@@ -1,5 +1,5 @@
 #
-#  Configuration for boilerplate
+#  Configuration for gulp expressjs projects
 #
 gulp:
   start:
@@ -100,6 +100,7 @@ gulp:
       - 'generated/**/*.js'
       - 'locales/**/*.*'
     test-modules:
+      - '*.js'
       - 'modules/**/tests/model/*.*'
       - 'modules/**/tests/server/*.*'
       - 'modules/**/views/**/*.*'
