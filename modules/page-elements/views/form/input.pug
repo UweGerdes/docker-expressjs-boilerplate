@@ -38,7 +38,7 @@ mixin input(attr)
     input(
       type='hidden',
       name=attr.name,
-      value=attr.value
+      value=(attr.value ? attr.value : post[attr.name])
     )
   else if attr.type == 'textarea'
     if post[attr.name]

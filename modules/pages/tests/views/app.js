@@ -39,9 +39,7 @@ describe('/pages/tests/views/app.js', function () {
         .end(function (err, res) {
           const document = getDocument(res, err);
           const moduleLinks = document.querySelectorAll('.module-link');
-          assert.isAtLeast(moduleLinks.length, 2, 'moduleLinks');
-          assert.equal(moduleLinks[0].textContent, 'Boilerplate');
-          assert.equal(moduleLinks[0].getAttribute('href'), '/boilerplate/');
+          assert.isAtLeast(moduleLinks.length, 1, 'moduleLinks');
           done();
         });
     });
