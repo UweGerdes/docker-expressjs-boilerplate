@@ -23,6 +23,6 @@ block content
       h2.subheadline Formular
       if locals.error
         .error #{__(error, post.username)}
-      if locals.post && Object.keys(locals.post).length > 0
-        pre#postdata= JSON.stringify(post, null, 2)
+      if locals.values && Object.keys(locals.values).length > 0
+        pre#postdata= JSON.stringify(values, null, 2)
       + form(modules[moduleName].form, '/'+ moduleName + '/form/')
