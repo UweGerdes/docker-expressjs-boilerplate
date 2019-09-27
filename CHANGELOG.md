@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.2.0
+updates to form handling
+
 ## 0.1.5
 added form generator view using configuration.yaml, changed form widgets
 
