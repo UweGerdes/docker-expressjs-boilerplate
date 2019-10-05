@@ -195,6 +195,14 @@ const requestGetI18nRoute = (req, res) => {
 app.get('/i18n-ejs', requestGetI18nRoute);
 
 /**
+ * Route for error 500 test page - simply throw error
+ */
+const requestGet500Route = () => {
+  throw new Error('testing server error');
+};
+app.get('/error500', requestGet500Route);
+
+/**
  * Server listens on process.env.SERVER_PORT
  *
  * @name server_listen
@@ -270,7 +278,10 @@ app.get('*', requestGet404Route);
  * @param {object} next - needed for complete signature
  */
 const requestError500Handler = (err, req, res, next) => {
-  console.error('SERVER ERROR:', err);
+  /* c8 ignore next 3 */
+  if (req.path !== '/error500/') {
+    console.error('SERVER ERROR:', err.message);
+  }
   if (err) {
     res
       .status(500)
@@ -282,6 +293,7 @@ const requestError500Handler = (err, req, res, next) => {
         },
         ...config.getData(req)
       });
+  /* c8 ignore next 3 */
   } else {
     next();
   }
