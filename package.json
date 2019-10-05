@@ -80,7 +80,9 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon --watch gulpfile.js --watch gulp --watch configuration.yaml --delay 2 --exec gulp",
-    "dev-quiet": "nodemon --watch gulpfile.js --watch gulp --quiet --exitcrash --delay 2 --exec gulp",
-    "test": "gulp tests"
+    "web-server": "node server.js &",
+    "pretest": "gulp build && npm run web-server",
+    "test": "gulp tests",
+    "posttest": "pkill -f node"
   }
 }
