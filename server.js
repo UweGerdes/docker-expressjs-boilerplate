@@ -11,6 +11,7 @@ const bodyParser = require('body-parser'),
   cookieParser = require('cookie-parser'),
   dateFormat = require('dateformat'),
   express = require('express'),
+  createGracefulShutdownMiddleware = require('express-graceful-shutdown'),
   session = require('express-session'),
   fs = require('fs'),
   glob = require('glob'),
@@ -54,6 +55,13 @@ if (config.server.verbose) {
 app.use(express.static(config.server.docroot));
 app.use(express.static(config.server.generated));
 app.use('/jsdoc', express.static(config.gulp.build.jsdoc.dest));
+
+/**
+ * Do graceful shutdown on SIGTERM signal
+ *
+ * @name server_graceful_shutdown
+ */
+app.use(createGracefulShutdownMiddleware(server, { forceTimeout: 30000 }));
 
 /**
  * Routes from modules
@@ -331,3 +339,10 @@ function onListening(proto, port) {
     process.send('server listening');
   }
 }
+
+/**
+ * Show message on exit
+ */
+process.on('exit', () => {
+  console.log('server exited.');
+});
