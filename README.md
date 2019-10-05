@@ -41,6 +41,15 @@ You should start `npm start` or `npm run dev` and open localhost:28080 for the s
 
 To run tests use `npm test`, for coverage of application use `npm run coverage && sleep 1`, for development environment coverage use `npm run fullcoverage && sleep 1`
 
+Or use the coverage tests it in a new container:
+
+```bash
+$ docker run -it --rm \
+	-v $(pwd):/home/node/app \
+	uwegerdes/expressjs-boilerplate \
+	/bin/bash -c "npm run coverage && sleep 1"
+```
+
 You may want to access the livereload port, add `-p 28081:8081 -e 'LIVERELOAD_PORT=28081'` to the run command.
 
 Restart it later with:
