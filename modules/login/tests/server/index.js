@@ -42,5 +42,20 @@ describe('/login/tests/server/index.js', function () {
           done();
         });
     });
+    it('should have headline and links', function (done) {
+      chai.request('http://localhost:8080')
+        .get('/login/logout/')
+        .end(function (err, res) {
+          expect(err).to.be.null;
+          expect(res).to.have.status(200);
+          expect(res).to.be.html;
+          const { document } = (new JSDOM(res.text)).window;
+          const headline = document.getElementById('headline');
+          assert.equal(headline.textContent, 'Login');
+          const links = document.querySelectorAll('#login-list li a');
+          assert.equal(links.length, 1);
+          done();
+        });
+    });
   });
 });
