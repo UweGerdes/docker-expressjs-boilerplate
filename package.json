@@ -81,14 +81,17 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon --watch gulpfile.js --watch gulp --watch configuration.yaml --delay 2 --exec gulp",
-    "web-server": "node server.js &",
-    "pretest": "gulp build && npm run web-server",
+    "pretest": "gulp build && npm run test-web-server",
+    "test-web-server": "node server.js &",
     "test": "gulp tests",
     "posttest": "pkill -f node",
-    "coverage-web-server": "c8 node server.js &",
     "precoverage": "gulp build && npm run coverage-web-server",
+    "coverage-web-server": "c8 node server.js &",
     "coverage": "gulp tests",
     "postcoverage": "pkill -f node",
-    "fullcoverage": "c8 npm run coverage"
+    "prefullcoverage": "c8 -r none gulp build && npm run fullcoverage-web-server",
+    "fullcoverage-web-server": "c8 --clean false node server.js &",
+    "fullcoverage": "c8 -r none --clean false gulp tests",
+    "postfullcoverage": "pkill -f node"
   }
 }
