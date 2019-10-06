@@ -50,7 +50,7 @@ $ docker run -it --rm \
 	/bin/bash -c "npm run coverage && sleep 1"
 ```
 
-You may want to access the livereload port, add `-p 28081:8081 -e 'LIVERELOAD_PORT=28081'` to the run command.
+If you run coverage on bigger project or on a Raspberry Pi add more time for the coverage report, `sleep 3` works on a Pi 3B, `sleep 8` for fullcoverage.
 
 Restart it later with:
 
