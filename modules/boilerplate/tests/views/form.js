@@ -175,12 +175,12 @@ describe('/boilerplate/tests/views/form.js', function () {
             'address-zip': '12345',
             'address-city': 'Wohnort'
           });
+      /* c8 ignore next 3 */
       } catch (error) {
         err = error;
       }
       document = getDocument(res, err);
       checkPage(document, 'Formular', 'anmelden');
-      testError();
       testElement('.fieldcontainer_textinput .input-text', { name: 'textinput', type: 'text', value: 'changed content' }, null);
       testElement('.fieldcontainer_passwordinput .input-password', { name: 'passwordinput', type: 'password', value: 'password' }, null);
       testElement('.fieldcontainer_textareainput .input-textarea', { name: 'textareainput' }, 'Langtexteingabe');
@@ -249,21 +249,6 @@ function checkPage (document, title, loginStatusLabel) {
   const loginStatus = document.querySelectorAll('.login-status');
   assert.equal(loginStatus.length, 1);
   assert.equal(loginStatus[0].textContent, loginStatusLabel);
-}
-
-/**
- * Test error message in document
- *
- * @param {String} msg - error message or no error
- */
-function testError(msg) {
-  const errors = document.querySelectorAll('.error');
-  if (msg) {
-    assert.equal(errors.length, 1, 'errors');
-    assert.equal(errors[0].textContent, msg, 'error');
-  } else {
-    assert.equal(errors.length, 0, errors.length > 0 ? 'error ' + errors[0].textContent : 'errors');
-  }
 }
 
 /**
