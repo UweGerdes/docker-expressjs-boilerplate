@@ -89,7 +89,7 @@
     "coverage-web-server": "c8 node server.js &",
     "coverage": "gulp tests",
     "postcoverage": "pkill -f node",
-    "prefullcoverage": "c8 -r none gulp build && npm run fullcoverage-web-server",
+    "prefullcoverage": "c8 -r none gulp build && c8 -r none --clean false gulp lint && c8 -r none --clean false gulp jsdoc && c8 -r none --clean false gulp deploy && npm run fullcoverage-web-server",
     "fullcoverage-web-server": "c8 --clean false node server.js &",
     "fullcoverage": "c8 -r none --clean false gulp tests",
     "postfullcoverage": "pkill -f node"
