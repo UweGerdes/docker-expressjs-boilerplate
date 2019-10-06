@@ -28,6 +28,7 @@ RUN apt-get update && \
 		npm install -g --cache /tmp/root-cache \
 					c8 \
 					gulp-cli \
+					mocha \
 					nodemon \
 					npm ; \
 	fi && \
