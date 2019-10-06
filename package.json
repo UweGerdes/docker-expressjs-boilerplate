@@ -18,7 +18,7 @@
     "email": "entwicklung@uwegerdes.de"
   },
   "engines": {
-    "node": ">=8.10.0"
+    "node": ">=10.10.0"
   },
   "dependencies": {
     "axios": "^0.19.0",
