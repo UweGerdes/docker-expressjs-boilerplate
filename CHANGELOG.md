@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.2.2
+added mocha for coverage
+
 ## 0.2.1
 added coverage for tests
 
