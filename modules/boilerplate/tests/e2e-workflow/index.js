@@ -57,7 +57,7 @@ module.exports = {
             '//select[@name="selectinput"]/option[2][@value="opt1"]': 'dies',
             '//select[@name="selectinput"]/option[3][@value="opt2"]': 'das',
             '//*[@class="select-label"]': 'vielleicht ein Pflichtfeld',
-            '//*[contains(@class, "field_textareainput")]': 'Langtextfeld\nsteht schon was',
+            '//*[contains(@class, "fieldcontainer_textareainput")]': 'Langtextfeld\nsteht schon was',
             '//textarea[@name="textareainput"]': 'steht schon was',
             '//*[contains(@class, "field_groupOfFields")]': 'Feldgruppe\nmal klickenoder hier\n- bitte wählen -\nWahl 1\nWahl 2',
             '//*[contains(@class, "field_grouptextinput1")]': '',
