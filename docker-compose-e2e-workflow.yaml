@@ -67,6 +67,7 @@ services:
       - HUB_HOST=boilerplate-e2e-hub
       - HUB_PORT=4444
       - NODE_ENV=staging
+      - LIVERELOAD_PORT=51288
     volumes:
       - ../docker-e2e-workflow:/home/node/app
       - ./modules:/home/node/app/config/modules
