@@ -257,6 +257,28 @@ for (const [baseRoute, router] of Object.entries(routers)) {
 }
 
 /**
+ * Route for failure handling
+ *
+ * @param {object} req - request
+ * @param {object} res - response
+ */
+const requestGetFailureRoute = (req, res, next) => {
+  let data = config.getData(req);
+  if (req.error) {
+    console.log('req.error:', req.error);
+    data.error = req.error;
+    if (data.error.code) {
+      res.status(data.error.code);
+    }
+    res.render(viewPath('error'), data);
+  } else {
+    next();
+  }
+};
+app.get('*', requestGetFailureRoute);
+
+
+/**
  * Route for not found errors
  *
  * @param {object} req - request
@@ -264,11 +286,11 @@ for (const [baseRoute, router] of Object.entries(routers)) {
  */
 const requestGet404Route = (req, res) => {
   res.status(404).render(viewPath('error'), {
+    ...config.getData(req),
     error: {
       code: 404,
       name: 'not found'
-    },
-    ...config.getData(req)
+    }
   });
 };
 app.get('*', requestGet404Route);
