@@ -40,6 +40,7 @@ const index = (req, res) => {
  * @param {object} req - request
  * @param {object} res - result
  */
+/* c8 ignore next 32 */
 const callback = async (req, res) => {
   const requestToken = req.query.code;
   if (requestToken) {

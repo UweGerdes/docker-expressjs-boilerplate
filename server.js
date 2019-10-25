@@ -39,6 +39,7 @@ let routers = { };
  *
  * @name set_logformat
  */
+/* c8 ignore next 7 */
 if (config.server.verbose) {
   morgan.token('time', () => {
     return dateFormat(new Date(), 'HH:MM:ss');
@@ -156,6 +157,7 @@ app.use(session({
  * @name module_router_use_express
  */
 for (const router of Object.values(routers)) {
+  /* c8 ignore next 3 */
   if (router.useExpress) {
     router.useExpress(app);
   }
@@ -167,6 +169,7 @@ for (const router of Object.values(routers)) {
  * @param {object} req - request
  * @param {object} res - response
  */
+/* c8 ignore next 3 */
 const requestGetBaseRoute = (req, res) => {
   res.sendFile(path.join(config.server.docroot, 'index.html'));
 };
@@ -246,6 +249,7 @@ httpsServer.on('listening', onListening.bind(null, 'https', process.env.HTTPS_PO
  * @name module_router_connect_server
  */
 for (const [baseRoute, router] of Object.entries(routers)) {
+/* c8 ignore next 3 */
   if (router.connectServer) {
     router.connectServer(server, httpsServer);
   }
@@ -306,6 +310,7 @@ app.use(requestError500Handler);
  * @param {string} page - page type
  * @param {string} type - file type (ejs, jade, pug, html)
  */
+/* c8 ignore next 3 */
 function viewPath(page = 'error', type = 'ejs') {
   return config.server.modules + '/pages/views/' + page + '.' + type;
 }
@@ -316,6 +321,7 @@ function viewPath(page = 'error', type = 'ejs') {
  * @param {object} error - error object
  * @listens server_listen:onError
  */
+/* c8 ignore next 18 */
 function onError(error) {
   if (error.syscall !== 'listen') {
     throw error;
@@ -347,6 +353,7 @@ function onError(error) {
 function onListening(proto, port) {
   log.info('server listening on ' +
     chalk.greenBright(proto + '://' + ipv4addresses.get()[0] + ':' + port));
+  /* c8 ignore next 3 */
   if (process.send !== undefined && proto === 'https') {
     process.send('server listening');
   }
@@ -355,6 +362,7 @@ function onListening(proto, port) {
 /**
  * Show message on exit
  */
+/* c8 ignore next 3 */
 process.on('exit', () => {
   console.log('server exited.');
 });
