@@ -22,10 +22,12 @@ const viewBase = path.join(path.dirname(__dirname), 'views');
  * @param {object} res - result
  */
 const index = (req, res) => {
-  let data = Object.assign({ },
-    config.getData(req),
-    req.params,
-    model.getData());
+  let data = {
+    ...config.getData(req),
+    ...req.params,
+    ...model.getData()
+  };
+  /* c8 ignore next 3 */
   if (req.session && req.session.userdata) {
     data.userdata = req.session.userdata;
   }
@@ -63,10 +65,11 @@ const callback = async (req, res) => {
     res.redirect('/login/');
   } else {
     req.session.unauthorized = true;
-    let data = Object.assign({ },
-      config.getData(req),
-      req.params,
-      model.getData());
+    let data = {
+      ...config.getData(req),
+      ...req.params,
+      ...model.getData()
+    };
     res.status(401).render(path.join(viewBase, 'unauthorized.pug'), data);
   }
 };
