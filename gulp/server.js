@@ -4,7 +4,7 @@
  * @module gulp/server
  * @requires module:lib/config
  * @requires module:lib/ipv4addresses
- * @requires module:gulp/lib/files-promises
+ * @requires module:lib/log
  * @requires module:gulp/lib/load-tasks
  * @requires module:gulp/lib/notify
  */
