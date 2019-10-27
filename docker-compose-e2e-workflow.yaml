@@ -13,8 +13,8 @@ services:
       - 51285:8080
       - 51286:8081
     environment:
-      NODE_ENV: staging
-      LIVERELOAD_PORT: 51281
+      NODE_ENV: development
+      LIVERELOAD_PORT: 51286
     volumes:
       - .:/home/node/app
     command: npm run dev
