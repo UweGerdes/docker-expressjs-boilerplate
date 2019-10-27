@@ -3,73 +3,66 @@
 version: "3.5"
 
 services:
-
-  expressjs-boilerplate-e2e:
+  boilerplate-server:
     build:
       context: .
-    container_name: expressjs-boilerplate-e2e
-    hostname: boilerplate-e2e
     image: uwegerdes/expressjs-boilerplate
-    environment:
-      - NODE_ENV=staging
+    container_name: boilerplate-server
+    hostname: boilerplate-e2e
     ports:
       - 51285:8080
       - 51286:8081
-    stdin_open: true
-    tty: true
+    environment:
+      NODE_ENV: staging
+      LIVERELOAD_PORT: 51281
     volumes:
-    - .:/home/node/app
+      - .:/home/node/app
     command: npm run dev
 
   boilerplate-e2e-hub:
-    image: selenium/hub:3.141.59-europium
+    image: selenium/hub
     container_name: boilerplate-e2e-hub
     hostname: boilerplate-e2e-hub
 
   boilerplate-e2e-chrome:
-    image: selenium/node-chrome:3.141.59-europium
+    image: selenium/node-chrome
     container_name: boilerplate-e2e-chrome
     volumes:
       - /dev/shm:/dev/shm
     depends_on:
       - boilerplate-e2e-hub
     environment:
-      - HUB_HOST=boilerplate-e2e-hub
-      - HUB_PORT=4444
-      - E2E_HOST=boilerplate-e2e-workflow
-      - JAVA_OPTS=-Dselenium.LOGGER.level=WARNING
+      HUB_HOST: boilerplate-e2e-hub
+      HUB_PORT: 4444
+      JAVA_OPTS: -Dselenium.LOGGER.level=WARNING
 
   boilerplate-e2e-firefox:
-    image: selenium/node-firefox:3.141.59-europium
+    image: selenium/node-firefox
     container_name: boilerplate-e2e-firefox
     volumes:
       - /dev/shm:/dev/shm
     depends_on:
       - boilerplate-e2e-hub
     environment:
-      - HUB_HOST=boilerplate-e2e-hub
-      - HUB_PORT=4444
-      - E2E_HOST=boilerplate-e2e-workflow
-      - JAVA_OPTS=-Dselenium.LOGGER.level=WARNING
+      HUB_HOST: boilerplate-e2e-hub
+      HUB_PORT: 4444
+      JAVA_OPTS: -Dselenium.LOGGER.level=WARNING
 
-  boilerplate-e2e-workflow:
+  boilerplate-e2e-frontend:
     image: uwegerdes/e2e-workflow
-    container_name: boilerplate-e2e-workflow
-    hostname: boilerplate-e2e-workflow
+    container_name: boilerplate-e2e-frontend
+    hostname: boilerplate-e2e-frontend
     ports:
       - 51287:8080
       - 51288:8081
-    stdin_open: true
-    tty: true
     depends_on:
       - boilerplate-e2e-hub
     environment:
-      - HUB_HOST=boilerplate-e2e-hub
-      - HUB_PORT=4444
-      - NODE_ENV=staging
-      - LIVERELOAD_PORT=51288
+      HUB_HOST: boilerplate-e2e-hub
+      HUB_PORT: 4444
+      NODE_ENV: staging
+      LIVERELOAD_PORT: 51288
     volumes:
       - ../docker-e2e-workflow:/home/node/app
       - ./modules:/home/node/app/config/modules
-#    command: npm start
     command: npm run dev

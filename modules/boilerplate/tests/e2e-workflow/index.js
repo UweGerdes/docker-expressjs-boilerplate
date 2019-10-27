@@ -4,11 +4,11 @@
  * (c) Uwe Gerdes, entwicklung@uwegerdes.de
  */
 
-const domain = 'http://expressjs-boilerplate-e2e:8080';
+const domain = 'http://boilerplate-server:8080';
 
 module.exports = {
   group: 'Boilerplate E2E Test',
-  name: 'Boilerplate',
+  name: 'E2E Test',
   viewports: {
     'Mobile': { width: 340, height: 568 },
     'Tablet': { width: 768, height: 1024 },
