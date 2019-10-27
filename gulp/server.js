@@ -91,7 +91,7 @@ const tasks = {
   /* c8 ignore next 5 */
   'livereload-all': () => {
     return gulp.src(config.gulp.watch.livereload[0])
-      .pipe(notify({ message: 'triggered', title: 'livereload' }))
+      .pipe(notify({ message: 'triggered', title: 'livereload-all' }))
       .pipe(livereload({ quiet: false }));
   },
   /**
