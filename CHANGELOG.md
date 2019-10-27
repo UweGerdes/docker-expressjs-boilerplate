@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.2.3
+updates for e2e-workflow tests
+
 ## 0.2.2
 added mocha for coverage
 
