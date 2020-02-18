@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.2.4
+added hostname to certificate generation
+
 ## 0.2.3
 updates for e2e-workflow tests
 
