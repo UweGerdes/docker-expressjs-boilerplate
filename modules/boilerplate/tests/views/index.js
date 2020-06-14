@@ -39,6 +39,19 @@ describe('/boilerplate/tests/views/index.js', function () {
           done();
         });
     });
+    it('should have breadcrumb', function (done) {
+      chai.request('http://localhost:8080')
+        .get('/boilerplate/')
+        .end(function (err, res) {
+          const document = getDocument(res, err);
+          const breadcrumbs = document.querySelectorAll('.header-breadcrumb-link');
+          assert.equal(breadcrumbs[0].getAttribute('href'), '/app/', 'breadcrumb 1 href');
+          assert.equal(breadcrumbs[0].textContent, 'Home');
+          assert.equal(breadcrumbs[1].getAttribute('href'), '/boilerplate/', 'breadcrumb 2 href');
+          assert.equal(breadcrumbs[1].textContent, 'Boilerplate');
+          done();
+        });
+    });
     it('should have subheadline de', function (done) {
       chai.request('http://localhost:8080')
         .get('/boilerplate/')
