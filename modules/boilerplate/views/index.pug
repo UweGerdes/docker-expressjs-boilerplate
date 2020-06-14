@@ -2,16 +2,18 @@
 extends ../../pages/views/page.pug
 
 append head
-  link(rel='stylesheet', href='/'+ moduleName + '/layout.css')
-  script(src='/'+ moduleName + '/script.js')
+  link(rel='stylesheet', href='/'+ modulePath + '/layout.css')
+  script(src='/'+ modulePath + '/script.js')
 
 append breadcrumbs
   li.header-breadcrumb
-    a.header-breadcrumb-link(href='/'+ moduleName + '/')= module.name
+    a.header-breadcrumb-link(href=href('/'))= module.name
 
 block content
   div#boilerplate.boilerplate
     h1#headline.headline= module.name
     #boilerplate-container.boilerplate-container
       h2.boilerplate-headline #{__('Hello')}
-      a.form-link(href='/'+ moduleName + '/form/') Formular
+      a.form-link(href='/'+ modulePath + '/form/') Formular
+  pre#test
+    = JSON.stringify(locals, null, 2)
