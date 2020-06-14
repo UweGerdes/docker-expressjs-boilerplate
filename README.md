@@ -86,7 +86,7 @@ Scripts in `modules/[module]/js/` will be copied to `public/js/[module]/`.
 
 #### e2e-workflow
 
-Start the docker-e2e-workflow test dockers in your project directory (in another terminal to separate the vcards and e2e-workflow test output):
+Start the docker-e2e-workflow test dockers in your project directory (in another terminal to separate the boilerplate and e2e-workflow test output):
 
 ```bash
 $ docker-compose -f docker-compose-e2e-workflow.yaml up
