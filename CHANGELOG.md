@@ -1,7 +1,7 @@
 # Changelog
 
 ## 0.2.6
-node package upgrade
+node package upgrade, updates, cookie
 
 ## 0.2.5
 correction to certificate generation

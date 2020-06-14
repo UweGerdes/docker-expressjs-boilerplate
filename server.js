@@ -182,6 +182,7 @@ app.get('/', requestGetBaseRoute);
  * @param {object} res - response
  */
 const requestGetAppRoute = (req, res) => {
+  res.cookie('cookieName', 'cookieValue', { Path: '/', HttpOnly: true });
   res.render(viewPath('app'), config.getData(req));
 };
 app.get('/app', requestGetAppRoute);
