@@ -72,8 +72,8 @@ app.use(createGracefulShutdownMiddleware(server, { forceTimeout: 30000 }));
 glob.sync(config.server.modules + '/*/server/index.js')
   .forEach((filename) => {
     const regex = new RegExp(config.server.modules + '(/[^/]+)/server/index.js');
-    const baseRoute = filename.replace(regex, '$1');
-    routers[baseRoute] = require(filename);
+    const moduleRoute = filename.replace(regex, '$1');
+    routers[moduleRoute] = require(filename);
   });
 
 /**
@@ -248,12 +248,12 @@ httpsServer.on('listening', onListening.bind(null, 'https', process.env.HTTPS_PO
  *
  * @name module_router_connect_server
  */
-for (const [baseRoute, router] of Object.entries(routers)) {
+for (const [moduleRoute, router] of Object.entries(routers)) {
 /* c8 ignore next 3 */
   if (router.connectServer) {
     router.connectServer(server, httpsServer);
   }
-  app.use(baseRoute, router.router);
+  app.use(moduleRoute, router.router);
 }
 
 /**
