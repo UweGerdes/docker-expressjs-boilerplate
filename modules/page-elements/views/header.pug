@@ -9,7 +9,7 @@ block header
               a.header-breadcrumb-link(href='/app/') Home
       if session
         .flex-block.flex-right
-          #login-status.login-status Benutzer
+          #login-status.login-status= __('User')
             block loginStatus
               ul#login-status-list.login-status-list.list
                 if session.userdata
@@ -21,7 +21,7 @@ block header
                     a.link.logout-link(href=(session.logoutLink ? session.logoutLink : '/login/logout/')) abmelden
                 else
                   li.list-item.login-status-login
-                    a.link.login-link(href=(locals.loginLink ? loginLink : '/login/')) anmelden
+                    a.link.login-link(href=(locals.loginLink ? loginLink : '/login/'))= __('login')
                   li.list-item.login-status-register
-                    a.link.register-link(href=(locals.registerLink ? registerLink : '/login/register/')) registrieren
+                    a.link.register-link(href=(locals.registerLink ? registerLink : '/login/signup/'))= __('sign up')
 
