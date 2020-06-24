@@ -277,7 +277,6 @@ const requestGetFailureRoute = (req, res, next) => {
 };
 app.get('*', requestGetFailureRoute);
 
-
 /**
  * Route for not found errors
  *
