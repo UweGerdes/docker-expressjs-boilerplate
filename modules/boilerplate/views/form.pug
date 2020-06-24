@@ -4,17 +4,17 @@ extends ../../pages/views/page.pug
 include ../../page-elements/views/form.pug
 
 append head
-  link(rel='stylesheet', href='/'+ moduleName + '/layout.css')
-  script(src='/'+ moduleName + '/script.js')
+  link(rel='stylesheet', href='/'+ modulePath + '/layout.css')
+  script(src='/'+ modulePath + '/script.js')
 
 block title
   | Formular
 
 append breadcrumbs
   li.header-breadcrumb
-    a.header-breadcrumb-link(href='/'+ moduleName + '/')= module.name
+    a.header-breadcrumb-link(href='/'+ modulePath + '/')= module.name
   li.header-breadcrumb
-    a.header-breadcrumb-link(href='/'+ moduleName + '/form/') Formular
+    a.header-breadcrumb-link(href='/'+ modulePath + '/form/') Formular
 
 block content
   div#formular.formular
@@ -25,4 +25,4 @@ block content
         .error #{__(error, post.username)}
       if locals.values && Object.keys(locals.values).length > 0
         pre#postdata= JSON.stringify(values, null, 2)
-      + form(modules[moduleName].form, '/'+ moduleName + '/form/')
+      + form(modules[modulePath].form, '/'+ modulePath + '/form/')

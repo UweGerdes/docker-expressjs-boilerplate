@@ -86,11 +86,13 @@ Scripts in `modules/[module]/js/` will be copied to `public/js/[module]/`.
 
 #### e2e-workflow
 
-Start the docker-e2e-workflow test dockers in your project directory (in another terminal to separate the vcards and e2e-workflow test output):
+Start the docker-e2e-workflow test dockers in your project directory (in another terminal to separate the boilerplate and e2e-workflow test output):
 
 ```bash
 $ docker-compose -f docker-compose-e2e-workflow.yaml up
 ```
+
+Open in your browser: `http://localhost:51287/` for the e2e-workflow server and `http://localhost:51285/` for the boilerplate server.
 
 Start another terminal and attach to the `boilerplate-e2e-workflow` or `expressjs-boilerplate-e2e` docker (you might want to enter `rs[RETURN]` to trigger nodemon restart, CRTL-P + CRTL-Q to detach):
 

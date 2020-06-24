@@ -65,4 +65,5 @@ services:
     volumes:
       - ../docker-e2e-workflow:/home/node/app
       - ./modules:/home/node/app/config/modules
+      - ./results:/home/node/app/results
     command: npm run dev
