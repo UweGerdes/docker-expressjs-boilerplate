@@ -182,6 +182,8 @@ app.get('/', requestGetBaseRoute);
  * @param {object} res - response
  */
 const requestGetAppRoute = (req, res) => {
+  // console.log(Object.keys(req.cookies));
+  // console.log(JSON.stringify(req.cookies, null, 2));
   res.cookie('cookieName', 'cookieValue', { Path: '/', HttpOnly: true });
   res.render(viewPath('app'), config.getData(req));
 };
@@ -277,7 +279,6 @@ const requestGetFailureRoute = (req, res, next) => {
   }
 };
 app.get('*', requestGetFailureRoute);
-
 
 /**
  * Route for not found errors
