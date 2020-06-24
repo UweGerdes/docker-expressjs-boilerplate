@@ -92,6 +92,8 @@ Start the docker-e2e-workflow test dockers in your project directory (in another
 $ docker-compose -f docker-compose-e2e-workflow.yaml up
 ```
 
+Open in your browser: `http://localhost:51287/` for the e2e-workflow server and `http://localhost:51285/` for the boilerplate server.
+
 Start another terminal and attach to the `boilerplate-e2e-workflow` or `expressjs-boilerplate-e2e` docker (you might want to enter `rs[RETURN]` to trigger nodemon restart, CRTL-P + CRTL-Q to detach):
 
 ```bash
