@@ -54,6 +54,10 @@ module.exports = {
         },
         'show login form': {
           title: 'Boilerplate',
+          waitForElements: [
+            '//input[@type="checkbox"][@name="rememberMe"]',
+            '//input[@type="submit"]'
+          ],
           elements: {
             '//*[contains(@class, "header-breadcrumbs")]': 'Home\nBoilerplate',
             '//*[contains(@class, "login-status")]': 'Benutzer',
@@ -62,6 +66,11 @@ module.exports = {
           elementsNotVisible: [
             '//span[contains(@class, "link")]'
           ],
+          input: {
+            '//input[@name="username"]': 'TestUser',
+            '//input[@name="password"]': 'TestPassword',
+            '//input[@type="checkbox"][@name="rememberMe"]': true
+          },
           click: '//input[@type="submit"]'
         },
         'show login Success': {
@@ -69,6 +78,7 @@ module.exports = {
           elements: {
             '//*[contains(@class, "header-breadcrumbs")]': 'Home\nBoilerplate\nFormular',
             '//*[contains(@class, "login-status")]': 'Benutzer',
+            '//*[@id="postdata"]': '{\n  "username": "TestUser",\n  "password": "TestPassword",\n  "rememberMe": "store"\n}',
             '//span[contains(@class, "link")]': '',
             '//*[@id="modalLayer"]': ''
           },

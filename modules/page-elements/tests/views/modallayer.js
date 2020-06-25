@@ -25,44 +25,8 @@ describe('/page-elements/tests/views/modallayer.js', function () {
         .end(function (err, res) {
           document = getDocument(res, err);
           checkPage(document, 'Boilerplate', 'Benutzeranmeldenregistrieren');
-          const loginStatus = document.getElementById('login-status');
-          assert.equal(loginStatus.textContent, 'Benutzeranmeldenregistrieren');
-          const modalLayer = document.getElementById('modalLayer');
-          assert.equal(modalLayer.textContent, 'FORMULARFake LoginUsernamePasswordRemember Login ');
-          done();
-        });
-    });
-    it('should have elements', function (done) {
-      chai.request(app)
-        .get('/boilerplate/')
-        .end(function (err, res) {
-          document = getDocument(res, err);
-          testElement('.form', {
-            name: 'loginform',
-            method: 'POST',
-            action: '/boilerplate/form/'
-          }, null);
-          //*
-          testElement('.fieldcontainer_username', { }, 'Username');
-          testElement('.fieldcontainer_username .input-text', {
-            name: 'username', type: 'text'
-          }, null);
-          testElement('.fieldcontainer_password', { }, 'Password');
-          testElement('.fieldcontainer_password .input-password', {
-            name: 'password', type: 'password'
-          }, null);
-          testElement('.fieldcontainer_rememberMe', { }, 'Remember Login');
-          testElement('.fieldcontainer_rememberMe .input-checkbox', {
-            name: 'rememberMe',
-            type: 'checkbox',
-            value: 'store'
-          }, null);
-          testElement('.fieldcontainer_submit', { }, ' ');
-          testElement('.fieldcontainer_submit .input-submit', {
-            type: 'submit',
-            value: 'submit login'
-          }, null);
-          // */
+          testElement('#login-status', { }, 'Benutzeranmeldenregistrieren');
+          testElement('#modalLayer', { }, '');
           done();
         });
     });

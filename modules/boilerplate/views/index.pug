@@ -1,8 +1,6 @@
 //- index.pug
 extends ../../pages/views/page.pug
 
-include ../../login/views/includes/loginform.pug
-
 append head
   link(rel='stylesheet', href='/'+ modulePath + '/layout.css')
   script(src='/'+ modulePath + '/script.js')
@@ -19,8 +17,3 @@ block content
       a.form-link(href='/'+ modulePath + '/form/') Formular
   pre#test
     = JSON.stringify(locals, null, 2)
-
-block modallayer
-  #modalLayer.modalLayer.hidden&attributes({ 'data-toggle': '#modalLayer' })
-    #modalLayer-content.modalLayer-content
-      + loginform()

@@ -27,7 +27,6 @@ const index = (req, res) => {
     ...req.params,
     ...model.getData()
   };
-  /* c8 ignore next 3 */
   if (req.session && req.session.userdata) {
     data.userdata = req.session.userdata;
   }
@@ -40,7 +39,6 @@ const index = (req, res) => {
  * @param {object} req - request
  * @param {object} res - result
  */
-/* c8 ignore next 32 */
 const callback = async (req, res) => {
   const requestToken = req.query.code;
   if (requestToken) {
@@ -88,8 +86,27 @@ const logout = (req, res) => {
   res.redirect('/login/');
 };
 
+/**
+ * async loaded login page
+ *
+ * @param {object} req - request
+ * @param {object} res - result
+ */
+const include = (req, res) => {
+  let data = {
+    ...config.getData(req),
+    ...req.params,
+    ...model.getData()
+  };
+  if (req.session && req.session.userdata) {
+    data.userdata = req.session.userdata;
+  }
+  res.render(path.join(viewBase, 'include', req.params.template + '.pug'), data);
+};
+
 module.exports = {
   index: index,
   callback: callback,
-  logout: logout
+  logout: logout,
+  include: include
 };

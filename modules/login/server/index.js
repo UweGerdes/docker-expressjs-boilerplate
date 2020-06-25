@@ -32,6 +32,13 @@ router.get('/callback', controller.callback);
  */
 router.get('/logout', controller.logout);
 
+/**
+ * GET /include route
+ *
+ * @name get_include_route
+ */
+router.get('/include/:template', controller.include);
+
 module.exports = {
   router: router,
   useExpress: controller.useExpress

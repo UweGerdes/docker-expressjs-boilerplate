@@ -35,6 +35,34 @@ handlers['data-toggle'] = {
 };
 
 /**
+ * send request and show response in target element
+ */
+handlers['data-xhr'] = {
+  elements: document.querySelectorAll('[data-xhr]'),
+  event: 'click',
+  func: function (event) {
+    const element = event.target;
+    const container = document.querySelectorAll(element.dataset.xhrResponse)[0];
+    container.innerHTML = '';
+    const xhttp = new XMLHttpRequest();
+    let seenBytes = 0;
+    xhttp.onreadystatechange = function () {
+      if (xhttp.readyState === 3) {
+        var newData = xhttp.responseText.substr(seenBytes);
+        seenBytes = xhttp.responseText.length;
+        container.insertAdjacentHTML('beforeEnd', newData);
+        container.scrollTop = container.scrollHeight - container.clientHeight;
+      }
+      if (xhttp.readyState === 4) {
+        container.scrollTop = container.scrollHeight - container.clientHeight;
+      }
+    };
+    xhttp.open('GET', element.getAttribute('data-xhr'), true);
+    xhttp.send();
+  }
+};
+
+/**
  * Attach event to elements
  *
  * @param {DOMelement} element - to attach event
