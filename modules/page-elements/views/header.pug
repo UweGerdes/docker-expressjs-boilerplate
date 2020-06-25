@@ -20,8 +20,12 @@ block header
                   li.list-item.login-status-logout
                     a.link.logout-link(href=(session.logoutLink ? session.logoutLink : '/login/logout/')) abmelden
                 else
-                  li.list-item.login-status-login
-                    a.link.login-link(href=(locals.loginLink ? loginLink : '/login/'))= __('login')
+                  li.list-item.login-status-loginLayer
+                    span.link&attributes({
+                      'data-xhr': '/login/include/loginform',
+                      'data-xhr-response': '#modalLayer-content',
+                      'data-toggle': '#modalLayer'
+                    })= __('login')
                   li.list-item.login-status-register
                     a.link.register-link(href=(locals.registerLink ? registerLink : '/login/signup/'))= __('sign up')
 

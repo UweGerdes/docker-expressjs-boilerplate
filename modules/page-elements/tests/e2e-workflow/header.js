@@ -23,10 +23,10 @@ module.exports = {
           elements: {
             '//*[contains(@class, "header-breadcrumbs")]': 'Home\nBoilerplate',
             '//*[contains(@class, "login-status")]': 'Benutzer',
-            '//a[@href="/login/"][contains(., "anmelden")]': ''
+            '//span[contains(@class, "link")][contains(., "anmelden")]': ''
           },
           elementsNotVisible: [
-            '//a[@href="/login/"]'
+            '//span[contains(@class, "link")]'
           ]
         },
         'hover login-status': {
@@ -35,9 +35,9 @@ module.exports = {
           elements: {
             '//*[contains(@class, "header-breadcrumbs")]': 'Home\nBoilerplate',
             '//*[contains(@class, "login-status")]': 'Benutzer\nanmelden\nregistrieren',
-            '//a[@href="/login/"]': 'anmelden'
+            '//span[contains(@class, "link")]': 'anmelden'
           },
-          click: '//a[@href="/login/"]'
+          click: '//span[contains(@class, "link")]'
         }
       }
     },
@@ -49,10 +49,10 @@ module.exports = {
           elements: {
             '//*[contains(@class, "header-breadcrumbs")]': 'Home\nBoilerplate',
             '//*[contains(@class, "login-status")]': 'User',
-            '//a[@href="/login/"][contains(., "login")]': ''
+            '//span[contains(@class, "link")][contains(., "login")]': ''
           },
           elementsNotVisible: [
-            '//a[@href="/login/"]'
+            '//span[contains(@class, "link")]'
           ]
         },
         'hover login-status': {
@@ -61,9 +61,9 @@ module.exports = {
           elements: {
             '//*[contains(@class, "header-breadcrumbs")]': 'Home\nBoilerplate',
             '//*[contains(@class, "login-status")]': 'User\nlogin\nsign up',
-            '//a[@href="/login/"]': 'login'
+            '//span[contains(@class, "link")]': 'login'
           },
-          click: '//a[@href="/login/"]'
+          click: '//span[contains(@class, "link")]'
         }
       }
     }

@@ -20,7 +20,7 @@ block content
   pre#test
     = JSON.stringify(locals, null, 2)
 
-block modals
-  #loginLayer.layer.login-layer.hidden
-    .layer-content.login-layer-content
+block modallayer
+  #modalLayer.modalLayer.hidden&attributes({ 'data-toggle': '#modalLayer' })
+    #modalLayer-content.modalLayer-content
       + loginform()
