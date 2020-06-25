@@ -21,7 +21,7 @@ block header
                     a.link.logout-link(href=(session.logoutLink ? session.logoutLink : '/login/logout/')) abmelden
                 else
                   li.list-item.login-status-loginLayer
-                    span.link&attributes({
+                    span.link.loginLayer-link&attributes({
                       'data-xhr': '/login/include/loginform',
                       'data-xhr-response': '#modalLayer-content',
                       'data-toggle': '#modalLayer'

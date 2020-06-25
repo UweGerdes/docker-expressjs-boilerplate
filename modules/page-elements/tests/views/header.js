@@ -1,5 +1,5 @@
 /**
- * Test for boilerplate page elements
+ * Test for boilerplate header elements
  */
 
 'use strict';
