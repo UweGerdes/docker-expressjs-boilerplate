@@ -10,3 +10,25 @@ oauth2:
     accessTokenUri: https://github.com/login/oauth/access_token
     authorizationUri: https://github.com/login/oauth/authorize
     userdataUri: https://api.github.com/user
+
+loginform:
+  name: loginform
+  title: Login
+  sections:
+    simple:
+      label: Fake Login
+      fields:
+        - name: username
+          type: text
+          label: Username
+        - name: password
+          type: password
+          label: Password
+        - name: rememberMe
+          type: checkbox
+          value: store
+          text: Remember Login
+        - type: submit
+          name: submit
+          label: Click to Submit
+          value: submit login

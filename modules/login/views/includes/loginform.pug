@@ -1,0 +1,7 @@
+//- login/views/includes/loginform.pug
+
+include ../../../page-elements/views/form.pug
+
+mixin loginform()
+  div#formular.formular FORMULAR
+    + form(modules['login'].loginform, '/'+ modulePath + '/form/')
