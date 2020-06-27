@@ -51,7 +51,7 @@ const tasks = {
       /* c8 ignore next 1 */
       return file.eslint != null && file.eslint.fixed;
     };
-    return gulp.src(config.gulp.watch.eslint)
+    return gulp.src(config.gulp.lint.eslint.files)
       .pipe(changedInPlace({ howToDetermineDifference: 'modification-time' }))
       .pipe(notify({ message: 'linting: <%= file.path %>', title: 'Gulp eslint' }))
       .pipe(eslint({ configFile: path.join(__dirname, '..', '.eslintrc.js'), fix: true }))
@@ -137,12 +137,13 @@ const tasks = {
   /**
    * Run `ejslint` and `livereload-all` task
    *
-   * @function lint
+   * @function ejslint
    * @param {function} callback - gulp callback to signal end of task
    */
   /* c8 ignore next 6 */
-  'ejslint-livereload': [['ejslint'], (callback) => {
+  'ejslint': (callback) => {
     sequence(
+      'ejslint-exec',
       'livereload-all',
       callback
     );
@@ -154,10 +155,10 @@ const tasks = {
    * - strip non ejs html and `<%` and `%>`
    * - keep lines for counting
    *
-   * @function ejslint
+   * @function ejslint-exec
    * @param {function} callback - gulp callback to signal end of task
    */
-  'ejslint': (callback) => {
+  'ejslint-exec': async (callback) => {
     /**
      * Replace expression output tags
      *
@@ -210,7 +211,7 @@ const tasks = {
       });
     };
 
-    Promise.all(config.gulp.watch['ejslint-livereload'].map(filePromises.getFilenames))
+    Promise.all(config.gulp.watch.ejslint.map(filePromises.getFilenames))
       .then((filenames) => [].concat(...filenames))
       .then((filenames) => {
         return Promise.all(
@@ -237,8 +238,8 @@ const tasks = {
         /* c8 ignore next 3 */
         if (errorList.join('').length > 0) {
           error = new PluginError('ejslint', errorList.join(''));
+          callback(error);
         }
-        callback(error);
       });
   }
 };
@@ -247,8 +248,14 @@ if (process.env.NODE_ENV === 'development') {
   loadTasks.importTasks(tasks);
 /* c8 ignore next 6 */
 } else {
-  loadTasks.importTasks({
+  const envTasks = {
     eslint: () => { },
     ejslint: () => { }
-  });
+  };
+  config.gulp.start[process.env.NODE_ENV].lint.forEach(
+    (key) => {
+      envTasks[key] = tasks[key];
+    }
+  );
+  loadTasks.importTasks(envTasks);
 }

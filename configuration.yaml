@@ -18,7 +18,7 @@ gulp:
         - 'less'
         - 'js'
         - 'locales'
-#        - 'jsdoc'
+        - 'jsdoc'
       tests:
         - 'test-modules'
       lint:
@@ -33,14 +33,33 @@ gulp:
     staging:
       gulp:
         - 'watch'
+        - 'livereload-start'
         - 'server-start'
-      build: []
+        - 'livereload'
+        - 'eslint'
+      build:
+        - 'less'
+        - 'js'
+        - 'locales'
       tests: []
-      lint: []
+      lint:
+        - 'eslint'
+        - 'yamllint'
+        - 'puglint'
+        - 'lesshint'
       server:
         - 'server-changed'
       watch:
         - 'server'
+        - 'livereload'
+        - 'eslint'
+        - 'js'
+        - 'yamllint'
+        - 'puglint'
+        - 'less'
+        - 'livereload-all'
+        - 'test-modules'
+        - 'test-e2e-workflow-modules'
     production:
       gulp:
         - 'build'
@@ -53,17 +72,15 @@ gulp:
       lint: []
       server:
         - 'server-changed'
+      watch: []
   watch:
     eslint:
-      - '*.js'
+      - 'gulpfile.js'
       - '.eslintrc.js'
       - 'gulp/**/*.js'
-      - 'lib/**/*.js'
-      - 'modules/**/*.js'
     js:
       - 'modules/*/js/*.js'
     jsdoc:
-#      - 'nofile.js'
       - '*.js'
       - 'gulp/**/*.js'
       - 'lib/**/*.js'
@@ -80,7 +97,7 @@ gulp:
     yamllint:
       - '**/*.yaml'
       - '**/*.yml'
-    ejslint-livereload:
+    ejslint:
       - '**/*.ejs'
     less:
       - 'src/less/**/*.less'
@@ -96,11 +113,11 @@ gulp:
       - 'public/**/*.html'
       - 'public/img/**/*.*'
       - 'generated/**/*.css'
-      - 'modules/**/*.ejs'
-      - 'modules/**/*.pug'
     livereload-all:
       - 'generated/**/*.js'
       - 'locales/**/*.*'
+      - 'modules/**/*.ejs'
+      - 'modules/**/*.pug'
     test-modules:
       - '*.js'
       - 'modules/**/tests/model/*.*'
@@ -114,6 +131,12 @@ gulp:
       - 'modules/**/tests/views/*.js'
   lint:
     eslint:
+      files:
+        - '*.js'
+        - '.eslintrc.js'
+        - 'gulp/**/*.js'
+        - 'lib/**/*.js'
+        - 'modules/**/*.js'
       fixtureDir: './fixture'
   build:
     jsdoc:
