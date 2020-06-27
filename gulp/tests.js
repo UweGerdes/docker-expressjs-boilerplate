@@ -3,7 +3,7 @@
  *
  * @module gulp/tests
  * @requires module:lib/config
- * @requires module:gulp/lib/files-promises
+ * @requires module:lib/files-promises
  * @requires module:gulp/lib/load-tasks
  * @requires module:gulp/lib/notify
  */
@@ -15,7 +15,7 @@ const gulp = require('gulp'),
   sequence = require('gulp-sequence'),
   gulpStreamToPromise = require('gulp-stream-to-promise'),
   config = require('../lib/config'),
-  filePromises = require('./lib/files-promises'),
+  files = require('../lib/files-promises'),
   loadTasks = require('./lib/load-tasks'),
   notify = require('./lib/notify');
 
@@ -39,9 +39,9 @@ const tasks = {
    * @param {function} callback - gulp callback to signal end of task
    */
   'test-modules': [['eslint', 'ejslint'], (callback) => {
-    Promise.all(config.gulp.tests.modules.map(filePromises.getFilenames))
+    Promise.all(config.gulp.tests.modules.map(files.getFilenames))
       .then((filenames) => [].concat(...filenames))
-      .then(filePromises.getRecentFiles)
+      .then(files.getRecentFiles)
       .then((filenames) => {
         const task = gulp.src(filenames, { read: false })
           // `gulp-mocha` needs filepaths so you can't have any plugins before it

@@ -21,7 +21,7 @@ const gulp = require('gulp'),
   lessPluginGlob = require('less-plugin-glob'),
   combiner = require('stream-combiner2'),
   config = require('../lib/config'),
-  filePromises = require('./lib/files-promises'),
+  filePromises = require('../lib/files-promises'),
   loadTasks = require('./lib/load-tasks'),
   notify = require('./lib/notify');
 

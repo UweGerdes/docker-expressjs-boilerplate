@@ -3,7 +3,7 @@
  *
  * @module gulp/lint
  * @requires module:lib/config
- * @requires module:gulp/lib/files-promises
+ * @requires module:lib/files-promises
  * @requires module:gulp/lib/load-tasks
  * @requires module:gulp/lib/notify
  */
@@ -23,7 +23,7 @@ const gulp = require('gulp'),
   PluginError = require('plugin-error'),
   check = require('syntax-error'),
   config = require('../lib/config'),
-  filePromises = require('./lib/files-promises'),
+  filePromises = require('../lib/files-promises'),
   loadTasks = require('./lib/load-tasks'),
   notify = require('./lib/notify');
 
