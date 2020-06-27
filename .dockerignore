@@ -3,6 +3,7 @@
 /coverage
 /deploy
 /docs/jsdoc
+/results
 
 # not needed by inheriting projects
 /modules/boilerplate
