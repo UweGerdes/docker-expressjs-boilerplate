@@ -24,10 +24,9 @@ const fs = require('fs'),
   log = require('../lib/log'),
   notify = require('./lib/notify');
 
-
 const tasks = {
   /**
-   * Start all configured server tasks for current NODE_ENV setting
+   * Start all configured server tasks for current `NODE_ENV` setting
    *
    * @function server
    * @param {function} callback - gulp callback to signal end of task
@@ -91,7 +90,7 @@ const tasks = {
   /* c8 ignore next 5 */
   'livereload-all': () => {
     return gulp.src(config.gulp.watch.livereload[0])
-      .pipe(notify({ message: 'triggered', title: 'livereload-all' }))
+      .pipe(notify({ message: 'triggered', title: 'livereload' }))
       .pipe(livereload({ quiet: false }));
   },
   /**

@@ -21,7 +21,7 @@ const gulp = require('gulp'),
 
 const tasks = {
   /**
-   * Start all tests configured for current NODE_ENV setting
+   * Start all tests configured for current `NODE_ENV` setting
    *
    * @function test
    * @param {function} callback - gulp callback to signal end of task
@@ -33,7 +33,7 @@ const tasks = {
     );
   },
   /**
-   * Start all tests configured in configuration gulp.test.modules
+   * Start all tests configured in `config.gulp.test.modules`
    *
    * @function test-modules
    * @param {function} callback - gulp callback to signal end of task
