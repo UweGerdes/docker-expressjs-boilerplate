@@ -1,7 +1,7 @@
 {
   "name": "expressjs-boilerplate",
   "description": "boilerplate for nodejs docker with expressjs with pug and ejs for html frontend",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "keywords": [
     "boilerplate",
     "docker",

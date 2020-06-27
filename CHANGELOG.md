@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.2.7
+hover and modal layer, update jsdoc, refactoring
+
 ## 0.2.6
 node package upgrade, updates, cookie
 
