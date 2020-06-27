@@ -30,7 +30,7 @@ module.exports = {
             '//*[@id="modalLayer"]'
           ]
         },
-        'hover login-status': {
+        'hover Benutzer': {
           title: 'Boilerplate',
           hover: '//*[contains(@class, "login-status")]',
           elements: {
@@ -42,7 +42,7 @@ module.exports = {
             '//*[@id="modalLayer"]'
           ]
         },
-        'hover login': {
+        'click anmelden': {
           title: 'Boilerplate',
           hover: '//*[contains(@class, "loginLayer-link")]',
           elements: {
