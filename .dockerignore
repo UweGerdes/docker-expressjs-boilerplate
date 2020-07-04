@@ -8,4 +8,5 @@
 # not needed by inheriting projects
 /modules/boilerplate
 /modules/login
+/modules/page-elements/tests
 /modules/pages/tests
