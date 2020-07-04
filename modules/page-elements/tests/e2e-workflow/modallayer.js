@@ -1,7 +1,7 @@
 /**
  * Testdata for expressjs-boilerplate
  *
- * (c) Uwe Gerdes, entwicklung@uwegerdes.de
+ * @module modules/page-elements/tests/e2e-workflow/modallayer
  */
 
 const domain = 'http://boilerplate-server:8080';

@@ -1,5 +1,7 @@
 /**
  * Test for boilerplate header elements
+ *
+ * @module modules/page-elements/tests/views/header
  */
 
 'use strict';

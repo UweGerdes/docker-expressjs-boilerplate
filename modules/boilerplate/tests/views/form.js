@@ -1,5 +1,7 @@
 /**
  * Test for boilerplate form elements and fill post data structure when submitted
+ *
+ * @module modules/boilerplate/tests/views/form
  */
 
 'use strict';

@@ -1,7 +1,7 @@
 /**
  * Scripts for boilerplate frontend
  *
- * @module modules/boilerplate/js
+ * @module modules/boilerplate/js/script
  */
 
 'use strict';

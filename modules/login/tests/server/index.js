@@ -1,5 +1,7 @@
 /**
  * Test for login page elements
+ *
+ * @module modules/login/tests/server/index
  */
 
 'use strict';

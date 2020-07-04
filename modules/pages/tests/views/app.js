@@ -2,7 +2,6 @@
  * Test for page elements
  *
  * @module modules/pages/tests/views/app
- * @requires module:lib/config
  */
 
 'use strict';

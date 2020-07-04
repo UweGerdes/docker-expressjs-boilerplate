@@ -1,7 +1,7 @@
 /**
  * Scripts for page elements
  *
- * @module modules/page-elements/js
+ * @module modules/page-elements/js/script
  */
 
 'use strict';
@@ -10,6 +10,8 @@ let handlers = {};
 
 /**
  * toggle element by id
+ *
+ * @name data-toggle
  */
 handlers['data-toggle'] = {
   elements: [window],
@@ -36,6 +38,8 @@ handlers['data-toggle'] = {
 
 /**
  * send request and show response in target element
+ *
+ * @name data-xhr
  */
 handlers['data-xhr'] = {
   elements: document.querySelectorAll('[data-xhr]'),

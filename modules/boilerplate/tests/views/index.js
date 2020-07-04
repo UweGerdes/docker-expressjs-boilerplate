@@ -1,5 +1,7 @@
 /**
  * Test for boilerplate page elements
+ *
+ * @module modules/boilerplate/tests/views/index
  */
 
 'use strict';

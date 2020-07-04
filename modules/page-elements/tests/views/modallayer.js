@@ -1,5 +1,7 @@
 /**
  * Test for boilerplate modal layer
+ *
+ * @module modules/page-elements/tests/views/modallayer
  */
 
 'use strict';

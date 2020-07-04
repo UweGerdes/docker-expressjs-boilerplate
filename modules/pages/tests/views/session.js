@@ -1,5 +1,7 @@
 /**
  * Test for session handling
+ *
+ * @module modules/pages/tests/views/session
  */
 
 'use strict';
