@@ -13,7 +13,7 @@ sudo adduser [yourusername] docker
 
 ## Build the Docker image
 
-If you have proxy caches for apt-get and npm you should build my baseimage (or baseimage-arm32v7 for Raspberry Pi 3) and nodejs before building the image.
+If you have proxy caches for apt-get and npm you should build my baseimage and nodejs before building the image.
 
 ```bash
 $ docker build -t uwegerdes/expressjs-boilerplate .

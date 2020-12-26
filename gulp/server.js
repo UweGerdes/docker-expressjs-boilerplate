@@ -20,24 +20,10 @@ const fs = require('fs'),
   path = require('path'),
   config = require('../lib/config'),
   ipv4addresses = require('../lib/ipv4addresses'),
-  loadTasks = require('./lib/load-tasks'),
   log = require('../lib/log'),
   notify = require('./lib/notify');
 
 const tasks = {
-  /**
-   * Start all configured server tasks for current `NODE_ENV` setting
-   *
-   * @function server
-   * @param {function} callback - gulp callback to signal end of task
-   */
-  /* c8 ignore next 6 */
-  'server': [['eslint'], (callback) => {
-    sequence(
-      ...config.gulp.start[process.env.NODE_ENV].server,
-      callback
-    );
-  }],
   /**
    * Server start task
    *
@@ -111,4 +97,24 @@ const tasks = {
   }
 };
 
-loadTasks.importTasks(tasks);
+module.exports = tasks;
+
+/**
+ * Start all configured server tasks for current `NODE_ENV` setting
+ *
+ * @function server
+ * @param {function} callback - gulp callback to signal end of task
+ */
+// module.exports.server = gulp.series(...config.gulp.start[process.env.NODE_ENV].server);
+console.log(process.env.NODE_ENV, config.gulp.start[process.env.NODE_ENV]);
+const myTasks = Object.keys(tasks)
+  .filter(key => config.gulp.start[process.env.NODE_ENV].server.includes(key))
+  .reduce((obj, key) => {
+    console.log('reduce', key);
+    return {
+      ...obj,
+      [key]: tasks[key]
+    };
+  }, {});
+console.log(process.env.NODE_ENV, process.env.NODE_ENV, Object.keys(myTasks));
+module.exports.build = gulp.series(...Object.values(myTasks));

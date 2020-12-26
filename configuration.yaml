@@ -59,7 +59,6 @@ gulp:
         - 'less'
         - 'livereload-all'
         - 'test-modules'
-        - 'test-e2e-workflow-modules'
     production:
       gulp:
         - 'build'

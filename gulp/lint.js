@@ -17,29 +17,16 @@ const gulp = require('gulp'),
   jsonlint = require('gulp-jsonlint'),
   lesshint = require('gulp-lesshint'),
   pugLinter = require('gulp-pug-linter'),
-  sequence = require('gulp-sequence'),
   yamlValidate = require('gulp-yaml-validate'),
   path = require('path'),
   PluginError = require('plugin-error'),
   check = require('syntax-error'),
   config = require('../lib/config'),
   filePromises = require('../lib/files-promises'),
-  loadTasks = require('./lib/load-tasks'),
-  notify = require('./lib/notify');
+  notify = require('./lib/notify'),
+  server = require('./server');
 
 const tasks = {
-  /**
-   * default gulp lint task, start all tasks for current `NODE_ENV`
-   *
-   * @function lint
-   * @param {function} callback - gulp callback to signal end of task
-   */
-  'lint': (callback) => {
-    sequence(
-      ...config.gulp.start[process.env.NODE_ENV].lint,
-      callback
-    );
-  },
   /**
    * Apply eslint to `config.gulp.lint.eslint.files` files
    *
@@ -52,7 +39,7 @@ const tasks = {
       return file.eslint != null && file.eslint.fixed;
     };
     return gulp.src(config.gulp.lint.eslint.files)
-      .pipe(changedInPlace({ howToDetermineDifference: 'modification-time' }))
+      .pipe(gulpIf(gulpStatus.isWatching, changedInPlace({ howToDetermineDifference: 'modification-time' })))
       .pipe(notify({ message: 'linting: <%= file.path %>', title: 'Gulp eslint' }))
       .pipe(eslint({ configFile: path.join(__dirname, '..', '.eslintrc.js'), fix: true }))
       .pipe(eslint.format())
@@ -133,20 +120,6 @@ const tasks = {
   'puglint': () => {
     return gulp.src(config.gulp.watch.puglint)
       .pipe(pugLinter({ reporter: 'default', failAfterError: true }));
-  },
-  /**
-   * Run `ejslint` and `livereload-all` task
-   *
-   * @function ejslint
-   * @param {function} callback - gulp callback to signal end of task
-   */
-  /* c8 ignore next 6 */
-  'ejslint': (callback) => {
-    sequence(
-      'ejslint-exec',
-      'livereload-all',
-      callback
-    );
   },
   /**
    * Lint `config.gulp.watch.ejslint` files
@@ -244,18 +217,23 @@ const tasks = {
   }
 };
 
-if (process.env.NODE_ENV === 'development') {
-  loadTasks.importTasks(tasks);
-/* c8 ignore next 6 */
-} else {
-  const envTasks = {
-    eslint: () => { },
-    ejslint: () => { }
-  };
-  config.gulp.start[process.env.NODE_ENV].lint.forEach(
-    (key) => {
-      envTasks[key] = tasks[key];
-    }
-  );
-  loadTasks.importTasks(envTasks);
-}
+module.exports = tasks;
+
+/**
+ * default gulp lint task, start all tasks for current `NODE_ENV`
+ *
+ * @function lint
+ * @param {function} callback - gulp callback to signal end of task
+ */
+module.exports.lint = gulp.series(...Object.values(tasks));
+
+/**
+ * Run `ejslint-exec` and `livereload-all` task
+ *
+ * @function ejslint
+ * @param {function} callback - gulp callback to signal end of task
+ */
+module.exports.ejslint = gulp.series(
+  tasks['ejslint-exec'],
+  server['livereload-all']
+);
