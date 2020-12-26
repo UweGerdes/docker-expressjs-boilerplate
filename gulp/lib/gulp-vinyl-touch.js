@@ -6,11 +6,10 @@
 
 'use strict';
 
-const Transform = require('stream').Transform,
-  through2 = require('through2');
+const Transform = require('stream').Transform;
 
 module.exports = () => {
-  let transformStream = new Transform({objectMode: true});
+  let transformStream = new Transform({ objectMode: true });
   /**
    * @param {Buffer|string} file
    * @param {string=} encoding - ignored if file contains a Buffer

@@ -39,7 +39,7 @@ const tasks = {
       return file.eslint != null && file.eslint.fixed;
     };
     return gulp.src(config.gulp.lint.eslint.files)
-      .pipe(gulpIf(gulpStatus.isWatching, changedInPlace({ howToDetermineDifference: 'modification-time' })))
+      .pipe(gulpIf(global.gulpStatus.isWatching, changedInPlace({ howToDetermineDifference: 'modification-time' })))
       .pipe(notify({ message: 'linting: <%= file.path %>', title: 'Gulp eslint' }))
       .pipe(eslint({ configFile: path.join(__dirname, '..', '.eslintrc.js'), fix: true }))
       .pipe(eslint.format())

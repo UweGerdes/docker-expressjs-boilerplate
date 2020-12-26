@@ -19,8 +19,6 @@ const gulp = require('gulp'),
   gulpStreamToPromise = require('gulp-stream-to-promise'),
   gulpTouch = require('./lib/gulp-vinyl-touch'),
   lessPluginGlob = require('less-plugin-glob'),
-  combiner = require('stream-combiner2'),
-  through2 = require('through2'),
   config = require('../lib/config'),
   filePromises = require('../lib/files-promises'),
   notify = require('./lib/notify'),
@@ -33,22 +31,6 @@ const tasks = {
    * @function less
    */
   'less': gulp.series(lint.lesshint, function less() {
-/*
-    return combiner.obj([
-      gulp.src(config.gulp.build.less.src),
-      gulpLess({
-        plugins: [lessPluginGlob]
-      }),
-      autoprefixer('last 3 version', 'safari 5', 'ie 8', 'ie 9', 'ios 6', 'android 4'),
-      rename(path => {
-        path.dirname = path.dirname.replace(/\/less$/, '');
-        return path;
-      }),
-      gulp.dest(config.gulp.build.less.dest),
-      notify({ message: 'written: <%= file.path %>', title: 'Gulp less' })
-    ])
-      .on('error', () => { });
-*/
     return gulp.src(config.gulp.build.less.src)
       .pipe(gulpLess({
         plugins: [lessPluginGlob]

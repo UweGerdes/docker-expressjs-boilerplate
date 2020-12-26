@@ -37,14 +37,14 @@ function gulpWatch(callback) {
       .reduce((obj, key) => ({ ...obj, [key]: gulp.watch[key] }), {});
   }
   console.log('watch:', tasklist, process.env.NODE_ENV);
-  gulpStatus.isWatching = true;
+  global.gulpStatus.isWatching = true;
   for (let task in tasklist) {
     if (gulp.watch.hasOwnProperty(task)) {
       console.log('watch:', task);
       if (task === 'less') {
         log.info('Task "' + task + '" is watching: ' + tasklist[task]);
         console.log(tasklist[task], { events: 'all' /* ,  ignoreInitial: false */ }, tasks[task]);
-        watch(tasklist[task], { events: 'all',  ignoreInitial: false }, tasks[task]);
+        watch(tasklist[task], { events: 'all', ignoreInitial: false }, tasks[task]);
       }
     }
   }
