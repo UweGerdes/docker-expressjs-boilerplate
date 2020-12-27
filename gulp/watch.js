@@ -9,10 +9,16 @@
 
 'use strict';
 
-const gulp = require('gulp'),
+const { watch } = require('gulp'),
   config = require('../lib/config'),
-  log = require('../lib/log'),
-  loadTasks = require('./lib/load-tasks');
+  log = require('../lib/log');
+
+const gulpTasks = {
+  ...require('./build'),
+  ...require('./lint'),
+  ...require('./server'),
+  ...require('./tests')
+};
 
 const tasks = {
   /**
@@ -24,7 +30,7 @@ const tasks = {
   'watch': (callback) => {
     global.gulpStatus.isWatching = true;
 
-    const watchTasks = gulp.start[process.env.NODE_ENV].watch
+    const watchTasks = config.gulp.start[process.env.NODE_ENV].watch
       .reduce((obj, key) => {
         return {
           ...obj,
@@ -33,9 +39,9 @@ const tasks = {
       }, {});
 
     for (let task in watchTasks) {
-      if (gulp.watch.hasOwnProperty(task)) {
-        log.info('Task "' + task + '" is watching: ' + gulp.watch[task].join(', '));
-        watch(gulp.watch[task], { events: 'all', ignoreInitial: true }, tasks[task]);
+      if (config.gulp.watch.hasOwnProperty(task)) {
+        log.info('Task "' + task + '" is watching: ' + config.gulp.watch[task].join(', '));
+        watch(config.gulp.watch[task], { events: 'all', ignoreInitial: true }, gulpTasks[task]);
       }
     }
     callback();

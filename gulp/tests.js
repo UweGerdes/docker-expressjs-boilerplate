@@ -15,8 +15,7 @@ const gulp = require('gulp'),
   gulpStreamToPromise = require('gulp-stream-to-promise'),
   config = require('../lib/config'),
   files = require('../lib/files-promises'),
-  notify = require('./lib/notify'),
-  lint = require('./lint');
+  notify = require('./lib/notify');
 
 const tasks = {
   /**

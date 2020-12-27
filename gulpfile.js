@@ -17,9 +17,8 @@
 
 global.gulpStatus = { isWatching: false };
 
-const { series, watch } = require('gulp'),
-  { gulp } = require('./lib/config'),
-  log = require('./lib/log');
+const { series } = require('gulp'),
+  config = require('./lib/config');
 
 const tasks = {
   ...require('./gulp/build'),
@@ -35,7 +34,7 @@ if (!process.env.NODE_ENV) {
 
 module.exports = tasks;
 
-const myTasks = gulp.start[process.env.NODE_ENV].default
+const myTasks = config.gulp.start[process.env.NODE_ENV].default
   .reduce((obj, key) => {
     return {
       ...obj,

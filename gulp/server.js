@@ -21,6 +21,7 @@ const fs = require('fs'),
   ipv4addresses = require('../lib/ipv4addresses'),
   log = require('../lib/log'),
   notify = require('./lib/notify'),
+  lint = require('./lint'),
   tests = require('./tests');
 
 const tasks = {
@@ -46,15 +47,18 @@ const tasks = {
    * @param {function} callback - gulp callback to signal end of task
    */
   /* c8 ignore next 8 */
-  'server-changed': gulp.series(function serverChanged(callback) {
-    server.changed((error) => {
-      if (!error) {
-        livereload.changed({ path: '/', quiet: false });
-      }
-      callback();
-    }),
+  'server-changed': gulp.series(
+    lint.eslint,
+    function serverChanged(callback) {
+      server.changed((error) => {
+        if (!error) {
+          livereload.changed({ path: '/', quiet: false });
+        }
+        callback();
+      });
+    },
     tests.tests
-  }),
+  ),
   /**
    * Server livereload task notifies clients
    *
@@ -86,7 +90,7 @@ const tasks = {
    * @function livereload-start
    */
   /* c8 ignore next 10 */
-  'livereload-start': () => {
+  'livereload-start': (callback) => {
     livereload.listen({
       host: ipv4addresses.get()[0],
       port: '8081',
@@ -95,6 +99,7 @@ const tasks = {
       cert: fs.readFileSync(path.join(__dirname, '..', config.server.httpsCert))
     });
     log.info('livereload listening on http://' + ipv4addresses.get()[0] + ':' + process.env.LIVERELOAD_PORT);
+    callback();
   }
 };
 

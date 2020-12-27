@@ -23,8 +23,7 @@ const gulp = require('gulp'),
   check = require('syntax-error'),
   config = require('../lib/config'),
   filePromises = require('../lib/files-promises'),
-  notify = require('./lib/notify'),
-  server = require('./server');
+  notify = require('./lib/notify');
 
 const tasks = {
   /**
@@ -231,6 +230,5 @@ module.exports.lint = gulp.series(...Object.values(tasks));
  * @param {function} callback - gulp callback to signal end of task
  */
 module.exports.ejslint = gulp.series(
-  tasks['ejslint-exec'],
-  server['livereload-all']
+  tasks['ejslint-exec']
 );
