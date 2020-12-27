@@ -12,7 +12,7 @@
 
 const gulp = require('gulp'),
   autoprefixer = require('gulp-autoprefixer'),
-  jsdoc = require('gulp-jsdoc3'),
+  gulpJsdoc = require('gulp-jsdoc3'),
   gulpLess = require('gulp-less'),
   mergeTranslations = require('gulp-merge-translations'),
   rename = require('gulp-rename'),
@@ -49,7 +49,7 @@ const tasks = {
    *
    * @function js
    */
-  'js': gulp.series(lint.eslint, (callback) => {
+  'js': gulp.series(lint.eslint, function js(callback) {
     Promise.all(config.gulp.build.js.src.map(filePromises.getFilenames))
       .then((filenames) => [].concat(...filenames))
       .then(filePromises.getRecentFiles)
@@ -63,6 +63,7 @@ const tasks = {
                   path.dirname = filename.replace(new RegExp(key), config.gulp.build.js.replace[key]);
                 });
               }))
+              .pipe(gulpTouch())
               .pipe(gulp.dest(config.gulp.build.js.dest))
               .pipe(notify({ message: 'written: <%= file.path %>', title: 'Gulp js' }))
           ));
@@ -79,7 +80,7 @@ const tasks = {
    *
    * @function locales
    */
-  'locales': gulp.series(lint.localesjsonlint, () => {
+  'locales': gulp.series(lint.localesjsonlint, function locales() {
     return gulp.src(config.gulp.watch.locales)
       .pipe(mergeTranslations('', {
         sep: '',
@@ -94,7 +95,7 @@ const tasks = {
    * @function jsdoc
    * @param {function} callback - gulp callback to signal end of task
    */
-  'jsdoc': gulp.series(lint.eslint, (callback) => {
+  'jsdoc': gulp.series(lint.eslint, function jsdoc(callback) {
     const jsdocConfig = {
       'tags': {
         'allowUnknownTags': true
@@ -119,7 +120,7 @@ const tasks = {
       }
     };
     gulp.src(config.gulp.build.jsdoc.src, { read: false })
-      .pipe(jsdoc(jsdocConfig, callback));
+      .pipe(gulpJsdoc(jsdocConfig, callback));
   }),
   /**
    * Copy files to deploy
@@ -144,3 +145,15 @@ module.exports = tasks;
  * @param {function} callback - gulp callback to signal end of task
  */
 module.exports.build = gulp.series(...Object.values(tasks));
+console.log(process.env.NODE_ENV, config.gulp.start[process.env.NODE_ENV].build);
+const myTasks = Object.keys(tasks)
+  .filter(key => config.gulp.start[process.env.NODE_ENV].build.includes(key))
+  .reduce((obj, key) => {
+    console.log('reduce', key);
+    return {
+      ...obj,
+      [key]: tasks[key]
+    };
+  }, {});
+console.log(process.env.NODE_ENV, process.env.NODE_ENV, Object.keys(myTasks));
+module.exports.build = gulp.series(...Object.values(myTasks));

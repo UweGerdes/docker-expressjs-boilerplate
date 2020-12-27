@@ -29,7 +29,7 @@ describe('/login/tests/server/index.js', function () {
           done();
         });
     });
-    it('should have headline and links', function (done) {
+    it('login should have headline and links', function (done) {
       chai.request('http://localhost:8080')
         .get('/login/')
         .end(function (err, res) {
@@ -44,7 +44,7 @@ describe('/login/tests/server/index.js', function () {
           done();
         });
     });
-    it('should have headline and links', function (done) {
+    it('logout should have headline and links', function (done) {
       chai.request('http://localhost:8080')
         .get('/login/logout/')
         .end(function (err, res) {

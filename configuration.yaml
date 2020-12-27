@@ -30,6 +30,8 @@ gulp:
       server:
         - 'server-changed'
         - 'tests'
+      deploy:
+        - 'deploy'
     staging:
       gulp:
         - 'watch'

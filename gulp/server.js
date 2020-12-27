@@ -116,4 +116,4 @@ const myTasks = Object.keys(tasks)
     };
   }, {});
 console.log(process.env.NODE_ENV, process.env.NODE_ENV, Object.keys(myTasks));
-module.exports.build = gulp.series(...Object.values(myTasks));
+module.exports.server = gulp.series(...Object.values(myTasks));

@@ -23,7 +23,8 @@ const { watch } = require('gulp'),
 const tasks = {
   ...require('./gulp/lint'),
   ...require('./gulp/build'),
-  ...require('./gulp/server')
+  ...require('./gulp/server'),
+  ...require('./gulp/tests')
 };
 /* c8 ignore next 3 */
 if (!process.env.NODE_ENV) {
@@ -60,7 +61,7 @@ const myTasks = Object.keys(tasks)
     };
   }, {});
 console.log(process.env.NODE_ENV, Object.keys(myTasks));
-module.exports = tasks;
+module.exports = myTasks;
 module.exports.watch = gulpWatch;
 
 /*

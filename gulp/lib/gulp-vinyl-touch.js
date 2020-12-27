@@ -17,7 +17,7 @@ module.exports = () => {
    *          error argument and data) when you are done processing the supplied chunk.
    */
   transformStream._transform = function(file, encoding, callback) {
-    const error = null;
+    let error = null;
     if (file !== null && file.stat !== null) {
       file.stat.atime = file.stat.mtime = new Date();
     } else {

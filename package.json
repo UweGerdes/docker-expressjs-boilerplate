@@ -64,7 +64,6 @@
     "gulp-notify": "^3.2.0",
     "gulp-pug-linter": "^1.4.0",
     "gulp-rename": "^2.0.0",
-    "gulp-sequence": "^1.0.0",
     "gulp-stream-to-promise": "^0.1.0",
     "gulp-yaml-validate": "^1.0.2",
     "jsdom": "^16.4.0",

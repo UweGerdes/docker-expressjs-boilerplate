@@ -81,7 +81,6 @@ const tasks = {
   'localesjsonlint': () => {
     return gulp.src(config.gulp.watch.locales)
       .pipe(jsonlint())
-      .pipe(jsonlint.reporter())
       .pipe(jsonlint.failOnError());
   },
   /**
@@ -131,7 +130,7 @@ const tasks = {
    * @function ejslint-exec
    * @param {function} callback - gulp callback to signal end of task
    */
-  'ejslint-exec': async (callback) => {
+  'ejslint-exec': async () => {
     /**
      * Replace expression output tags
      *
@@ -184,7 +183,7 @@ const tasks = {
       });
     };
 
-    Promise.all(config.gulp.watch.ejslint.map(filePromises.getFilenames))
+    return Promise.all(config.gulp.watch.ejslint.map(filePromises.getFilenames))
       .then((filenames) => [].concat(...filenames))
       .then((filenames) => {
         return Promise.all(
@@ -207,11 +206,9 @@ const tasks = {
         );
       })
       .then((errorList) => {
-        let error;
         /* c8 ignore next 3 */
         if (errorList.join('').length > 0) {
-          error = new PluginError('ejslint', errorList.join(''));
-          callback(error);
+          throw new PluginError('ejslint', errorList.join(''));
         }
       });
   }
