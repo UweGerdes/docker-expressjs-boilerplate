@@ -20,24 +20,26 @@ const tasks = {
    *
    * @function watch
    */
-  /* c8 ignore next 17 */
-  'watch': () => {
-    const tasks = loadTasks.tasks();
-    let tasklist = config.gulp.watch;
-    if (config.gulp.start[process.env.NODE_ENV] && config.gulp.start[process.env.NODE_ENV].watch) {
-      tasklist = config.gulp.start[process.env.NODE_ENV].watch
-        .reduce((obj, key) => ({ ...obj, [key]: config.gulp.watch[key] }), {});
-    }
-    for (let task in tasklist) {
-      if (config.gulp.watch.hasOwnProperty(task)) {
-        if (tasks.indexOf(task) >= 0) {
-          gulp.watch(config.gulp.watch[task], [task]);
-          log.info('Task "' + task + '" is watching: [ ' +
-            config.gulp.watch[task].join(', ') + ' ]');
-        }
+  /* c8 ignore next 19 */
+  'watch': (callback) => {
+    global.gulpStatus.isWatching = true;
+
+    const watchTasks = gulp.start[process.env.NODE_ENV].watch
+      .reduce((obj, key) => {
+        return {
+          ...obj,
+          [key]: tasks[key]
+        };
+      }, {});
+
+    for (let task in watchTasks) {
+      if (gulp.watch.hasOwnProperty(task)) {
+        log.info('Task "' + task + '" is watching: ' + gulp.watch[task].join(', '));
+        watch(gulp.watch[task], { events: 'all', ignoreInitial: true }, tasks[task]);
       }
     }
+    callback();
   }
 };
 
-loadTasks.importTasks(tasks);
+module.exports = tasks;

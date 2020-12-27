@@ -95,7 +95,7 @@ const tasks = {
    * @function jsdoc
    * @param {function} callback - gulp callback to signal end of task
    */
-  'jsdoc': gulp.series(lint.eslint, function jsdoc(callback) {
+  'jsdoc': (callback) => {
     const jsdocConfig = {
       'tags': {
         'allowUnknownTags': true
@@ -121,7 +121,7 @@ const tasks = {
     };
     gulp.src(config.gulp.build.jsdoc.src, { read: false })
       .pipe(gulpJsdoc(jsdocConfig, callback));
-  }),
+  },
   /**
    * Copy files to deploy
    *
@@ -144,16 +144,11 @@ module.exports = tasks;
  * @function build
  * @param {function} callback - gulp callback to signal end of task
  */
-module.exports.build = gulp.series(...Object.values(tasks));
-console.log(process.env.NODE_ENV, config.gulp.start[process.env.NODE_ENV].build);
-const myTasks = Object.keys(tasks)
-  .filter(key => config.gulp.start[process.env.NODE_ENV].build.includes(key))
+const myTasks = config.gulp.start[process.env.NODE_ENV].build
   .reduce((obj, key) => {
-    console.log('reduce', key);
     return {
       ...obj,
       [key]: tasks[key]
     };
   }, {});
-console.log(process.env.NODE_ENV, process.env.NODE_ENV, Object.keys(myTasks));
 module.exports.build = gulp.series(...Object.values(myTasks));

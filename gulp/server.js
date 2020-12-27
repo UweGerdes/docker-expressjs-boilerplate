@@ -20,7 +20,8 @@ const fs = require('fs'),
   config = require('../lib/config'),
   ipv4addresses = require('../lib/ipv4addresses'),
   log = require('../lib/log'),
-  notify = require('./lib/notify');
+  notify = require('./lib/notify'),
+  tests = require('./tests');
 
 const tasks = {
   /**
@@ -45,14 +46,15 @@ const tasks = {
    * @param {function} callback - gulp callback to signal end of task
    */
   /* c8 ignore next 8 */
-  'server-changed': (callback) => {
+  'server-changed': gulp.series(function serverChanged(callback) {
     server.changed((error) => {
       if (!error) {
         livereload.changed({ path: '/', quiet: false });
       }
       callback();
-    });
-  },
+    }),
+    tests.tests
+  }),
   /**
    * Server livereload task notifies clients
    *
@@ -104,16 +106,12 @@ module.exports = tasks;
  * @function server
  * @param {function} callback - gulp callback to signal end of task
  */
-// module.exports.server = gulp.series(...config.gulp.start[process.env.NODE_ENV].server);
-console.log(process.env.NODE_ENV, config.gulp.start[process.env.NODE_ENV]);
 const myTasks = Object.keys(tasks)
   .filter(key => config.gulp.start[process.env.NODE_ENV].server.includes(key))
   .reduce((obj, key) => {
-    console.log('reduce', key);
     return {
       ...obj,
       [key]: tasks[key]
     };
   }, {});
-console.log(process.env.NODE_ENV, process.env.NODE_ENV, Object.keys(myTasks));
 module.exports.server = gulp.series(...Object.values(myTasks));

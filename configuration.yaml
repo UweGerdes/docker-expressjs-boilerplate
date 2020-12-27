@@ -4,7 +4,7 @@
 gulp:
   start:
     development:
-      gulp:
+      default:
         - 'lint'
         - 'build'
         - 'watch'
@@ -13,7 +13,7 @@ gulp:
         - 'tests'
         - 'livereload'
 #        - 'livereload-all'
-        - 'eslint'
+#        - 'eslint'
       build:
         - 'less'
         - 'js'
@@ -32,8 +32,18 @@ gulp:
         - 'tests'
       deploy:
         - 'deploy'
+      watch:
+        - 'server'
+        - 'livereload'
+        - 'eslint'
+        - 'js'
+        - 'yamllint'
+        - 'puglint'
+        - 'less'
+        - 'livereload-all'
+        - 'test-modules'
     staging:
-      gulp:
+      default:
         - 'watch'
         - 'livereload-start'
         - 'server-start'
@@ -62,7 +72,7 @@ gulp:
         - 'livereload-all'
         - 'test-modules'
     production:
-      gulp:
+      default:
         - 'build'
         - 'server-start'
       build:
