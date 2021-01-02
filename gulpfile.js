@@ -34,7 +34,7 @@ if (!process.env.NODE_ENV) {
 
 module.exports = tasks;
 
-const myTasks = config.gulp.start[process.env.NODE_ENV].default
+const defaultTasks = config.gulp.start[process.env.NODE_ENV].default
   .reduce((obj, key) => {
     return {
       ...obj,
@@ -42,4 +42,4 @@ const myTasks = config.gulp.start[process.env.NODE_ENV].default
     };
   }, {});
 
-module.exports.default = series(...Object.values(myTasks));
+module.exports.default = series(...Object.values(defaultTasks));
