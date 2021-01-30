@@ -6,6 +6,7 @@
  * @requires module:lib/files-promises
  * @requires module:gulp/lib/load-tasks
  * @requires module:gulp/lib/notify
+ * @requires module:gulp/lint
  */
 
 'use strict';

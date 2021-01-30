@@ -6,6 +6,7 @@
  * @requires module:lib/files-promises
  * @requires module:gulp/lib/load-tasks
  * @requires module:gulp/lib/notify
+ * @requires module:gulp/lint
  */
 
 'use strict';
@@ -15,7 +16,8 @@ const gulp = require('gulp'),
   gulpStreamToPromise = require('gulp-stream-to-promise'),
   config = require('../lib/config'),
   files = require('../lib/files-promises'),
-  notify = require('./lib/notify');
+  notify = require('./lib/notify'),
+  lint = require('./lint');
 
 const tasks = {
   /**
@@ -43,7 +45,7 @@ const tasks = {
         callback();
       })
       .catch(err => console.log(err));
-  }
+  })
 };
 
 module.exports = tasks;
