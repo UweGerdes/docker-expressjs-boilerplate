@@ -10,7 +10,7 @@ gulp:
         - 'watch'
         - 'livereload-start'
         - 'server-start'
-        - 'tests'
+#        - 'tests'
         - 'livereload'
 #        - 'livereload-all'
 #        - 'eslint'
