@@ -48,4 +48,15 @@ const tasks = {
   }
 };
 
-module.exports = tasks;
+let moduleTasks = [];
+/**
+ * Load gulp watch from modules
+ *
+ * @name module_gulp_loader
+ */
+glob.sync(config.server.modules + '/*/gulp/watch.js')
+  .forEach((filename) => {
+    moduleTasks.push(require('.' + filename));
+  });
+
+module.exports = Object.assign({}, tasks, ...moduleTasks);

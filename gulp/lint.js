@@ -213,7 +213,18 @@ const tasks = {
   }
 };
 
-module.exports = tasks;
+let moduleTasks = [];
+/**
+ * Load gulp lint from modules
+ *
+ * @name module_gulp_loader
+ */
+glob.sync(config.server.modules + '/*/gulp/lint.js')
+  .forEach((filename) => {
+    moduleTasks.push(require('.' + filename));
+  });
+
+module.exports = Object.assign({}, tasks, ...moduleTasks);
 
 /**
  * default gulp lint task, start all tasks for current `NODE_ENV`

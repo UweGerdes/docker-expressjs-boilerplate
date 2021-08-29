@@ -48,7 +48,18 @@ const tasks = {
   })
 };
 
-module.exports = tasks;
+let moduleTasks = [];
+/**
+ * Load gulp tests from modules
+ *
+ * @name module_gulp_loader
+ */
+glob.sync(config.server.modules + '/*/gulp/tests.js')
+  .forEach((filename) => {
+    moduleTasks.push(require('.' + filename));
+  });
+
+module.exports = Object.assign({}, tasks, ...moduleTasks);
 
 /**
  * Start all tests configured for current `NODE_ENV` setting
