@@ -14,6 +14,7 @@
 const gulp = require('gulp'),
   mocha = require('gulp-mocha'),
   gulpStreamToPromise = require('gulp-stream-to-promise'),
+  glob = require('glob'),
   config = require('../lib/config'),
   files = require('../lib/files-promises'),
   notify = require('./lib/notify'),

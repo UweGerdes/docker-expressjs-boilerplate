@@ -10,6 +10,7 @@
 'use strict';
 
 const { watch } = require('gulp'),
+  glob = require('glob'),
   config = require('../lib/config'),
   log = require('../lib/log');
 
