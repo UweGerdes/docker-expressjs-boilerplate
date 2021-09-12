@@ -5,6 +5,8 @@
 
 'use strict';
 
+const config = require('../../../lib/config');
+
 const tasks = {
   /**
    * test task
@@ -15,6 +17,7 @@ const tasks = {
   /* c8 ignore next 4 */
   'boilerplate-server': (callback) => {
     console.log('boilerplate-server called');
+    console.log(JSON.stringify(config, null, 4));
     callback();
   }
 };

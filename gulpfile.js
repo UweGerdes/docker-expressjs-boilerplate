@@ -18,6 +18,7 @@
 global.gulpStatus = { isWatching: false };
 
 const { series } = require('gulp'),
+  log = require('./lib/log'),
   config = require('./lib/config');
 
 const tasks = {
@@ -32,14 +33,36 @@ if (!process.env.NODE_ENV) {
   process.env.NODE_ENV = 'development';
 }
 
-module.exports = tasks;
-
-const defaultTasks = config.gulp.start[process.env.NODE_ENV].default
-  .reduce((obj, key) => {
+/**
+ * Start all configured tasks for current `NODE_ENV` setting
+ *
+ * @function server
+ * @param {function} callback - gulp callback to signal end of task
+ */
+const myGroups = Object.keys(config.gulp.start[process.env.NODE_ENV])
+  .reduce((obj, group) => {
+    const myTasks = Object.keys(tasks)
+      .filter(key => config.gulp.start[process.env.NODE_ENV][group].includes(key))
+      .reduce((obj, key) => {
+        return {
+          ...obj,
+          [key]: tasks[key]
+        };
+      }, {});
+    tasks[group] = series(...Object.values(myTasks));
     return {
       ...obj,
-      [key]: tasks[key]
+      [group]: myTasks
     };
   }, {});
-
-module.exports.default = series(...Object.values(defaultTasks));
+// tasks = gulp.series(...Object.values(myTasks));
+//*
+log.info('myGroups: ' + Object.keys(myGroups).join(', '));
+Object.keys(myGroups)
+  .forEach(group => {
+    log.info(group + ': ' + Object.keys(myGroups[group]).join(', '));
+  });
+log.info('lesshint: ' + myGroups.lint.lesshint);
+log.info('tasks: ' + Object.keys(tasks).join(', '));
+// */
+module.exports = tasks;

@@ -22,8 +22,7 @@ const fs = require('fs'),
   ipv4addresses = require('../lib/ipv4addresses'),
   log = require('../lib/log'),
   notify = require('./lib/notify'),
-  lint = require('./lint'),
-  tests = require('./tests');
+  lint = require('./lint');
 
 const tasks = {
   /**
@@ -57,8 +56,7 @@ const tasks = {
         }
         callback();
       });
-    },
-    tests.tests
+    }
   ),
   /**
    * Server livereload task notifies clients

@@ -228,10 +228,9 @@ glob.sync(config.server.modules + '/*/gulp/lint.js')
 module.exports = Object.assign({}, tasks, ...moduleTasks);
 
 /**
- * default gulp lint task, start all tasks for current `NODE_ENV`
+ * default gulp lint task, start all tasks
  *
  * @function lint
- * @param {function} callback - gulp callback to signal end of task
  */
 module.exports.lint = gulp.series(...Object.values(tasks));
 
