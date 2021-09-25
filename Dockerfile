@@ -29,8 +29,7 @@ RUN apt-get update && \
 					c8 \
 					gulp-cli \
 					mocha \
-					nodemon \
-					npm ; \
+					nodemon ; \
 	fi && \
 	rm -r /tmp/*
 
