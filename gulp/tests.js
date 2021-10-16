@@ -68,4 +68,4 @@ module.exports = Object.assign({}, tasks, ...moduleTasks);
  * @function test
  * @param {function} callback - gulp callback to signal end of task
  */
-module.exports.tests = gulp.series(...Object.values(tasks));
+module.exports.tests2 = gulp.series(...Object.values(tasks));

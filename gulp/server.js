@@ -129,4 +129,4 @@ const myTasks = Object.keys(tasks)
       [key]: tasks[key]
     };
   }, {});
-module.exports.server = gulp.series(...Object.values(myTasks));
+module.exports.server2 = gulp.series(...Object.values(myTasks));

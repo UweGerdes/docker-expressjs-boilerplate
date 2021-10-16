@@ -232,7 +232,7 @@ module.exports = Object.assign({}, tasks, ...moduleTasks);
  *
  * @function lint
  */
-module.exports.lint = gulp.series(...Object.values(tasks));
+module.exports.lint2 = gulp.series(...Object.values(tasks));
 
 /**
  * Run `ejslint-exec` and `livereload-all` task

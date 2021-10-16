@@ -164,4 +164,4 @@ const myTasks = config.gulp.start[process.env.NODE_ENV].build
       [key]: tasks[key]
     };
   }, {});
-module.exports.build = gulp.series(...Object.values(myTasks));
+module.exports.build2 = gulp.series(...Object.values(myTasks));
