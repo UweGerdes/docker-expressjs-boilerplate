@@ -24,8 +24,8 @@ const { series } = require('gulp'),
 const tasks = {
   ...require('./gulp/build'),
   ...require('./gulp/lint'),
-  ...require('./gulp/server'),
   ...require('./gulp/tests'),
+  ...require('./gulp/server'),
   ...require('./gulp/watch')
 };
 /* c8 ignore next 3 */
