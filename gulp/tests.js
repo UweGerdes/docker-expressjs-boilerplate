@@ -27,7 +27,8 @@ const tasks = {
    * @function test-modules
    * @param {function} callback - gulp callback to signal end of task
    */
-  'test-modules': gulp.series(lint.eslint, function testModules(callback) {
+   // 'test-modules': gulp.series(lint.eslint, function testModules(callback) {
+  'test-modules': function testModules(callback) {
     Promise.all(config.gulp.tests.modules.map(files.getFilenames))
       .then((filenames) => [].concat(...filenames))
       .then(files.getRecentFiles)
@@ -46,7 +47,8 @@ const tasks = {
         callback();
       })
       .catch(err => console.log(err));
-  })
+  }
+  // })
 };
 
 let moduleTasks = [];
