@@ -27,9 +27,10 @@ gulp:
         - 'jsonlint'
         - 'yamllint'
         - 'puglint'
+        - 'lesshint'
       server:
         - 'server-changed'
-        - 'tests'
+        - 'test-modules'
       deploy:
         - 'deploy'
       watch:
@@ -191,6 +192,79 @@ gulp:
         - 'modules/*/views/**/*'
         - 'public/**/*'
       dest: 'deploy'
+  watching:
+    less:
+      watch:
+        - 'src/less/**/*.less'
+        - 'modules/**/*.less'
+      src:
+        - src/less/app.less
+        - modules/*/less/layout.less
+      dest: generated
+      tasks:
+        - lesshint
+        - less
+    ejslint:
+      watch:
+        - '**/*.ejs'
+      tasks:
+        - ejslint
+        - livereload-all
+    puglint:
+      watch:
+        - '**/*.pug'
+      tasks:
+        - puglint
+        - livereload-all
+    js:
+      src:
+        - 'modules/*/js/*.js'
+      dest: 'generated'
+      replace:
+        'modules/(.+/)js/.+': '$1'
+      tasks:
+        - eslint
+        - js
+    locales:
+      src:
+        - 'src/locales/*.json'
+        - 'modules/*/locales/*.json'
+      dest: locales
+      tasks:
+        - localesjsonlint
+        - locales
+    livereload:
+      watch:
+        - 'public/**/*.html'
+        - 'public/img/**/*.*'
+        - 'generated/**/*.css'
+      tasks:
+        - livereload
+    livereload-all:
+      watch:
+        - 'generated/**/*.js'
+        - 'locales/**/*.*'
+      tasks:
+        - livereload-all
+    server:
+      watch:
+        - 'server.js'
+        - 'lib/*.js'
+        - 'modules/*/server/*.js'
+        - 'modules/*/*.yaml'
+      tasks:
+        - eslint
+        - yamllint
+        - server-changed
+        - test-modules
+    gulp:
+      watch:
+        - 'gulpfile.js'
+        - '.eslintrc.js'
+        - 'gulp/**/*.js'
+        - 'modules/*/gulp/*.js'
+      tasks:
+        - eslint
 
 server:
   server: ./server.js
