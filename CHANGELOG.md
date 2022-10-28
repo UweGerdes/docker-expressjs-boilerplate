@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.3.1
+package upgrades
+
 ## 0.3.0
 switch to Gulp.JS 4.x
 
