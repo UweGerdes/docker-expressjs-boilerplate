@@ -12,7 +12,6 @@ gulp:
 
   watch:
     'boilerplate-server':
-      - 'modules/boilerplate/gulp/server.js'
       - 'modules/boilerplate/js/script.js'
 
 form:

@@ -61,11 +61,3 @@ glob.sync(config.server.modules + '/*/gulp/tests.js')
   });
 
 module.exports = Object.assign({}, tasks, ...moduleTasks);
-
-/**
- * Start all tests configured for current `NODE_ENV` setting
- *
- * @function test
- * @param {function} callback - gulp callback to signal end of task
- */
-module.exports.tests2 = gulp.series(...Object.values(tasks));

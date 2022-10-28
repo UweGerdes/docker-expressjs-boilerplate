@@ -130,7 +130,7 @@ const tasks = {
    * @function ejslint-exec
    * @param {function} callback - gulp callback to signal end of task
    */
-  'ejslint-exec': async () => {
+  'ejslint': async () => {
     /**
      * Replace expression output tags
      *
@@ -226,20 +226,3 @@ glob.sync(config.server.modules + '/*/gulp/lint.js')
   });
 
 module.exports = Object.assign({}, tasks, ...moduleTasks);
-
-/**
- * default gulp lint task, start all tasks
- *
- * @function lint
- */
-module.exports.lint2 = gulp.series(...Object.values(tasks));
-
-/**
- * Run `ejslint-exec` and `livereload-all` task
- *
- * @function ejslint
- * @param {function} callback - gulp callback to signal end of task
- */
-module.exports.ejslint = gulp.series(
-  tasks['ejslint-exec']
-);

@@ -148,20 +148,3 @@ glob.sync(config.server.modules + '/*/gulp/build.js')
   });
 
 module.exports = Object.assign({}, tasks, ...moduleTasks);
-
-/**
- * Default gulp build task
- *
- * Build all tasks configured for current NODE_ENV setting
- *
- * @function build
- * @param {function} callback - gulp callback to signal end of task
- */
-const myTasks = config.gulp.start[process.env.NODE_ENV].build
-  .reduce((obj, key) => {
-    return {
-      ...obj,
-      [key]: tasks[key]
-    };
-  }, {});
-module.exports.build2 = gulp.series(...Object.values(myTasks));
