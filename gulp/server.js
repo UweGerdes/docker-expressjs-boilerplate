@@ -33,12 +33,14 @@ let tasks = {
    */
   /* c8 ignore next 8 */
   'server-start': (callback) => {
-    server.listen({
-      path: config.server.server,
-      env: { VERBOSE: true, FORCE_COLOR: 1 },
-      delay: 9000
-    },
-    callback);
+    server.listen(
+      {
+        path: config.server.server,
+        env: { VERBOSE: true, FORCE_COLOR: 1 },
+        delay: 9000
+      },
+      callback
+    );
   },
   /**
    * Server changed task restarts server
