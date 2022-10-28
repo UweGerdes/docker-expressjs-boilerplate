@@ -79,7 +79,7 @@
   },
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon --watch gulpfile.js --watch gulp --watch configuration.yaml --delay 2 --exec gulp",
+    "dev": "nodemon --watch gulpfile.js --watch gulp --watch configuration.yaml --watch 'modules/*/configuration.yaml' --watch 'modules/*/gulp/*.js' --delay 2 --exec gulp",
     "pretest": "gulp build && npm run test-web-server",
     "test-web-server": "node server.js &",
     "test": "gulp tests",

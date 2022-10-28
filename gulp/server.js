@@ -112,15 +112,11 @@ let moduleTasks = [];
  */
 glob.sync(config.server.modules + '/*/gulp/server.js')
   .forEach((filename) => {
-    log.info('Filename: ' + filename);
     const task = require('.' + filename);
     moduleTasks.push(task);
     tasks = Object.assign({}, tasks, task);
   });
 
-log.info('tasks = ' + Object.keys(tasks));
-log.info('moduleTasks[0] = ' + Object.keys(moduleTasks[0]));
-log.info('moduleTasks = ' + JSON.stringify(tasks['boilerplate-server'], null, 2));
 module.exports = Object.assign({}, tasks, ...moduleTasks);
 
 /**

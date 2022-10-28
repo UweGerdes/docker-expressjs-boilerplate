@@ -4,20 +4,16 @@ gulp:
   start:
     development:
       default:
-        - 'lint'
-        - 'build'
-        - 'watch'
-        - 'livereload-start'
-        - 'server-start'
-#        - 'tests'
-        - 'livereload'
-#        - 'livereload-all'
-#        - 'eslint'
         - 'boilerplate-server'
       server:
         - 'boilerplate-server'
-        - 'server-changed'
-        - 'test-modules'
+      watch:
+        - 'boilerplate-server'
+
+  watch:
+    'boilerplate-server':
+      - 'modules/boilerplate/gulp/server.js'
+      - 'modules/boilerplate/js/script.js'
 
 form:
   name: sampleform

@@ -44,7 +44,8 @@ gulp:
         - 'puglint'
         - 'less'
         - 'livereload-all'
-        - 'test-modules'
+        - 'tests'
+        - 'locales'
     staging:
       default:
         - 'watch'
@@ -73,7 +74,7 @@ gulp:
         - 'puglint'
         - 'less'
         - 'livereload-all'
-        - 'test-modules'
+        - 'tests'
     production:
       default:
         - 'build'
@@ -132,8 +133,10 @@ gulp:
       - 'locales/**/*.*'
       - 'modules/**/*.ejs'
       - 'modules/**/*.pug'
-    test-modules:
-      - '*.js'
+    tests:
+      - 'server.js'
+      - 'modules/**/js/**/*.*'
+      - 'modules/**/server/**/*.*'
       - 'modules/**/tests/model/*.*'
       - 'modules/**/tests/server/*.*'
       - 'modules/**/views/**/*.*'
