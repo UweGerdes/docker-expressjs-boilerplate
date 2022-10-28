@@ -44,6 +44,9 @@ WORKDIR ${NODE_HOME}
 RUN npm install --cache /tmp/node-cache && \
 	rm -r /tmp/*
 
+RUN perl -i.bak -0pe 's/(.+prefer-regex-literals.+?:).+?\n.+?\n.+?\n/$1 1,\n/gms' \
+		/home/node/node_modules/eslint-config-airbnb-base/rules/best-practices.js
+
 WORKDIR ${APP_HOME}
 
 EXPOSE ${SERVER_PORT} ${HTTPS_PORT} ${LIVERELOAD_PORT}
