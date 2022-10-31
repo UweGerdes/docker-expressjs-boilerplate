@@ -40,9 +40,10 @@ if (!process.env.NODE_ENV) {
  */
 Object.keys(config.gulp.start[process.env.NODE_ENV])
   .forEach((group) => {
-    const myTasks = Object.keys(tasks)
-      .filter(key => config.gulp.start[process.env.NODE_ENV][group].includes(key))
+    const myTasks = config.gulp.start[process.env.NODE_ENV][group]
+      .filter(key => Object.keys(tasks).includes(key))
       .reduce((obj, key) => {
+        console.log('start ', group, key);
         return {
           ...obj,
           [key]: tasks[key]

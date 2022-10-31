@@ -12,8 +12,6 @@ gulp:
         - 'server-start'
         - 'tests'
         - 'livereload'
-#        - 'livereload-all'
-#        - 'eslint'
       build:
         - 'less'
         - 'js'
