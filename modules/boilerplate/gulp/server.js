@@ -5,7 +5,8 @@
 
 'use strict';
 
-const config = require('../../../lib/config'),
+const path = require('path'),
+  config = require('../../../lib/config'),
   log = require('../../../lib/log');
 
 const tasks = {
@@ -18,7 +19,7 @@ const tasks = {
   /* c8 ignore next 4 */
   'boilerplate-server': (callback) => {
     log.info('boilerplate-server called ' + Object.keys(config));
-    // console.log(JSON.stringify(config, null, 4));
+    log.info(path.join(__dirname, config.modules.boilerplate.app.server));
     callback();
   }
 };
