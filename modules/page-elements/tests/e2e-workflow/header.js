@@ -10,8 +10,8 @@ module.exports = {
   group: 'Boilerplate E2E Test',
   name: 'Header Test',
   viewports: {
-    'Mobile': { width: 340, height: 568 },
-    'Tablet': { width: 768, height: 1024 },
+    // 'Mobile': { width: 340, height: 568 },
+    // 'Tablet': { width: 768, height: 1024 },
     'Desktop': { width: 1200, height: 900 }
   },
   testCases: {

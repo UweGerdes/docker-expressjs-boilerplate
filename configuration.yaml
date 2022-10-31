@@ -101,9 +101,9 @@ gulp:
       - 'lib/**/*.js'
       - 'modules/**/*.js'
     jsonlint:
-      - '**/*.json'
       - '.lesshintrc'
-      - '!coverage/**/*.json'
+      - '**/*.json'
+      - '!locales/*.json'
       - '!src/locales/*.json'
       - '!modules/**/locales/*.json'
     locales:
@@ -136,7 +136,7 @@ gulp:
     tests:
       - 'server.js'
       - 'modules/**/js/**/*.*'
-      - 'modules/**/server/**/*.*'
+      - 'modules/**/server/**/*.js'
       - 'modules/**/tests/model/*.*'
       - 'modules/**/tests/server/*.*'
       - 'modules/**/views/**/*.*'

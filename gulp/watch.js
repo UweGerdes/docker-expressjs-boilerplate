@@ -31,13 +31,20 @@ const tasks = {
   'watch': (callback) => {
     global.gulpStatus.isWatching = true;
 
-    const watchTasks = config.gulp.start[process.env.NODE_ENV].watch
+    const watchTasks = config.gulp.start[process.env.NODE_ENV].tests
       .reduce((obj, key) => {
         return {
           ...obj,
-          [key]: tasks[key]
+          tests: gulpTasks[key]()
         };
       }, {});
+
+    for (let task in gulpTasks) {
+      if (config.gulp.watch.hasOwnProperty(task)) {
+        log.info('Task "' + task + '" is watching: ' + config.gulp.watch[task].join(', '));
+        watch(config.gulp.watch[task], { events: 'all', ignoreInitial: true }, gulpTasks[task]);
+      }
+    }
 
     for (let task in watchTasks) {
       if (config.gulp.watch.hasOwnProperty(task)) {

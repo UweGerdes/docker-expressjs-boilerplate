@@ -24,9 +24,8 @@ const tasks = {
    * Start all tests configured in `config.gulp.test.modules`
    *
    * @function test-modules
-   * @param {function} callback - gulp callback to signal end of task
    */
-  'test-modules': function testModules(callback) {
+  'test-modules': function testModules() {
     Promise.all(config.gulp.tests.modules.map(files.getFilenames))
       .then((filenames) => [].concat(...filenames))
       .then(files.getRecentFiles)
@@ -41,12 +40,8 @@ const tasks = {
           .pipe(notify({ message: 'tested: <%= file.path %>', title: 'Gulp test' }));
         return gulpStreamToPromise(task);
       })
-      .then(() => {
-        callback();
-      })
       .catch(err => console.log(err));
   }
-  // })
 };
 
 let moduleTasks = [];
@@ -57,7 +52,17 @@ let moduleTasks = [];
  */
 glob.sync(config.server.modules + '/*/gulp/tests.js')
   .forEach((filename) => {
-    moduleTasks.push(require('.' + filename));
+    const task = require('.' + filename);
+    moduleTasks.push(task);
+    tasks = Object.assign({}, tasks, task);
   });
 
 module.exports = Object.assign({}, tasks, ...moduleTasks);
+
+/**
+ * Start all tests configured for current `NODE_ENV` setting
+ *
+ * @function test
+ * @param {function} callback - gulp callback to signal end of task
+ */
+module.exports.tests2 = gulp.series(...Object.values(tasks));

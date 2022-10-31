@@ -39,7 +39,7 @@ if (!process.env.NODE_ENV) {
  * @param {function} callback - gulp callback to signal end of task
  */
 Object.keys(config.gulp.start[process.env.NODE_ENV])
-  .reduce((obj, group) => {
+  .forEach((group) => {
     const myTasks = Object.keys(tasks)
       .filter(key => config.gulp.start[process.env.NODE_ENV][group].includes(key))
       .reduce((obj, key) => {
@@ -49,10 +49,6 @@ Object.keys(config.gulp.start[process.env.NODE_ENV])
         };
       }, {});
     tasks[group] = series(...Object.values(myTasks));
-    return {
-      ...obj,
-      [group]: myTasks
-    };
-  }, {});
+  });
 
 module.exports = tasks;
