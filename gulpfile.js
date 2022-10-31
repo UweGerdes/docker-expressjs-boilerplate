@@ -43,7 +43,6 @@ Object.keys(config.gulp.start[process.env.NODE_ENV])
     const myTasks = config.gulp.start[process.env.NODE_ENV][group]
       .filter(key => Object.keys(tasks).includes(key))
       .reduce((obj, key) => {
-        console.log('start ', group, key);
         return {
           ...obj,
           [key]: tasks[key]
