@@ -25,7 +25,7 @@ const tasks = {
    *
    * @function test-modules
    */
-  'test-modules': function testModules() {
+  'test-modules': function testModules(callback) {
     Promise.all(config.gulp.tests.modules.map(files.getFilenames))
       .then((filenames) => [].concat(...filenames))
       .then(files.getRecentFiles)
@@ -39,6 +39,9 @@ const tasks = {
           })
           .pipe(notify({ message: 'tested: <%= file.path %>', title: 'Gulp test' }));
         return gulpStreamToPromise(task);
+      })
+      .then(() => {
+        callback();
       })
       .catch(err => console.log(err));
   }
