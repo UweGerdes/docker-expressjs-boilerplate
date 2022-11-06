@@ -182,7 +182,7 @@ describe('/boilerplate/tests/views/form.js', function () {
         err = error;
       }
       document = getDocument(res, err);
-      checkPage(document, 'Formular', 'Benutzeranmeldenregistrieren');
+      checkPage(document, 'Formular', 'BenutzerNicht angemeldetanmeldenregistrieren');
       testElement('.fieldcontainer_textinput .input-text', { name: 'textinput', type: 'text', value: 'changed content' }, null);
       testElement('.fieldcontainer_passwordinput .input-password', { name: 'passwordinput', type: 'password', value: 'password' }, null);
       testElement('.fieldcontainer_textareainput .input-textarea', { name: 'textareainput' }, 'Langtexteingabe');

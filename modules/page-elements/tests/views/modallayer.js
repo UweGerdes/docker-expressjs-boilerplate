@@ -19,15 +19,15 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 let document;
 
-describe('/page-elements/tests/views/modallayer.js', function () {
+describe(__filename.replace(process.env.APP_HOME, ''), function () {
   describe('GET /boilerplate/', function () {
     it('should have head, script and headline', function (done) {
       chai.request(app)
         .get('/boilerplate/')
         .end(function (err, res) {
           document = getDocument(res, err);
-          checkPage(document, 'Boilerplate', 'Benutzeranmeldenregistrieren');
-          testElement('#login-status', { }, 'Benutzeranmeldenregistrieren');
+          checkPage(document, 'Boilerplate', 'BenutzerNicht angemeldetanmeldenregistrieren');
+          testElement('#login-status', { }, 'BenutzerNicht angemeldetanmeldenregistrieren');
           testElement('#modalLayer', { }, '');
           done();
         });
