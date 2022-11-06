@@ -26,7 +26,7 @@ You may want to add `--build-arg NODE_ENV="production"` for a production server.
 Run the container with:
 
 ```bash
-$ docker run -it \
+$ docker run -it --rm \
 	-v $(pwd):/home/node/app \
 	-p 28080:8080 \
 	-p 28443:8443 \
