@@ -22,6 +22,8 @@ describe(__filename.replace(process.env.APP_HOME, ''), function () {
         .get('/boilerplate/')
         .end(function (err, res) {
           const document = getDocument(res, err);
+          const language = document.getElementById('language');
+          assert.equal(language.textContent, 'SpracheDeutschEnglisch');
           const loginStatus = document.getElementById('login-status');
           assert.equal(loginStatus.textContent, 'BenutzerNicht angemeldetanmeldenregistrieren');
           done();
