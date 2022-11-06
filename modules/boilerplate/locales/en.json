@@ -1,3 +1,51 @@
 {
-  "Hello": "Welcome to Boilerplate"
+  "Hello": "Welcome to Boilerplate",
+
+  "Input Fields": "Eingabefelder",
+
+  "Text Input Field": "Texteingabe",
+  "please write text": "bitte Text eingeben",
+  "change this text": "ändern!",
+
+  "Password Input Field": "Passwort",
+
+  "Textarea Input Field": "Langtextfeld",
+  "please write much text": "bitte viel Text eingeben",
+  "already written": "steht schon was",
+
+  "Click Fields": "Klick-Felder",
+
+  "Button Click Field": "Button",
+  "click here": "hier klicken",
+
+  "Checkbox Click Field": "Möglichkeit",
+  "check here": "kann man wählen",
+
+  "Select Fields": "Auswahl-Felder",
+
+  "Radio Select Field": "Auswahl",
+  "click me": "mal klicken",
+  "or me": "oder hier",
+
+  "Select Option Field": "Auswahlliste",
+  "- please select -": "- bitte wählen -",
+  "first option": "dies",
+  "second option": "das",
+  "select an option": "vielleicht ein Pflichtfeld",
+
+  "Address Input": "Adress-Eingabe",
+  "Address Input Field": "Adresse",
+
+  "Group of Input Fields": "Gruppe von Eingabefeldern",
+  "Field Group": "Feldgruppe",
+  "enter group text": "Text in Gruppenfeld eintragen",
+  "click me": "mal klicken",
+  "or me": "oder hier",
+  "first group option": "Wahl 1",
+  "second group option": "Wahl 2",
+  "select a group option": "hier etwas auswählen",
+
+  "Submit": "Absenden",
+  "Click to Submit": " ",
+  "submit form": "submit"
 }

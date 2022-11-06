@@ -1,5 +1,26 @@
 name: Boilerplate
 
+gulp:
+  start:
+    development:
+      tests:
+      default:
+        - 'boilerplate-server'
+      build:
+      lint:
+      server:
+        - 'boilerplate-server'
+      deploy:
+      watch:
+        - 'boilerplate-server'
+
+  watch:
+    'boilerplate-server':
+      - 'modules/boilerplate/app/*.js'
+
+app:
+  server: ../app/index.js
+
 form:
   name: sampleform
   title: Sample Form

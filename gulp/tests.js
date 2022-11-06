@@ -6,39 +6,27 @@
  * @requires module:lib/files-promises
  * @requires module:gulp/lib/load-tasks
  * @requires module:gulp/lib/notify
+ * @requires module:gulp/lint
  */
 
 'use strict';
 
 const gulp = require('gulp'),
   mocha = require('gulp-mocha'),
-  sequence = require('gulp-sequence'),
   gulpStreamToPromise = require('gulp-stream-to-promise'),
+  glob = require('glob'),
   config = require('../lib/config'),
   files = require('../lib/files-promises'),
-  loadTasks = require('./lib/load-tasks'),
   notify = require('./lib/notify');
 
-const tasks = {
-  /**
-   * Start all tests configured for current `NODE_ENV` setting
-   *
-   * @function test
-   * @param {function} callback - gulp callback to signal end of task
-   */
-  'tests': (callback) => {
-    sequence(
-      ...config.gulp.start[process.env.NODE_ENV].tests,
-      callback
-    );
-  },
+let tasks = {
   /**
    * Start all tests configured in `config.gulp.test.modules`
    *
    * @function test-modules
    * @param {function} callback - gulp callback to signal end of task
    */
-  'test-modules': [['eslint', 'ejslint'], (callback) => {
+  'test-modules': function testModules(callback) {
     Promise.all(config.gulp.tests.modules.map(files.getFilenames))
       .then((filenames) => [].concat(...filenames))
       .then(files.getRecentFiles)
@@ -57,9 +45,20 @@ const tasks = {
         callback();
       })
       .catch(err => console.log(err));
-  }]
+  }
 };
 
-if (process.env.NODE_ENV === 'development') {
-  loadTasks.importTasks(tasks);
-}
+let moduleTasks = [];
+/**
+ * Load gulp tests from modules
+ *
+ * @name module_gulp_loader
+ */
+glob.sync(config.server.modules + '/*/gulp/tests.js')
+  .forEach((filename) => {
+    let task = require('.' + filename);
+    moduleTasks.push(task);
+    tasks = Object.assign({}, tasks, task);
+  });
+
+module.exports = Object.assign({}, tasks, ...moduleTasks);

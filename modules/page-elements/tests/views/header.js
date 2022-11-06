@@ -15,15 +15,17 @@ const chai = require('chai'),
 
 chai.use(chaiHttp);
 
-describe('/page-elements/tests/views/index.js', function () {
+describe(__filename.replace(process.env.APP_HOME, ''), function () {
   describe('GET /boilerplate/', function () {
     it('should have headline', function (done) {
       chai.request('http://localhost:8080')
         .get('/boilerplate/')
         .end(function (err, res) {
           const document = getDocument(res, err);
+          const language = document.getElementById('language');
+          assert.equal(language.textContent, 'SpracheDeutschEnglisch');
           const loginStatus = document.getElementById('login-status');
-          assert.equal(loginStatus.textContent, 'Benutzeranmeldenregistrieren');
+          assert.equal(loginStatus.textContent, 'BenutzerNicht angemeldetanmeldenregistrieren');
           done();
         });
     });

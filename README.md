@@ -13,7 +13,7 @@ sudo adduser [yourusername] docker
 
 ## Build the Docker image
 
-If you have proxy caches for apt-get and npm you should build my baseimage (or baseimage-arm32v7 for Raspberry Pi 3) and nodejs before building the image.
+If you have proxy caches for apt-get and npm you should build my baseimage and nodejs before building the image.
 
 ```bash
 $ docker build -t uwegerdes/expressjs-boilerplate .
@@ -26,7 +26,7 @@ You may want to add `--build-arg NODE_ENV="production"` for a production server.
 Run the container with:
 
 ```bash
-$ docker run -it \
+$ docker run -it --rm \
 	-v $(pwd):/home/node/app \
 	-p 28080:8080 \
 	-p 28443:8443 \
@@ -60,7 +60,9 @@ $ docker start -ai expressjs-boilerplate
 
 ## Using the boilerplate
 
-You should add your project in the modules subdirectory with html/ejs/pug templates, less, js, server and tests. See the sample in modules/boilerplate.
+This image is a base image for other projects. You only need the `modules/yourmodule`.
+
+You should add your project in the modules subdirectory with html/ejs/pug templates, less, js, server and tests. See the sample in modules/boilerplate. You can also add a `gulp` directory to add / replace gulp tasks.
 
 Other samples are in my projects docker-vcards, docker-rpi-nodejs-gpio (more to come).
 
