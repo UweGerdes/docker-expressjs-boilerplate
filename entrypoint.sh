@@ -14,4 +14,6 @@ fi
 
 cd "${APP_HOME}"
 
+gulp build
+
 exec "$@"
