@@ -33,6 +33,7 @@ gulp:
         - 'lesshint'
       server:
         - 'server-changed'
+        - 'livereload-all'
         - 'test-modules'
       deploy:
         - 'deploy'
