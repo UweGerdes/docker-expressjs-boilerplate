@@ -1,11 +1,18 @@
 # dockerignore
+/.dockerignore
 /.git
+/.gitignore
+/CHANGELOG.md
 /coverage
 /deploy
-/docs/jsdoc
+/docs
+/fixture
+/generated
+/locales
 /results
 
 # not needed by inheriting projects
+/docker-compose-e2e-workflow.yaml
 /modules/boilerplate
 /modules/login
 /modules/page-elements/tests
