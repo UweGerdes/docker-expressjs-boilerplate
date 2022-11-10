@@ -71,4 +71,7 @@ services:
     volumes:
       - ./modules:/home/node/app/config/modules
       - ./results:/home/node/app/results
+      # for e2e development
+      # - ../docker-e2e-workflow/modules/e2e:/home/node/app/modules/e2e
+      # - ../docker-e2e-workflow/fixture:/home/node/app/fixture
     command: npm run dev
