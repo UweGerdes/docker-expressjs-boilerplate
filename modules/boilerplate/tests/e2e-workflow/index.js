@@ -8,7 +8,7 @@ const domain = 'http://boilerplate-server:8080';
 
 module.exports = {
   group: 'Boilerplate E2E Test',
-  name: 'E2E Test',
+  name: 'Boilerplate E2E Test',
   viewports: {
     'Mobile': { width: 340, height: 568 },
     'Tablet': { width: 768, height: 1024 },
