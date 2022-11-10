@@ -23,6 +23,10 @@ services:
     image: selenium/hub
     container_name: boilerplate-e2e-hub
     hostname: boilerplate-e2e-hub
+    ports:
+      - 54442:4442
+      - 54443:4443
+      - 54444:4444
 
   boilerplate-e2e-chrome:
     image: selenium/node-chrome
@@ -32,8 +36,10 @@ services:
     depends_on:
       - boilerplate-e2e-hub
     environment:
-      HUB_HOST: boilerplate-e2e-hub
-      HUB_PORT: 4444
+      SE_EVENT_BUS_HOST: boilerplate-e2e-hub
+      SE_EVENT_BUS_PUBLISH_PORT: 4442
+      SE_EVENT_BUS_SUBSCRIBE_PORT: 4443
+      TEST_SERVER: boilerplate-server
       JAVA_OPTS: -Dselenium.LOGGER.level=WARNING
 
   boilerplate-e2e-firefox:
@@ -44,8 +50,10 @@ services:
     depends_on:
       - boilerplate-e2e-hub
     environment:
-      HUB_HOST: boilerplate-e2e-hub
-      HUB_PORT: 4444
+      SE_EVENT_BUS_HOST: boilerplate-e2e-hub
+      SE_EVENT_BUS_PUBLISH_PORT: 4442
+      SE_EVENT_BUS_SUBSCRIBE_PORT: 4443
+      TEST_SERVER: boilerplate-server
       JAVA_OPTS: -Dselenium.LOGGER.level=WARNING
 
   boilerplate-e2e-frontend:
