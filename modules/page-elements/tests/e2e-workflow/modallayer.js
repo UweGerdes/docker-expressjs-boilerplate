@@ -8,7 +8,7 @@ const domain = 'http://boilerplate-server:8080';
 
 module.exports = {
   group: 'Boilerplate E2E Test',
-  name: 'Modal Layer Test',
+  name: 'Boilerplate Modal Layer Test',
   viewports: {
     // 'Mobile': { width: 340, height: 568 },
     'Tablet': { width: 768, height: 1024 }
@@ -35,7 +35,7 @@ module.exports = {
           hover: '//*[contains(@class, "login-status")]',
           elements: {
             '//*[contains(@class, "header-breadcrumbs")]': 'Home\nBoilerplate',
-            '//*[contains(@class, "login-status")]': 'Benutzer\nanmelden\nregistrieren',
+            '//*[contains(@class, "login-status")]': 'Benutzer\nNicht angemeldet\nanmelden\nregistrieren',
             '//span[contains(@class, "link")]': 'anmelden'
           },
           elementsNotVisible: [
@@ -47,7 +47,7 @@ module.exports = {
           hover: '//*[contains(@class, "loginLayer-link")]',
           elements: {
             '//*[contains(@class, "header-breadcrumbs")]': 'Home\nBoilerplate',
-            '//*[contains(@class, "login-status")]': 'Benutzer\nanmelden\nregistrieren',
+            '//*[contains(@class, "login-status")]': 'Benutzer\nNicht angemeldet\nanmelden\nregistrieren',
             '//span[contains(@class, "link")]': 'anmelden'
           },
           click: '//span[contains(@class, "loginLayer-link")]'
@@ -108,7 +108,7 @@ module.exports = {
           hover: '//*[contains(@class, "login-status")]',
           elements: {
             '//*[contains(@class, "header-breadcrumbs")]': 'Home\nBoilerplate',
-            '//*[contains(@class, "login-status")]': 'User\nlogin\nsign up',
+            '//*[contains(@class, "login-status")]': 'User\nNot logged in\nlogin\nsign up',
             '//span[contains(@class, "link")]': 'login'
           },
           click: '//span[contains(@class, "link")]'
