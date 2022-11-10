@@ -39,7 +39,6 @@ services:
       SE_EVENT_BUS_HOST: boilerplate-e2e-hub
       SE_EVENT_BUS_PUBLISH_PORT: 4442
       SE_EVENT_BUS_SUBSCRIBE_PORT: 4443
-      TEST_SERVER: boilerplate-server
       JAVA_OPTS: -Dselenium.LOGGER.level=WARNING
 
   boilerplate-e2e-firefox:
@@ -53,7 +52,6 @@ services:
       SE_EVENT_BUS_HOST: boilerplate-e2e-hub
       SE_EVENT_BUS_PUBLISH_PORT: 4442
       SE_EVENT_BUS_SUBSCRIBE_PORT: 4443
-      TEST_SERVER: boilerplate-server
       JAVA_OPTS: -Dselenium.LOGGER.level=WARNING
 
   boilerplate-e2e-frontend:
