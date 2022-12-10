@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.3.3
+upgrade packages, update tests
+
 ## 0.3.2
 corrections for Gulp.JS 4.x
 
