@@ -19,7 +19,6 @@ RUN apt-get update && \
 	apt-get dist-upgrade -y && \
 	apt-get clean && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
-	npm -g config set user ${USER_NAME} && \
 	if [ "${NODE_ENV}" = "development" ] ; then \
 		npm install -g --cache /tmp/root-cache \
 					c8 \
