@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.3.4
+upgrade packages
+
 ## 0.3.3
 upgrade packages, update tests
 

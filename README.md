@@ -1,19 +1,8 @@
 # Docker with Express.js boilerplate
 
-## Install Docker
-
-For Windows or Mac users: open [https://www.docker.com/get-started](https://www.docker.com/get-started) in your browser.
-
-For Linus users: install Docker with:
-
-```bash
-curl -sSL https://get.docker.com | sh
-sudo adduser [yourusername] docker
-```
-
 ## Build the Docker image
 
-If you have proxy caches for apt-get and npm you should build my baseimage and nodejs before building the image.
+If you have a proxy cache for apt-get you should build my baseimage and nodejs before building the image.
 
 ```bash
 $ docker build -t uwegerdes/expressjs-boilerplate .

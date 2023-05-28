@@ -93,6 +93,7 @@ gulp:
       - 'gulpfile.js'
       - '.eslintrc.js'
       - 'gulp/**/*.js'
+      - 'modules/*/gulp/**/*.js'
     js:
       - 'modules/*/js/*.js'
     jsdoc:
@@ -132,7 +133,6 @@ gulp:
       - 'modules/**/tests/model/*.*'
       - 'modules/**/tests/server/*.*'
       - 'modules/**/views/**/*.*'
-      - 'htdocs/js/**/*.js'
     server:
       - 'server.js'
       - 'lib/*.js'
