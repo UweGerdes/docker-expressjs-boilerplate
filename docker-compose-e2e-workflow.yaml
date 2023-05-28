@@ -61,6 +61,7 @@ services:
     ports:
       - 51287:8080
       - 51288:8081
+      - 51283:8443
     depends_on:
       - boilerplate-e2e-hub
     environment:
