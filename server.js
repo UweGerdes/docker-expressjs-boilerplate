@@ -24,12 +24,13 @@ const bodyParser = require('body-parser'),
   ipv4addresses = require('./lib/ipv4addresses'),
   log = require('./lib/log'),
   app = express(),
-  server = require('http').createServer(app);
+  http = require('http');
 
 const options = {
   key: fs.readFileSync(path.join(__dirname, config.server.httpsKey)),
   cert: fs.readFileSync(path.join(__dirname, config.server.httpsCert))
 };
+const httpServer = http.createServer(app);
 const httpsServer = https.createServer(options, app);
 
 let routers = { };
@@ -62,7 +63,7 @@ app.use('/jsdoc', express.static(config.gulp.build.jsdoc.dest));
  *
  * @name server_graceful_shutdown
  */
-app.use(createGracefulShutdownMiddleware(server, { forceTimeout: 30000 }));
+app.use(createGracefulShutdownMiddleware(httpServer, { forceTimeout: 30000 }));
 
 /**
  * Load routes from modules
@@ -212,23 +213,23 @@ app.get('/error500', requestGet500Route);
 /**
  * HTTP server listens on process.env.SERVER_PORT
  *
- * @name httpsServer:listen
+ * @name httpServer:listen
  */
-server.listen(process.env.SERVER_PORT);
+httpServer.listen(process.env.SERVER_PORT);
 /**
  * HTTP server fires on error
  *
  * @name httpServer:onError
  * @event server_listen:onError
  */
-server.on('error', onError);
+httpServer.on('error', onError);
 /**
  * HTTP server fires on listening
  *
  * @name httpServer:onListening
  * @event server_listen:onListening
  */
-server.on('listening', onListening.bind(null, 'http', process.env.SERVER_PORT));
+httpServer.on('listening', onListening.bind(null, 'http', process.env.SERVER_PORT));
 
 /**
  * HTTPS server listens on process.env.HTTPS_PORT
@@ -259,7 +260,7 @@ httpsServer.on('listening', onListening.bind(null, 'https', process.env.HTTPS_PO
 for (const [moduleRoute, router] of Object.entries(routers)) {
 /* c8 ignore next 3 */
   if (router.connectServer) {
-    router.connectServer(server, httpsServer);
+    router.connectServer(httpServer, httpsServer);
   }
   app.use(moduleRoute, router.router);
 }
