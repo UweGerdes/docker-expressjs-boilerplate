@@ -11,7 +11,7 @@ gulp:
         - 'yamllint'
         - 'puglint'
         - 'less'
-        - 'js'
+#        - 'js'
         - 'locales'
         - 'jsdoc'
         - 'watch'
