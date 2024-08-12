@@ -72,9 +72,10 @@ app.use(createGracefulShutdownMiddleware(httpServer, { forceTimeout: 30000 }));
  */
 glob.sync(config.server.modules + '/*/server/index.js')
   .forEach((filename) => {
+    const loadFilename = filename.replace(/^(\.\/)?/, './'); // assure starting with ./ which is helpful in configuration.yaml
     const regex = new RegExp(config.server.modules + '(/[^/]+)/server/index.js');
-    const moduleRoute = filename.replace(regex, '$1');
-    routers[moduleRoute] = require(filename);
+    const moduleRoute = loadFilename.replace(regex, '$1');
+    routers[moduleRoute] = require(loadFilename);
   });
 
 /**
