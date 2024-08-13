@@ -17,7 +17,6 @@ const gulp = require('gulp'),
   gulpLess = require('gulp-less'),
   mergeTranslations = require('gulp-merge-translations'),
   rename = require('gulp-rename'),
-  gulpStreamToPromise = require('gulp-stream-to-promise'),
   glob = require('glob'),
   gulpTouch = require('./lib/gulp-vinyl-touch'),
   lessPluginGlob = require('less-plugin-glob'),
@@ -51,9 +50,9 @@ let tasks = {
    *
    * @function js
    */
-  'js': gulp.series(lint.eslint, function js(callback) {
+  'js': gulp.series(() => {
+    //*
     Promise.all(config.gulp.build.js.src.map(filePromises.getFilenames))
-      .then((filenames) => [].concat(...filenames))
       .then(filePromises.getRecentFiles)
       .then((filenames) => {
         const promises = [];
@@ -76,6 +75,18 @@ let tasks = {
         callback();
       })
       .catch(err => console.log(err));
+    // */
+
+      return gulp.src(config.gulp.build.js.src)
+        .pipe(rename(path => {
+          Object.keys(config.gulp.build.js.replaceDirname).forEach((key) => {
+            path.dirname = path.dirname.replace(new RegExp(key), config.gulp.build.js.replaceDirname[key]);
+          });
+          return path;
+        }))
+        .pipe(gulpTouch())
+        .pipe(gulp.dest(config.gulp.build.js.dest))
+        .pipe(notify({ message: 'written: <%= file.path %>', title: 'Gulp js' }));
   }),
   /**
    * Compile locales files

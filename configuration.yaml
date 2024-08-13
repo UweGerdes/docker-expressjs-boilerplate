@@ -11,7 +11,7 @@ gulp:
         - 'yamllint'
         - 'puglint'
         - 'less'
-#        - 'js'
+        - 'js'
         - 'locales'
         - 'jsdoc'
         - 'watch'
@@ -165,8 +165,8 @@ gulp:
       src:
         - 'modules/*/js/*.js'
       dest: 'generated'
-      replace:
-        'modules/(.+/)js/.+': '$1'
+      replaceDirname:
+        '(.+)/js$': '$1'
     less:
       src:
         - 'src/less/app.less'
