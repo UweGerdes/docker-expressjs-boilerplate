@@ -37,6 +37,7 @@ describe('/pages/tests/views/session.js', () => {
       }
       document = checkResponse(http, err);
       checkPage(document, 'Module', 'Home');
+      testElement('#page', { 'class': 'page' }, null);
       testElement('#headline', { }, 'Module:');
       // console.log(JSON.stringify(http.header['set-cookie']));
     });
