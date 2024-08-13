@@ -21,7 +21,6 @@ const gulp = require('gulp'),
   gulpTouch = require('./lib/gulp-vinyl-touch'),
   lessPluginGlob = require('less-plugin-glob'),
   config = require('../lib/config'),
-  filePromises = require('../lib/files-promises'),
   notify = require('./lib/notify'),
   lint = require('./lint');
 
@@ -50,43 +49,17 @@ let tasks = {
    *
    * @function js
    */
-  'js': gulp.series(() => {
-    //*
-    Promise.all(config.gulp.build.js.src.map(filePromises.getFilenames))
-      .then(filePromises.getRecentFiles)
-      .then((filenames) => {
-        const promises = [];
-        for (const filename of filenames) {
-          promises.push(gulpStreamToPromise(
-            gulp.src(filename)
-              .pipe(rename(function (path) {
-                Object.keys(config.gulp.build.js.replace).forEach((key) => {
-                  path.dirname = filename.replace(new RegExp(key), config.gulp.build.js.replace[key]);
-                });
-              }))
-              .pipe(gulpTouch())
-              .pipe(gulp.dest(config.gulp.build.js.dest))
-              .pipe(notify({ message: 'written: <%= file.path %>', title: 'Gulp js' }))
-          ));
-        }
-        return Promise.all(promises);
-      })
-      .then(() => {
-        callback();
-      })
-      .catch(err => console.log(err));
-    // */
-
-      return gulp.src(config.gulp.build.js.src)
-        .pipe(rename(path => {
-          Object.keys(config.gulp.build.js.replaceDirname).forEach((key) => {
-            path.dirname = path.dirname.replace(new RegExp(key), config.gulp.build.js.replaceDirname[key]);
-          });
-          return path;
-        }))
-        .pipe(gulpTouch())
-        .pipe(gulp.dest(config.gulp.build.js.dest))
-        .pipe(notify({ message: 'written: <%= file.path %>', title: 'Gulp js' }));
+  'js': gulp.series(lint.eslint, function js() {
+    return gulp.src(config.gulp.build.js.src)
+      .pipe(rename(path => {
+        Object.keys(config.gulp.build.js.replaceDirname).forEach((key) => {
+          path.dirname = path.dirname.replace(new RegExp(key), config.gulp.build.js.replaceDirname[key]);
+        });
+        return path;
+      }))
+      .pipe(gulpTouch())
+      .pipe(gulp.dest(config.gulp.build.js.dest))
+      .pipe(notify({ message: 'written: <%= file.path %>', title: 'Gulp js' }));
   }),
   /**
    * Compile locales files

@@ -131,7 +131,7 @@ gulp:
       - 'modules/**/js/**/*.*'
       - 'modules/**/tests/server/**/*.js'
       - 'modules/**/tests/model/*.*'
-      - 'modules/**/tests/server/*.*'
+      - 'modules/**/tests/views/*.*/*.js'
       - 'modules/**/views/**/*.*'
     server:
       - 'server.js'

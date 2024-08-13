@@ -13,11 +13,10 @@
 
 const gulp = require('gulp'),
   mocha = require('gulp-mocha'),
-  gulpStreamToPromise = require('gulp-stream-to-promise'),
   glob = require('glob'),
   config = require('../lib/config'),
-  files = require('../lib/files-promises'),
-  notify = require('./lib/notify');
+  notify = require('./lib/notify'),
+  lint = require('./lint');
 
 let tasks = {
   /**
@@ -26,26 +25,17 @@ let tasks = {
    * @function test-modules
    * @param {function} callback - gulp callback to signal end of task
    */
-  'test-modules': function testModules(callback) {
-    Promise.all(config.gulp.tests.modules.map(files.getFilenames))
-      .then((filenames) => [].concat(...filenames))
-      .then(files.getRecentFiles)
-      .then((filenames) => {
-        const task = gulp.src(filenames, { read: false })
-          // `gulp-mocha` needs filepaths so you can't have any plugins before it
-          .pipe(mocha({ reporter: 'tap', timeout: 10000 })) // timeout for Raspberry Pi 3
-          /* c8 ignore next 3 */
-          .on('error', function (error) {
-            task.emit(error);
-          })
-          .pipe(notify({ message: 'tested: <%= file.path %>', title: 'Gulp test' }));
-        return gulpStreamToPromise(task);
+  'test-modules': gulp.series(lint.eslint, function testModules() {
+    const task = gulp.src(config.gulp.tests.modules, { read: false })
+      // `gulp-mocha` needs filepaths so you can't have any plugins before it
+      .pipe(mocha({ reporter: 'tap', timeout: 10000 })) // timeout for Raspberry Pi 3
+      /* c8 ignore next 3 */
+      .on('error', function (error) {
+        task.emit(error);
       })
-      .then(() => {
-        callback();
-      })
-      .catch(err => console.log(err));
-  }
+      .pipe(notify({ message: 'tested: <%= file.path %>', title: 'Gulp test' }));
+    return task;
+  })
 };
 
 let moduleTasks = [];
