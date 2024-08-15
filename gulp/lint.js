@@ -20,10 +20,9 @@ const gulp = require('gulp'),
   yamlValidate = require('gulp-yaml-validate'),
   path = require('path'),
   glob = require('glob'),
-  PluginError = require('plugin-error'),
   check = require('syntax-error'),
+  through2 = require('through2'),
   config = require('../lib/config'),
-  filePromises = require('../lib/files-promises'),
   notify = require('./lib/notify');
 
 let tasks = {
@@ -131,86 +130,66 @@ let tasks = {
    * @param {function} callback - gulp callback to signal end of task
    */
   'ejslint': async () => {
-    /**
-     * Replace expression output tags
-     *
-     * @function ejslint:replaceOutputTags
-     * @param {function} file - file object with contents
-     */
-    const replaceOutputTags = (file) => {
-      return new Promise((resolve) => {
-        file.noOutput = '<% var output, output_raw; %>' + file.content
-          .replace(/<%= *(.+?) *%>/g, '<% output = $1; %>')
-          .replace(/<%- *(.+?) *%>/g, '<% output_raw = $1; %>');
-        resolve(file);
-      });
-    };
 
-    /**
-     * Replace html outside of ejs tags with returns
-     *
-     * @function ejslint:replaceEjsTags
-     * @param {function} file - file object with contents
-     */
-    const replaceEjsTags = (file) => {
-      return new Promise((resolve) => {
-        let parts = file.noOutput.split(/<%/);
-        let output = [];
-        parts.forEach((part) => {
-          let snips = part.split(/%>/);
-          output.push(snips[0]);
-          output.push(snips.join('%>').replace(/[^\n]/g, ''));
+    function lintEjs(file, enc, callback) {
+      let fileContent = '<% var output, output_raw; %>' + file.contents.toString()
+        .replace(/<%[=-]/g, '<% ')
+        .replace(/[=-]%>/g, ' %>');
+      const lines = fileContent.split('\n');
+      let output = [];
+      let codeMode = false;
+      lines.forEach((line) => {
+        let parts = [];
+        line.split(/(<%[=\- ]|[ \-=]%>)/).forEach((token) => {
+          switch (token) {
+            case '<%=':
+              parts.push('ä= ');
+              codeMode = true;
+              break;
+            case '<%-':
+              parts.push('ö= ');
+              codeMode = true;
+              break;
+            case '<% ':
+              parts.push(';  ');
+              codeMode = true;
+              break;
+            case ' %>':
+            case '-%>':
+            case '=%>':
+              parts.push(' ;');
+              codeMode = false;
+              break;
+            default:
+              if (codeMode) {
+                parts.push(token);
+              } else {
+                parts.push(' '.repeat(token.length));
+              }
+          }
         });
-        file.jsCode = output.join('');
-        resolve(file);
+        output.push(parts.join(''));
       });
-    };
+      const err = check(output.join('\n'), path.relative(process.cwd(), file.path));
+      if (err) {
+        let errMsg = err.message + ' in line ' + err.line + '\n';
+        errMsg += lines[err.line - 1] + '\n';
+        errMsg += ' '.repeat(err.column - 5) + '----^\n';
+        file.error = errMsg;
+      } else {
+        file.contents = Buffer.from(output.join(''));
+      }
+      callback(null, file);
+    }
 
-    /**
-     * Check the remaining content
-     *
-     * @function ejslint:fileCheck
-     * @param {function} file - file object with contents
-     */
-    const fileCheck = (file) => {
-      return new Promise((resolve) => {
-        const err = check(file.jsCode, path.relative(process.cwd(), file.filename));
-        /* c8 ignore next 3 */
-        if (err) {
-          resolve(err);
-        }
-        resolve();
-      });
-    };
-
-    return Promise.all(config.gulp.watch.ejslint.map(filePromises.getFilenames))
-      .then((filenames) => [].concat(...filenames))
-      .then((filenames) => {
-        return Promise.all(
-          filenames.map(filePromises.getFileContent)
-        );
-      })
-      .then((files) => {
-        return Promise.all(
-          files.map(replaceOutputTags)
-        );
-      })
-      .then((files) => {
-        return Promise.all(
-          files.map(replaceEjsTags)
-        );
-      })
-      .then((files) => {
-        return Promise.all(
-          files.map(fileCheck)
-        );
-      })
-      .then((errorList) => {
-        /* c8 ignore next 3 */
-        if (errorList.join('').length > 0) {
-          throw new PluginError('ejslint', errorList.join(''));
-        }
-      });
+    return gulp.src(config.gulp.watch.ejslint)
+      .pipe(gulpIf(global.gulpStatus.isWatching, changedInPlace({ firstPass: true })))
+      .pipe(through2.obj(lintEjs))
+      .pipe(notify({ message: 'linting: <%= file.path %>', title: 'Gulp ejslint' }))
+      .pipe(gulpIf(
+        (file) => file.error !== undefined,
+        notify({ message: 'error: <%= file.error %>', title: 'Gulp ejslint' })
+      ));
   }
 };
 

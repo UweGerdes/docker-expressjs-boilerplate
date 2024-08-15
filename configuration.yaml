@@ -9,6 +9,7 @@ gulp:
       default:
         - 'jsonlint'
         - 'yamllint'
+        - 'ejslint'
         - 'puglint'
         - 'less'
         - 'js'

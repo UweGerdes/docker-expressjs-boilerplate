@@ -69,7 +69,6 @@
     "gulp-yaml-validate": "^1.0.2",
     "jsdom": "^24.1.1",
     "less-plugin-glob": "^3.0.0",
-    "plugin-error": "^2.0.1",
     "supertest": "^7.0.0",
     "syntax-error": "^1.4.0",
     "through2": "^4.0.2"
