@@ -5,17 +5,16 @@ gulp:
     development:
       tests:
       default:
-        - 'boilerplate-server'
+        - 'boilerplate-server-start'
       build:
       lint:
       server:
-        - 'boilerplate-server'
+        - 'boilerplate-server-changed'
       deploy:
       watch:
-        - 'boilerplate-server'
 
   watch:
-    'boilerplate-server':
+    'boilerplate-server-changed':
       - 'modules/boilerplate/app/*.js'
 
 app:
