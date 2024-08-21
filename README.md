@@ -63,6 +63,12 @@ The project provides global styles so you should only add styles to your module 
 
 Scripts in `modules/[module]/js/` will be copied to `public/js/[module]/`.
 
+### Login With Github
+
+If you change the parameters in `modules/login/configuration.yaml` you can try a login with GitHub. Go to "Settings" - "Developer" - "OAuth Apps" and set up a "New OAuth App".
+
+Set "Homepage URL" to `https://localhost:28443/` and "Authorization callback URL" to `https://localhost:28443/login/callback` and try the link on page `https://localhost:28443/login/`.
+
 ## Other Docker for this Boilerplate
 
 ### e2e-workflow
