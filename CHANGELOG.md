@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.4.0
+upgrade packages and cleanup
+
 ## 0.3.4
 upgrade packages
 

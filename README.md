@@ -2,13 +2,13 @@
 
 ## Build the Docker image
 
-If you have a proxy cache for apt-get you should build my baseimage and nodejs before building the image.
-
 ```bash
 $ docker build -t uwegerdes/expressjs-boilerplate .
 ```
 
 You may want to add `--build-arg NODE_ENV="production"` for a production server.
+
+If you want a slightly different image base or have a proxy cache for apt-get you should build my baseimage and nodejs before building this image.
 
 ## Run the Docker container
 
@@ -26,7 +26,7 @@ $ docker run -it --rm \
 	bash
 ```
 
-You should start `npm start` or `npm run dev` and open localhost:28080 for the server, localhost:28443 is the https port.
+You should start `npm start` or `npm run dev` and open localhost:28080 for the server, localhost:28443 is the https port. If oyu use https and use the development feature `livereload`, make sure to open https://localhost:28081 once to accept the self signed key.
 
 To run tests use `npm test`, for coverage of application use `npm run coverage && sleep 1`, for development environment coverage use `npm run fullcoverage && sleep 1`
 
@@ -39,23 +39,17 @@ $ docker run -it --rm \
 	/bin/bash -c "npm run coverage && sleep 1"
 ```
 
-If you run coverage on bigger project or on a Raspberry Pi add more time for the coverage report, `sleep 3` works on a Pi 3B, `sleep 8` for fullcoverage.
-
-Restart it later with:
-
-```bash
-$ docker start -ai expressjs-boilerplate
-```
+If you run coverage for larger project or on a Raspberry Pi add more time for the coverage report, `sleep 3` works on a Pi 3B, `sleep 8` for fullcoverage.
 
 ## Using the boilerplate
 
-This image is a base image for other projects. You only need the `modules/yourmodule`.
+This image is a base image for other projects. You only need a package.json with your dependencies and the directory `./modules/yourmodule`, containing a `configuration.yaml` and all things needed for your app.
 
-You should add your project in the modules subdirectory with html/ejs/pug templates, less, js, server and tests. See the sample in modules/boilerplate. You can also add a `gulp` directory to add / replace gulp tasks.
+Your project in the modules subdirectory should include html/ejs/pug templates, less, js, server and tests. See the sample in modules/boilerplate. You can also add a `gulp` directory to add / replace gulp tasks.
 
 Other samples are in my projects docker-vcards, docker-rpi-nodejs-gpio (more to come).
 
-`server.js` will load `module/[project]/server/index.js` - this should be your router. Routes are prepended with `[project]`.
+`server.js` will load `module/[project]/server/index.js` - this should be your router. Routes are prepended with `[yourmodule]`.
 
 ### Templates: HTML / EJS / [Pug](https://pugjs.org/)
 
@@ -69,13 +63,9 @@ The project provides global styles so you should only add styles to your module 
 
 Scripts in `modules/[module]/js/` will be copied to `public/js/[module]/`.
 
-### Iconfont
+## Other Docker for this Boilerplate
 
-### Graphviz
-
-### More Docker
-
-#### e2e-workflow
+### e2e-workflow
 
 Start the docker-e2e-workflow test dockers in your project directory (in another terminal to separate the boilerplate and e2e-workflow test output):
 
@@ -90,19 +80,19 @@ Start another terminal and attach to the `boilerplate-e2e-workflow` or `expressj
 ```bash
 $ docker attach expressjs-boilerplate-e2e
 ```
-## Build production server
+## Production Server Deployment
 
 Execute `gulp deploy` in development mode, the contents of the directory `deploy` are suitable for building a production server.
 
-Please keep in mind that this boilerplate has not been tested for performance or security. Don't use it in a realy productive environment.
+Please keep in mind that this boilerplate has not been tested for performance or security. Don't use it in a real productive environment.
 
-### Build the Docker image
+### Build Production Docker Image
 
 ```bash
 $ docker build -t uwegerdes/expressjs-boilerplate-prod .
 ```
 
-### Run the Docker container
+### Run Production Docker Container
 
 ```bash
 $ docker run -d \
