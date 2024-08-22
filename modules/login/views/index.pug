@@ -22,6 +22,6 @@ block content
                 oauth.authorizationUri + '?' +
                 oauth.clientIDParamName + '=' + oauth.clientID + '&' +
                 oauth.redirectUriParamName + '=' + oauth.redirectUri + '&' +
-                'state' + '=' + Object.keys(session.cookie)
+                'state=' + session.oauth2StateString
               )
-                = 'Login with ' + name + '=' + Object.keys(session.cookie)
+                = 'Login with ' + name

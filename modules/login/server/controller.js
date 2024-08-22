@@ -9,12 +9,14 @@
 'use strict';
 
 const axios = require('axios'),
+  crypto = require('node:crypto'),
   path = require('path'),
   config = require('../../../lib/config'),
   model = require('./model.js');
 
 const viewBase = path.join(path.dirname(__dirname), 'views');
 
+let oauth2StateString = crypto.randomBytes(20).toString('hex');
 /**
  * Render the index page
  *
@@ -22,6 +24,8 @@ const viewBase = path.join(path.dirname(__dirname), 'views');
  * @param {object} res - result
  */
 const index = (req, res) => {
+  oauth2StateString = crypto.randomBytes(20).toString('hex');
+  req.session.oauth2StateString = oauth2StateString;
   let data = {
     ...config.getData(req),
     ...req.params,
@@ -41,7 +45,8 @@ const index = (req, res) => {
  */
 const callback = async (req, res) => {
   const requestToken = req.query.code;
-  if (requestToken) {
+  const requestState = req.query.state;
+  if (requestToken && requestState === oauth2StateString) {
     const oauth = config.modules.login.oauth2.GitHub;
     req.session.oauthProvider = 'GitHub';
     const response = await axios({

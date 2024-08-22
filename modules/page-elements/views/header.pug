@@ -22,10 +22,11 @@ block header
             block loginStatus
               ul#login-status-list.login-status-list.expand-list.list
                 if session.userdata
-                  li.list-item.login-status-ok= 'Angemeldet über ' + session.oauthProvider + ' als '  + session.userdata.username
+                  li.list-item.login-status-ok= 'Angemeldet über ' + session.oauthProvider + ' als '  + session.userdata.name
                   | #{' '}
                   li.list-item.login-status-logout
-                    a.link.edit-link(href=(session.editLink ? session.editLink : '/login/edit/')) bearbeiten
+                    if session.editLink
+                      a.link.edit-link(href=session.editLink) bearbeiten
                   li.list-item.login-status-logout
                     a.link.logout-link(href=(session.logoutLink ? session.logoutLink : '/login/logout/')) abmelden
                 else

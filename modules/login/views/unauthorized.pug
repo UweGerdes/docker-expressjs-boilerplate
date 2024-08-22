@@ -10,4 +10,14 @@ block content
     h1#headline.headline= module.name
     #login-container.login-container
       h2 Unauthorized
-      h3.error no code parameter found
+      h3.error Authorization failed
+      h2 Login
+      ul#login-list
+        each oauth, name in module.oauth2
+          li
+            a(href=oauth.authorizationUri + '?' +
+              oauth.clientIDParamName + '=' + oauth.clientID + '&' +
+              oauth.redirectUriParamName + '=' + oauth.redirectUri + '&' +
+              'state=' + session.oauth2StateString
+            )
+              = 'Login with ' + name
