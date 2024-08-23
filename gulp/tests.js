@@ -46,7 +46,7 @@ let moduleTasks = [];
  */
 glob.sync(config.server.modules + '/*/gulp/tests.js')
   .forEach((filename) => {
-    let task = require('.' + filename);
+    let task = require('../' + filename);
     moduleTasks.push(task);
     tasks = Object.assign({}, tasks, task);
   });
