@@ -28,6 +28,9 @@ RUN apt-get update && \
 	fi && \
 	rm -r /tmp/*
 
+COPY --chown=${USER_NAME}:${USER_NAME} . ${APP_HOME}
+RUN chown ${USER_NAME}:${USER_NAME} ${APP_HOME}
+
 COPY entrypoint.sh /usr/local/bin/
 RUN chmod 755 /usr/local/bin/entrypoint.sh
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
@@ -46,8 +49,6 @@ RUN perl -i.bak -0pe 's/(.+prefer-regex-literals.+?:).+?\n.+?\n.+?\n/$1 1,\n/gms
 		/home/node/node_modules/eslint-config-airbnb-base/rules/best-practices.js
 
 WORKDIR ${APP_HOME}
-
-COPY --chown=${USER_NAME}:${USER_NAME} . ${APP_HOME}
 
 EXPOSE ${SERVER_PORT} ${HTTPS_PORT} ${LIVERELOAD_PORT}
 
