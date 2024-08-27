@@ -76,7 +76,7 @@ Set "Homepage URL" to `https://localhost:28443/` and "Authorization callback URL
 Start the docker-e2e-workflow test dockers in your project directory (in another terminal to separate the boilerplate and e2e-workflow test output):
 
 ```bash
-$ docker-compose -f docker-compose-e2e-workflow.yaml up
+$ docker compose -f docker-compose-e2e-workflow.yaml up
 ```
 
 Open in your browser: `http://localhost:51287/` for the e2e-workflow server and `http://localhost:51285/` for the boilerplate server.
