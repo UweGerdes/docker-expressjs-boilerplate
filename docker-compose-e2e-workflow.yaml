@@ -12,6 +12,7 @@ services:
     ports:
       - 51285:8080
       - 51286:8081
+      - 51287:8443
     environment:
       NODE_ENV: development
       LIVERELOAD_PORT: 51286
