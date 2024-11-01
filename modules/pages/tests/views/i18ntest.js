@@ -17,7 +17,7 @@ chai.use(chaiHttp);
 
 describe('/pages/tests/views/i18n-test.js', function () {
   describe('GET /i18n-ejs/', function () {
-    it('should show test translations - en', function (done) {
+    it('should show test translations - Accept-Language en', function (done) {
       chai.request('http://localhost:8080')
         .get('/i18n-ejs/')
         .set('Accept-Language', 'en;q=0.8,de;q=0.5')
@@ -38,7 +38,7 @@ describe('/pages/tests/views/i18n-test.js', function () {
           done();
         });
     });
-    it('should show test translations - de', function (done) {
+    it('should show test translations - Accept-Language de', function (done) {
       chai.request('http://localhost:8080')
         .get('/i18n-ejs/')
         .set('Accept-Language', 'de;q=0.8,en;q=0.5')
@@ -59,7 +59,7 @@ describe('/pages/tests/views/i18n-test.js', function () {
           done();
         });
     });
-    it('should show test translations - en', function (done) {
+    it('should show test translations - lang=de', function (done) {
       chai.request('http://localhost:8080')
         .get('/i18n-ejs/?lang=de')
         .set('Accept-Language', 'en;q=0.8,de;q=0.5')
