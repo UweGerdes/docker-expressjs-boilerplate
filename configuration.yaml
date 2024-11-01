@@ -106,6 +106,7 @@ gulp:
       - '!coverage/**/*.json'
       - '!src/locales/*.json'
       - '!modules/**/locales/*.json'
+      - '!modules/**/*generated/**/*.json'
     locales:
       - 'src/locales/*.json'
       - 'modules/**/locales/*.json'
@@ -152,6 +153,7 @@ gulp:
         - 'gulp/**/*.js'
         - 'lib/**/*.js'
         - 'modules/**/*.js'
+        - '!modules/**/*generated/**/*.js'
       fixtureDir: './fixture'
   build:
     jsdoc:
